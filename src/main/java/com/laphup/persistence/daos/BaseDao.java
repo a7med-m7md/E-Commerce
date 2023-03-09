@@ -1,4 +1,4 @@
-package com.bit.persistence.daos;
+package com.laphup.persistence.daos;
 
 public interface BaseDao<ID,Name> {
     public void getAll();

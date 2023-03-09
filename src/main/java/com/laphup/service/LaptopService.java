@@ -1,11 +1,10 @@
-package com.bit.service;
+package com.laphup.service;
 
-import com.bit.dtos.LaptopDTO;
-import com.bit.mappers.LaptopMapper;
-import com.bit.persistence.daosImp.LaptopDaoImp;
-import com.bit.persistence.entities.LaptopCategory;
-import com.bit.persistence.entities.Laptop;
-import com.bit.util.enums.SortBy;
+import com.laphup.dtos.LaptopDTO;
+import com.laphup.mappers.LaptopMapper;
+import com.laphup.persistence.daosImp.LaptopDaoImp;
+import com.laphup.persistence.entities.Laptop;
+import com.laphup.util.enums.SortBy;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,10 +1,10 @@
-package com.bit.persistence.daosImp;
+package com.laphup.persistence.daosImp;
 
-import com.bit.persistence.daos.LaptopDao;
-import com.bit.persistence.entities.LaptopCategory;
-import com.bit.persistence.entities.Laptop;
-import com.bit.util.enums.Rate;
-import com.bit.util.enums.SortBy;
+import com.laphup.persistence.daos.LaptopDao;
+import com.laphup.persistence.entities.Laptop;
+import com.laphup.util.Constants;
+import com.laphup.util.enums.Rate;
+import com.laphup.util.enums.SortBy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,7 @@ public class LaptopDaoImp implements LaptopDao {
         laptop.setUuid(UUID.randomUUID());
 //        laptop.setLaptopCategory(new LaptopCategory());
         laptop.setPurchasingCount(5);
-        laptop.setImagPath("dar.png");
-
+        laptop.setImagPath(Constants.MAIN_DIR + "/webapps/store/img/laptops/dar.png");
         laptops.add(laptop);
         return laptops;
     }

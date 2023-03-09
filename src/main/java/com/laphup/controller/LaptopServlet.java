@@ -1,9 +1,9 @@
-package com.bit.controller;
+package com.laphup.controller;
 
-import com.bit.dtos.LaptopDTO;
-import com.bit.persistence.entities.LaptopCategory;
-import com.bit.service.LaptopService;
-import com.bit.util.enums.SortBy;
+import com.laphup.dtos.LaptopDTO;
+import com.laphup.service.LaptopService;
+import com.laphup.util.enums.SortBy;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,12 +22,13 @@ public class LaptopServlet extends HttpServlet {
         SortBy sortBy = SortBy.valueOf(req.getParameter("sortedBy"));
         double minPrice = Double.parseDouble(req.getParameter("minPrice"));
         double maxPrice = Double.parseDouble(req.getParameter("maxPrice"));
-
-        LaptopService laptopService = new LaptopService();
+        System.out.println(pageNumber+count+laptopCategory+sortBy+minPrice+maxPrice);        LaptopService laptopService = new LaptopService();
         List<LaptopDTO> laptops = laptopService.getPage(pageNumber, count, laptopCategory, sortBy, minPrice, maxPrice);
+        Gson gson = new Gson();
+        String messageJson = gson.toJson(laptops);
 
         response.setContentType("text/html");
-        PrintWriter out  = response.getWriter();
-        out.println(laptops.get(0).getName());
+        PrintWriter out = response.getWriter();
+        out.println(messageJson);
     }
 }

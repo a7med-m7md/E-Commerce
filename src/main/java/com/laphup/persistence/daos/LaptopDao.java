@@ -1,8 +1,7 @@
-package com.bit.persistence.daos;
+package com.laphup.persistence.daos;
 
-import com.bit.persistence.entities.LaptopCategory;
-import com.bit.persistence.entities.Laptop;
-import com.bit.util.enums.SortBy;
+import com.laphup.persistence.entities.Laptop;
+import com.laphup.util.enums.SortBy;
 
 import java.util.List;
 

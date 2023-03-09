@@ -1,4 +1,4 @@
-package com.bit.util.enums;
+package com.laphup.util.enums;
 
 public enum Gender {
     MALE,

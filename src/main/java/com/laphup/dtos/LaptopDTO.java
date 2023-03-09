@@ -1,7 +1,7 @@
-package com.bit.dtos;
+package com.laphup.dtos;
 
-import com.bit.persistence.entities.LaptopCategory;
-import com.bit.util.enums.Rate;
+import com.laphup.persistence.entities.LaptopCategory;
+import com.laphup.util.enums.Rate;
 import lombok.Getter;
 import lombok.Setter;
 

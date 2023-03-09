@@ -1,6 +1,6 @@
-package com.bit.persistence.entities;
+package com.laphup.persistence.entities;
 
-import com.bit.util.enums.Rate;
+import com.laphup.util.enums.Rate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,4 +1,4 @@
-package com.bit.util;
+package com.laphup.util;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

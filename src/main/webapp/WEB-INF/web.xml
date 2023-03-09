@@ -3,7 +3,7 @@
 <web-app>
   <servlet>
     <servlet-name>LaptopServlet</servlet-name>
-    <servlet-class>com.bit.controller.LaptopServlet</servlet-class>
+    <servlet-class>com.laphup.controller.LaptopServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LaptopServlet</servlet-name>

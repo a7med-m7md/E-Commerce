@@ -1,4 +1,4 @@
-package com.bit.persistence.entities;
+package com.laphup.persistence.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

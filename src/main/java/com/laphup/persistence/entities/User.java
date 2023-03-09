@@ -1,6 +1,6 @@
-package com.bit.persistence.entities;
+package com.laphup.persistence.entities;
 
-import com.bit.util.enums.Gender;
+import com.laphup.util.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
