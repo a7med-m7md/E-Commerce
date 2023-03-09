@@ -13,12 +13,12 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-public class Product {
+public class Laptop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID uuid;
     private String imagPath;
-    private LabCategory labCategory;
+    private String laptopCategory; // convert to map laptopcategory
     private String name;
     private double price;
     private Rate rate;
