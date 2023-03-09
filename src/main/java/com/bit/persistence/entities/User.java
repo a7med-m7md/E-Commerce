@@ -1,11 +1,23 @@
 package com.bit.persistence.entities;
 
 import com.bit.util.enums.Gender;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
-public class User  {
+@Setter
+@Getter
+@Entity
+public class User  implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID uuid;
     private String name;
     private Gender gender;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date birthDay;
     private String password;
     private String passwordSult;
