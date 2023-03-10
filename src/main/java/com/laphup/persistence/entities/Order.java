@@ -3,18 +3,22 @@ package com.laphup.persistence.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
 @Setter
 @Getter
 @Entity
-public class LaptopCategory implements Serializable {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID uuid;
-    private String categoryName;
-    @OneToMany(mappedBy = "uuid")
-    private Set<Laptop> laptop;
+    private Date dateOfPurchasing;
+    private long price;
+    @OneToMany(mappedBy = "order")
+    private Set<OrderDetails> orderDetails;
+    @ManyToOne
+    @JoinColumn(name = "uuid")
+    private User user;
 }

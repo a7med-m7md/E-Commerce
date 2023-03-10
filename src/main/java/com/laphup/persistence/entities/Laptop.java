@@ -1,13 +1,11 @@
 package com.laphup.persistence.entities;
 
 import com.laphup.util.enums.Rate;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Setter
@@ -17,10 +15,15 @@ public class Laptop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID uuid;
-    private String imagPath;
-    private String laptopCategory; // convert to map laptopcategory
+    @OneToMany(mappedBy = "uuid")
+    private Set<LaptopImage> laptopImage;
+    @ManyToOne
+    @JoinColumn(name = "uuid")
+    private LaptopCategory laptopCategory;
     private String name;
     private double price;
     private Rate rate;
     private int purchasingCount;
+    @OneToMany(mappedBy = "laptop")
+    private Set<Order> order;
 }
