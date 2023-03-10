@@ -20,10 +20,10 @@ public class Laptop {
     @ManyToOne
     @JoinColumn(name = "uuid")
     private LaptopCategory laptopCategory;
+    @OneToMany(mappedBy = "laptop")
+    private Set<Order> order;
     private String name;
     private double price;
     private Rate rate;
     private int purchasingCount;
-    @OneToMany(mappedBy = "laptop")
-    private Set<Order> order;
 }

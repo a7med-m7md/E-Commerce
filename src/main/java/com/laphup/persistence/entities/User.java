@@ -18,12 +18,14 @@ public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID uuid;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthDay;
+    @OneToMany(mappedBy = "uuid")
+    private Set<Order> order;
     private String fName;
     private String lName;
     private Role role;
     private Gender gender;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date birthDay;
     private String password;
     private String passwordSult;
     private String job;
@@ -34,6 +36,4 @@ public class User  implements Serializable {
     private long creditLimit;
     private String address;
     private String interests;
-    @OneToMany(mappedBy = "uuid")
-    private Set<Order> order;
 }
