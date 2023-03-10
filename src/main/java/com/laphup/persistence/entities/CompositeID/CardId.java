@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -12,8 +11,8 @@ import java.util.UUID;
 @Setter
 @Getter
 public class CardId implements Serializable {
-    @Column(name = "uuid")
-    private UUID userID;
-    @Column(name = "uuid")
-    private UUID laptopID;
+    @Column
+    private UUID userId;
+    @Column
+    private UUID laptopId;
 }

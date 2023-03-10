@@ -1,3 +1,4 @@
+/*
 package com.laphup.mappers;
 
 import com.laphup.dtos.LaptopDTO;
@@ -17,7 +18,8 @@ public class LaptopMapper {
         imageConverter = new ImageConverter();
     }
     public synchronized static LaptopDTO convertToDto(Laptop laptop) {
-        ModelMapper modelMapper = new ModelMapper();
+        */
+/*ModelMapper modelMapper = new ModelMapper();
         ImageConverter imageConverter = new ImageConverter();
         LaptopDTO laptopDTO = modelMapper.map(laptop, LaptopDTO.class);
 
@@ -27,7 +29,8 @@ public class LaptopMapper {
             ex.printStackTrace();
         }
 
-        return laptopDTO;
+        return laptopDTO;*//*
+return null;
     }
     public synchronized Laptop convertToEntity(LaptopDTO laptopDTO) {
         ModelMapper modelMapper = new ModelMapper();
@@ -35,12 +38,15 @@ public class LaptopMapper {
 
         Laptop laptop = modelMapper.map(laptopDTO, Laptop.class);
 
-        /*try {
+        */
+/*try {
             laptop.setImagPath(imageConverter.converToImage(laptop.getImagPath()));
         }catch (IOException ex){
             ex.printStackTrace();
-        }*/
+        }*//*
+
 
         return laptop;
     }
 }
+*/

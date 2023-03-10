@@ -12,9 +12,9 @@ import java.util.UUID;
 @Entity
 public class LaptopCategory implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID uuid;
-    @OneToMany(mappedBy = "uuid")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID laptopCategoryUuid;
+    @OneToMany(mappedBy = "laptopCategory")
     private Set<Laptop> laptop;
     private String categoryName;
 }

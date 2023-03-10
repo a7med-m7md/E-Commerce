@@ -12,10 +12,10 @@ import java.util.UUID;
 @Entity
 public class LaptopImage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID laptopImageUuid;
     @ManyToOne
-    @JoinColumn(name = "uuid")
+    @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
     private String imagPath;
     private ImgaeType imgaeType;

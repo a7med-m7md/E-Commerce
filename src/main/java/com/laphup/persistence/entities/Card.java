@@ -12,10 +12,10 @@ public class Card {
     @EmbeddedId
     private CardId cardId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uuid")
+    @JoinColumn(name = "userUuid")
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uuid")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
     private int quantity;
 }

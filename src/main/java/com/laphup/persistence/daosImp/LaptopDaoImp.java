@@ -1,3 +1,4 @@
+/*
 package com.laphup.persistence.daosImp;
 
 import com.laphup.persistence.daos.LaptopDao;
@@ -19,11 +20,12 @@ public class LaptopDaoImp implements LaptopDao {
         laptop.setName("Hp Envi");
         laptop.setPrice(20000);
         laptop.setRate(Rate.FIVE);
-        laptop.setUuid(UUID.randomUUID());
+        laptop.setUuidLaptop(UUID.randomUUID());
 //        laptop.setLaptopCategory(new LaptopCategory());
         laptop.setPurchasingCount(5);
-        laptop.setImagPath(Constants.MAIN_DIR + "/webapps/store/img/laptops/dar.png");
+        //laptop.setImagPath(Constants.MAIN_DIR + "/webapps/store/img/laptops/dar.png");
         laptops.add(laptop);
         return laptops;
     }
 }
+*/

@@ -13,15 +13,15 @@ import java.util.UUID;
 @Entity
 public class Laptop {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID uuid;
-    @OneToMany(mappedBy = "uuid")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uuidLaptop;
+    @OneToMany(mappedBy = "laptop")
     private Set<LaptopImage> laptopImage;
     @ManyToOne
-    @JoinColumn(name = "uuid")
+    @JoinColumn(name = "laptopCategoryUuid")
     private LaptopCategory laptopCategory;
     @OneToMany(mappedBy = "laptop")
-    private Set<Order> order;
+    private Set<OrderDetails> orderDetails;
     private String name;
     private double price;
     private Rate rate;
