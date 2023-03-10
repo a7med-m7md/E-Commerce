@@ -12,13 +12,14 @@ import java.util.UUID;
 @Entity
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID orderUuid;
     @OneToMany(mappedBy = "order")
     private Set<OrderDetails> orderDetails;
-    @ManyToOne
-    @JoinColumn(name = "uuid")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userUuid")
     private User user;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfPurchasing;
     private long price;
 }

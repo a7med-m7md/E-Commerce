@@ -1,3 +1,4 @@
+/*
 package com.laphup.dtos;
 
 import com.laphup.persistence.entities.LaptopCategory;
@@ -17,3 +18,4 @@ public class LaptopDTO {
     private double price;
     private Rate rate;
 }
+*/

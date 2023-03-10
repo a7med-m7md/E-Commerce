@@ -1,3 +1,4 @@
+/*
 package com.laphup.persistence.daos;
 
 import com.laphup.persistence.entities.Laptop;
@@ -9,3 +10,4 @@ public interface LaptopDao {
     public List<Laptop> getAll(int pageNumber, int count, String laptopCategory,
                                SortBy sortedBy, double minPrice, double maxPrice);
 }
+*/

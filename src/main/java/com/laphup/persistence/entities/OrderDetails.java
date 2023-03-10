@@ -12,10 +12,10 @@ public class OrderDetails {
     @EmbeddedId
     private OrderDetailsId orderDetailsId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uuid")
+    @JoinColumn(name = "orderUuid")
     private Order order;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "uuid")
+    @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
     private int quantity;
 }
