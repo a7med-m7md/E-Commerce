@@ -12,12 +12,15 @@ public class RequestServlet implements ServletRequestListener {
     public void requestInitialized(ServletRequestEvent sre) {
         EntityManagerFactory entityManagerFactory = (EntityManagerFactory)sre.getServletContext().getContext("EntityManagerFactory");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
+        System.out.println("-------------------------------------*"+entityManager);
         sre.getServletRequest().setAttribute("EntityManager",entityManager);
     }
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
         EntityManager entityManager = (EntityManager) sre.getServletRequest().getAttribute("EntityManager");
+        System.out.println("-------------------------------------*"+entityManager);
+
         entityManager.close();
     }
 }

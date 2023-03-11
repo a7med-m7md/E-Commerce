@@ -12,6 +12,8 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         //ServletContextListener.super.contextInitialized(sce);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pu");
+        System.out.println("-------------------------------------*"+entityManagerFactory);
+
         sce.getServletContext().setAttribute("EntityManagerFactory",entityManagerFactory);
     }
 }

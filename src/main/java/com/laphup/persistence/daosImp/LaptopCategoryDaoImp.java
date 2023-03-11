@@ -13,5 +13,7 @@ public class LaptopCategoryDaoImp extends BaseDao<LaptopCategory, UUID, String> 
         this.request = request;
     }
 
-
+//    public LaptopCategory getByCategory(){
+//
+//    }
 }

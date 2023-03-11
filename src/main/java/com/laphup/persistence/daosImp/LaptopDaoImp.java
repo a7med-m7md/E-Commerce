@@ -1,8 +1,10 @@
 package com.laphup.persistence.daosImp;
 
 import com.laphup.Listeners.RequestServlet;
+import com.laphup.persistence.daos.BaseDao;
 import com.laphup.persistence.daos.LaptopDao;
 import com.laphup.persistence.entities.Laptop;
+import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.Constants;
 import com.laphup.util.enums.Rate;
 import com.laphup.util.enums.SortBy;
@@ -12,9 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LaptopDaoImp implements LaptopDao {
-    @Override
-    public List<Laptop> getAll(HttpServletRequest requestServlet, int pageNumber, int count, String laptopCategory, SortBy sortedBy, double minPrice, double maxPrice) {
+public class LaptopDaoImp extends BaseDao<LaptopCategory, UUID, String> {
+    private HttpServletRequest request;
+    public LaptopDaoImp(HttpServletRequest request){
+        super(request);
+        this.request = request;
+    }
+
+    public List<Laptop> getAll(int pageNumber, int count, String laptopCategory, SortBy sortedBy, double minPrice, double maxPrice) {
         List<Laptop> laptops = new ArrayList<>();
 
         Laptop laptop = new Laptop();
