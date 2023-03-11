@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class BaseDao<Table,ID ,Name> {
-
     private EntityManager entityManager;
     public BaseDao(HttpServletRequest request){
         entityManager = (EntityManager) request.getAttribute("EntityManager");
