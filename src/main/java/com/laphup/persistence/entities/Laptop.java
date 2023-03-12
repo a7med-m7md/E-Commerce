@@ -25,6 +25,6 @@ public class Laptop {
     private String name;
     private double price;
     private Rate rate;
-    private int quantitie;
-    private String discription;
+    private int quantities;
+    private String description;
 }
