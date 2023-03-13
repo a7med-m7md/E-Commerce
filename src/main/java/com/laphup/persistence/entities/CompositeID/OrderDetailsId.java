@@ -12,6 +12,6 @@ import java.util.UUID;
 @Setter
 @Getter
 public class OrderDetailsId implements Serializable {
-    private UUID orderId;
-    private UUID laptotId;
+    private UUID orderUuid;
+    private UUID uuidLaptop;
 }

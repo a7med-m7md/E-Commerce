@@ -11,9 +11,11 @@ import lombok.Setter;
 public class Card {
     @EmbeddedId
     private CardId cardId;
+    @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userUuid")
     private User user;
+    @MapsId("laptopId")
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;

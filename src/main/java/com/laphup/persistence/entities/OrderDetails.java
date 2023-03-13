@@ -11,9 +11,11 @@ import lombok.Setter;
 public class OrderDetails {
     @EmbeddedId
     private OrderDetailsId orderDetailsId;
+    @MapsId("orderUuid")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderUuid")
     private Order order;
+    @MapsId("uuidLaptop")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
