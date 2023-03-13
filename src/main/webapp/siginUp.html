@@ -18,6 +18,9 @@
 <!-- Section: Design Block -->
 <section class="text-center text-lg-start">
     <style>
+     .error{
+        outline: 1px solid red;
+    }
     .cascading-right {
       margin-right: -50px;
     }
@@ -38,10 +41,6 @@
     color: #f5b80f;
 
 }
-
-
-
-
     </style>
 
     <!-- Jumbotron -->
@@ -54,18 +53,18 @@
             ">
                     <div class="card-body p-5 shadow-5 text-center">
                         <h2 class="fw-bold mb-5">Sign up now</h2>
-                        <form>
+                        <form method="post" action="SignUpServlet" id="form">
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" id="firstName" class="form-control"/>
+                                        <input type="text" id="firstName" name="firstname" class="form-control"/>
                                         <label class="form-label" for="firstName">First name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" id="lastName" class="form-control"/>
+                                        <input type="text" id="lastName" name="lastname" class="form-control"/>
                                         <label class="form-label" for="lastName">Last name</label>
                                     </div>
                                 </div>
@@ -73,14 +72,14 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" id="emailS" class="form-control"/>
+                                <input type="email" id="emailS" name="email" class="form-control"/>
                                 <label class="form-label" for="emailS" aria-required="true">Email
                                     Address</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="passwordS" class="form-control"/>
+                                <input type="password" name="password" id="passwordS" class="form-control"/>
                                 <label class="form-label" for="passwordS">Password</label>
                             </div>
 
@@ -89,7 +88,7 @@
                                     <div>
                                         <div class="input-group date" id="datepicker">
                                             <input type="date" class="form-control border rounded-2"
-                                                   id="dateS" required/>
+                                                   id="dateS" name="birthdate" required/>
                                             <span class="input-group-append"> </span>
                                         </div>
                                     </div>
@@ -98,12 +97,12 @@
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender"
-                                                   id="female" value="option1">
+                                                   id="female" value="FEMALE">
                                             <label class="form-check-label" for="female">Female</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender"
-                                                   id="male" value="option2">
+                                                   id="male" value="MALE">
                                             <label class="form-check-label" for="male">Male</label>
                                         </div>
                                     </div>
@@ -112,13 +111,13 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" id="job" class="form-control"/>
+                                        <input type="text" name="job" id="job" class="form-control"/>
                                         <label class="form-label" for="job">Job</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" id="address" class="form-control"/>
+                                        <input type="text" id="address" name="address" class="form-control"/>
                                         <label class="form-label" for="address">Address</label>
                                     </div>
                                 </div>
@@ -126,12 +125,12 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="number" id="creditL" class="form-control"/>
+                                        <input type="number" id="creditL" name="creditL" class="form-control"/>
                                         <label class="form-label" for="creditL">Credit Limit</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <select id="select-country" name="select-country"
+                                    <select id="interests" name="interests"
                                             class="demo-default form-control bg-date border-gold col-5">
                                         <option class="form-control bg-date border border-gold rounded-2 text-gold"
                                                 value="country" selected>Interests
@@ -147,8 +146,6 @@
                             <button id="signupbtn" type="submit" class="btn btn-primary btn-block mb-4 buttonsinin">
                                 Sign up
                             </button>
-
-
                         </form>
                     </div>
                 </div>
