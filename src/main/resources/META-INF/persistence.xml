@@ -7,14 +7,6 @@ https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
     <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- <class>com.laphup.persistence.entities.OrderDetails</class>
-        <class>com.laphup.persistence.entities.Order</class>
-         <class>com.laphup.persistence.entities.LaptopImage</class>
-         <class>com.laphup.persistence.entities.Laptop</class>
-         <class>com.laphup.persistence.entities.LaptopCategory</class>
-        <class>com.laphup.persistence.entities.User</class>
-         <class>com.laphup.persistence.entities.Card</class>-->
-
         <properties>
 <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />-->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/laphup"/>
