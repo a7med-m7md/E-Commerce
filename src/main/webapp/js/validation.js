@@ -19,6 +19,26 @@ $('#form').submit(function () {
     return true;
 });
 $('#signupbtn').click(function () {
+    var user = JSON.stringify({
+        birthDay: $('#dateS').val(),
+        fName: $('#firstName').val(),
+        lName: $('#lastName').val(),
+        gender: $("input[name='gender']:checked").val(),
+        password: $('#passwordS').val(),
+        job: $('#job').val(),
+        eMail: $('#emailS').val(),
+        creditLimit: $('#creditL').val(),
+        address: $('#address').val(),
+        interests: $('#interests').val(),
+    })
+    $.ajax({
+        url: 'SignUp', //servlet url
+        type: 'POST', //servlet request type
+        contentType: 'application/json', //For input type
+        data: user, //input data
+        dataType: 'json'
+    });
+    window.location.href = "index.jsp"
     var emailS = $('#emailS').val();
     if (IsEmail(emailS) == false) {
         $('#emailS').addClass("error");
@@ -40,14 +60,17 @@ $("#emailS").blur(function () {
     console.log("External content loaded successfully!");
 });
 function ajaxCallBack(responseTxt, statusTxt, xhr) {
-    //       if(responseTxt == "" )
     if (responseTxt == "Exist") {
         $("#emailE").empty();
-        $("#emailE").append("This Email is used");
-        $("#emailE").addClass("error");
+        var errorMeassage = $("<label>").addClass("emailE");
+        errorMeassage.append("This Email is used");
+        errorMeassage.addClass("errorMeassage");
+        $("#emaildev").append(errorMeassage);
     }
     else {
-        $("#emailE").empty();
+        $(".emailE").empty();
+        $(".emailE").removeClass("errorMeassage");
+        $(".emailE").remove();
     }
-    $("#emailE").removeClass("error");
+
 }

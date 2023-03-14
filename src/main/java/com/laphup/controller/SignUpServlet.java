@@ -1,6 +1,8 @@
 package com.laphup.controller;
 
+import com.google.gson.Gson;
 import com.laphup.dtos.UserDto;
+import com.laphup.persistence.entities.User;
 import com.laphup.service.SingUpService;
 import com.laphup.util.enums.Gender;
 import jakarta.servlet.RequestDispatcher;
@@ -40,36 +42,19 @@ public class SignUpServlet extends HttpServlet {
         System.out.println(user);
         SingUpService singUpService = new SingUpService(request);
         singUpService.register(user);
+        response.sendRedirect("/index.jsp");
     }
 
     public UserDto checkExistence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDto user = null;
-        String firstName = request.getParameter("firstname");
-        String lastName = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String birthdate = request.getParameter("birthdate");
-        Date date = null;
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        String job = request.getParameter("job");
-        String address = request.getParameter("address");
-        Gender gender = Gender.valueOf(request.getParameter("gender"));
-        String interests = request.getParameter("interests");
-        Long creditL = Long.valueOf(request.getParameter("creditL"));
-        if (!(firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() &&
-                password.isEmpty() && job.isEmpty() && address.isEmpty() && interests.isEmpty()) && date != null &&
-                gender != null && creditL != 0f) {
-            user = new UserDto(date, firstName, lastName, gender, password, job, email, creditL, address, interests);
-            return user;
-        } else {
+
+        Gson gson = new Gson();
+        UserDto userDto = gson.fromJson(request.getReader(), UserDto.class);
+        if(userDto!=null)
+        return userDto;
+        else {
             RequestDispatcher rd = request.getRequestDispatcher("/siginUp.html");
             rd.include(request, response);
         }
         return null;
-
     }
 }
