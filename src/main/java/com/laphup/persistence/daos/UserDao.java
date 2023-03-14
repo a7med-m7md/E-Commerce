@@ -1,12 +1,12 @@
 package com.laphup.persistence.daos;
 
-import com.laphup.persistence.entities.RegisterEntity;
 import com.laphup.persistence.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
+import jakarta.persistence.Query;
+
+import java.util.List;
+import java.util.Optional;
 
 public class UserDao extends BaseDao<User, Integer, String> {
 
@@ -19,10 +19,14 @@ public class UserDao extends BaseDao<User, Integer, String> {
         entityManager = (EntityManager) request.getAttribute("EntityManager");
     }
 
-    public User getByEmail(String email) {
-        User user = (User) entityManager.find(User.class, email);
-        return user;
+    public Optional<User> getByEmail(String email) {
+        String queryString = "from User u where u.eMail = :email";
+        Query q = entityManager.createQuery(queryString);
+        q.setParameter("email", email);
+        List<User> users = q.getResultList();
+        if (users.isEmpty())
+            return Optional.empty();
+        else
+            return Optional.of(users.get(0));
     }
-
-
 }

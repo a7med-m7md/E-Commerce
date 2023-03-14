@@ -17,17 +17,13 @@ public class SingUpService {
 
     public SingUpService(HttpServletRequest request) {
         this.request = request;
-        if (request == null)
-            System.out.println("SingUpService");
         userDao = new UserDao(request);
     }
 
     private ModelMapper modelMapper = new ModelMapper();
-
     public boolean isNewUser(String email) {
-
-        Optional<User> optionalEntity = Optional.ofNullable(userDao.getByEmail(email));
-        if (optionalEntity.isEmpty())
+        Optional<User> optionalEntity = userDao.getByEmail(email);
+        if (optionalEntity.isPresent())
             return true;
         else
             return false;
