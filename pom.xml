@@ -14,12 +14,13 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencies>
     <!--ORM-->
+
     <dependency>
       <groupId>jakarta.persistence</groupId>
       <artifactId>jakarta.persistence-api</artifactId>
@@ -35,7 +36,11 @@
       <artifactId>mysql-connector-j</artifactId>
       <version>8.0.31</version>
     </dependency>
-
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.31</version>
+    </dependency>
     <!--Servlet and jsp-->
     <dependency>
       <groupId>jakarta.servlet.jsp.jstl</groupId>
@@ -142,7 +147,7 @@
           <configuration>
             <username>admin</username>
             <password>admin</password>
-            <url>http://localhost:8082/manager/text</url>
+            <url>http://localhost:8081/manager/text</url>
             <path>/store</path>
           </configuration>
         </plugin>

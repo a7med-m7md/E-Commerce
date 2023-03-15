@@ -10,6 +10,14 @@
 <!--    <url-pattern>/laptopservlet</url-pattern>-->
 <!--  </servlet-mapping>-->
 
+<!--  <servlet>-->
+<!--    <servlet-name>AddLaptopServlet</servlet-name>-->
+<!--    <servlet-class>com.laphup.controller.AddLaptopServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AddLaptopServlet</servlet-name>-->
+<!--    <url-pattern>/addLaptop</url-pattern>-->
+<!--  </servlet-mapping>-->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

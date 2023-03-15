@@ -1,4 +1,4 @@
-package com.laphup.persistence.daos;
+package com.laphup.persistence.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BaseDao<Table,ID ,Name> {
+    public class BaseDao<Table,ID ,Name> {
     private EntityManager entityManager;
     public BaseDao(HttpServletRequest request){
         entityManager = (EntityManager) request.getAttribute("EntityManager");

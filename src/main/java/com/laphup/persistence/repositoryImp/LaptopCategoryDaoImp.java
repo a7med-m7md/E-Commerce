@@ -1,6 +1,6 @@
-package com.laphup.persistence.daosImp;
+package com.laphup.persistence.repositoryImp;
 
-import com.laphup.persistence.daos.BaseDao;
+import com.laphup.persistence.repository.BaseDao;
 import com.laphup.persistence.entities.LaptopCategory;
 import jakarta.servlet.http.HttpServletRequest;
 
