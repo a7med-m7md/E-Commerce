@@ -2,9 +2,7 @@ package com.laphup.controller;
 
 import com.google.gson.Gson;
 import com.laphup.dtos.UserDto;
-import com.laphup.persistence.entities.User;
 import com.laphup.service.SingUpService;
-import com.laphup.util.enums.Gender;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,11 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class SignUpServlet extends HttpServlet {
+    boolean exist = true;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,26 +28,32 @@ public class SignUpServlet extends HttpServlet {
             if (singUpService.isNewUser(email)) {
                 System.out.println("This Mail Exist");
                 printWriter.print("Exist");
-            }
+                exist = false;
+            } else
+                exist = true;
         }
+        request.getServletContext().setAttribute("exist", exist);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDto user = checkExistence(request, response);
-        System.out.println(user);
-        SingUpService singUpService = new SingUpService(request);
-        singUpService.register(user);
-        response.sendRedirect("/index.jsp");
+        System.out.println(request.getServletContext().getAttribute("exist"));
+        boolean exist = (boolean) request.getServletContext().getAttribute("exist");
+        if (exist) {
+            UserDto user = checkExistence(request, response);
+            System.out.println(user);
+            SingUpService singUpService = new SingUpService(request);
+            singUpService.register(user);
+        }
     }
 
     public UserDto checkExistence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Gson gson = new Gson();
         UserDto userDto = gson.fromJson(request.getReader(), UserDto.class);
-        if(userDto!=null)
-        return userDto;
+        if (userDto != null)
+            return userDto;
         else {
             RequestDispatcher rd = request.getRequestDispatcher("/siginUp.html");
             rd.include(request, response);

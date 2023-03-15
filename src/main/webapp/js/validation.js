@@ -38,15 +38,16 @@ $('#signupbtn').click(function () {
         data: user, //input data
         dataType: 'json'
     });
-    window.location.href = "index.jsp"
     var emailS = $('#emailS').val();
     if (IsEmail(emailS) == false) {
         $('#emailS').addClass("error");
         return false;
     }
-    else
+    else if (ajaxCallBack() === true) {
+        window.location.href = "index.jsp"
         $('#emailS').removeClass("error");
-    return true;
+        return true;
+    }
 });
 function IsEmail(email) {
     if (!(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/))) {
@@ -61,16 +62,18 @@ $("#emailS").blur(function () {
 });
 function ajaxCallBack(responseTxt, statusTxt, xhr) {
     if (responseTxt == "Exist") {
-        $("#emailE").empty();
         var errorMeassage = $("<label>").addClass("emailE");
+        errorMeassage.empty();
         errorMeassage.append("This Email is used");
         errorMeassage.addClass("errorMeassage");
         $("#emaildev").append(errorMeassage);
+        return false;
     }
     else {
         $(".emailE").empty();
         $(".emailE").removeClass("errorMeassage");
         $(".emailE").remove();
+        return true;
     }
 
 }
