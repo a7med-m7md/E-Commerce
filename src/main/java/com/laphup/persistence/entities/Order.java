@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity
+@Entity(name = "PurchasedOrder")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

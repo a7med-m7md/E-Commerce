@@ -16,6 +16,8 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
+@NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u")
+@NamedQuery(name = "getUserById", query = "SELECT u FROM User u WHERE u.uuid = :id")
 public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
