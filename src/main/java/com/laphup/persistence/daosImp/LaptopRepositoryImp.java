@@ -1,17 +1,13 @@
 package com.laphup.persistence.daosImp;
 
-import com.laphup.persistence.entities.LaptopImage;
 import com.laphup.persistence.repository.BaseRepository;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
-import com.laphup.util.Constants;
-import com.laphup.util.enums.Rate;
 import com.laphup.util.enums.SortBy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,16 +15,17 @@ import java.util.UUID;
 public class LaptopRepositoryImp extends BaseRepository<LaptopCategory, UUID> {
     private HttpServletRequest request;
     private EntityManager entityManager;
+    private CriteriaBuilder criteriaBuilder;
     public LaptopRepositoryImp(HttpServletRequest request){
         super(request);
         this.request = request;
         this.entityManager = (EntityManager) request.getAttribute("EntityManager");
+        this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
     public List<Laptop> getPage(@NotNull int pageNumber, @NotNull int count, String laptopCategory, SortBy sortedBy, Double minPrice, Double maxPrice) {
 
         //Create CriteriaQuery and root table (laptop)
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Laptop> query_Laptop = criteriaBuilder.createQuery(Laptop.class);
         Root<Laptop> laptopRoot = query_Laptop.from(Laptop.class);
 
@@ -50,7 +47,6 @@ public class LaptopRepositoryImp extends BaseRepository<LaptopCategory, UUID> {
         else {
             order = criteriaBuilder.asc(laptopRoot.get("rate"));
         }
-
 
         //Execute the query according filters  layers
         ArrayList<Predicate> predicates = new ArrayList<>();
