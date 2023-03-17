@@ -1,6 +1,7 @@
 package com.laphup.controller;
 
 import com.google.gson.Gson;
+import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.service.CategoryService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,6 +26,9 @@ public class CategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String categoryName = request.getParameter("category-name");
         CategoryService categoryService = new CategoryService(request);
-        categoryService.saveCategory(categoryName);
+        LaptopCategory category = categoryService.saveCategory(categoryName);
+        Gson gson = new Gson();
+        String categoryAsJson = gson.toJson(category);
+        response.getWriter().write(categoryAsJson);
     }
 }

@@ -2,9 +2,10 @@ package com.laphup.persistence.repositoryImp;
 
 import com.laphup.dtos.LaptopDTO;
 import com.laphup.persistence.entities.LaptopImage;
-import com.laphup.persistence.repository.BaseDao;
+//import com.laphup.persistence.repository.BaseDao;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
+import com.laphup.persistence.repository.BaseDao;
 import com.laphup.persistence.repository.LaptopRepo;
 import com.laphup.util.enums.Rate;
 import com.laphup.util.enums.SortBy;

@@ -1,18 +1,19 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "category",
-        success: function(response) {
+        success: function (response) {
 
             var categoryList = JSON.parse(response);
             console.log(categoryList)
             for (var i = 0; i < categoryList.length; i++) {
                 var category = categoryList[i];
                 console.log(category.categoryName)
+                console.log(category.laptopCategoryUuid)
                 var li = $("<li>").addClass("list-group-item d-flex justify-content-between align-items-center");
                 var div = $("<div>").addClass("custom-control custom-radio");
-                var input = $("<input>").attr("type", "radio").attr("id", "category" + i).attr("name", "category").addClass("custom-control-input");
-                var label = $("<label>").attr("for", "category" + i).addClass("custom-control-label").text(category.categoryName);
+                var input = $("<input>").attr("type", "radio").attr("id", category.laptopCategoryUuid).attr("name", "category").addClass("custom-control-input");
+                var label = $("<label>").attr("for", category.laptopCategoryUuid).addClass("custom-control-label").text(category.categoryName);
                 div.append(input);
                 div.append(label);
                 li.append(div);
@@ -21,17 +22,31 @@ $(document).ready(function() {
             }
         }
     });
+
 });
 
+// $('#category-name').on('change', function() {
+//     var category = $(this).val();
+//     console.log(category + " <<==")
+//     $('#hidden-category').val(category)
+// });
 
-function addNewCategory(event){
+$("#list-category-val").on("change", "input[type=radio]", function() {
+    var selectedCategory = $(this).siblings("label").text();
+    console.log("Should change to " + selectedCategory)
+    $('#hidden-category').val(selectedCategory)
+    console.log($('#hidden-category').val() + " vvval")
+});
+
+function addNewCategory(event) {
     event.preventDefault();
     let categoryName = $("#category-name").val();
-    $.post("category", {"category-name": categoryName}, function () {
+    $.post("category", {"category-name": categoryName}, function (response) {
+        let categoryInfo = JSON.parse(response);
         var li = $("<li>").addClass("list-group-item d-flex justify-content-between align-items-center");
         var div = $("<div>").addClass("custom-control custom-radio");
-        var input = $("<input>").attr("type", "radio").attr("id", "category1" ).attr("name", "category").addClass("custom-control-input");
-        var label = $("<label>").attr("for", "category" ).addClass("custom-control-label").text(categoryName);
+        var input = $("<input>").attr("type", "radio").attr("id", categoryInfo.laptopCategoryUuid).attr("name", "category").addClass("custom-control-input");
+        var label = $("<label>").attr("for", categoryInfo.laptopCategoryUuid).addClass("custom-control-label").text(categoryName);
         div.append(input);
         div.append(label);
         li.append(div);

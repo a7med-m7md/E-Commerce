@@ -49,8 +49,7 @@
 							</div>
 							<div class="form-group">
 								<label for="laptop-price">Laptop Price</label>
-								<input type="number" min="1" class="form-control" id="laptop-price" name="laptop-price"
-									   placeholder="Enter Laptop Price">
+								<input type="number" min="1" class="form-control" id="laptop-price" name="laptop-price" placeholder="Enter Laptop Price">
 							</div>
 							<div class="form-group">
 								<label for="laptop-description">Laptop Description</label>
@@ -58,18 +57,21 @@
 							</div>
 							<div class="form-group">
 								<label for="laptop-quantity">Laptop Quantity</label>
-								<input type="number" min="1" class="form-control" id="laptop-quantity"
-									   placeholder="Enter Laptop Quantity" name="laptop-quantity">
+								<input type="number" min="1" class="form-control" id="laptop-quantity" placeholder="Enter Laptop Quantity" name="laptop-quantity">
 							</div>
 							<div class="form-group">
 								<label for="laptop-photo">Laptop Photo</label>
 								<input type="file" class="form-control-file" id="laptop-photo" name="product-image">
 							</div>
 							<div class="form-group">
-								<label for="additional-photos">Additional Photos</label>
-								<input type="file" class="form-control-file" id="additional-photos" name="additional-photos[]" multiple>
+								<label>Additional Photos</label>
+								<div id="additional-photos-container">
+<%--									<input type="file" class="form-control-file" id="additional-photos" name="additional-photos[]" multiple>--%>
+								</div>
+								<button type="button" class="btn btn-secondary btn-sm mt-2" id="add-photo-button"><i class="fas fa-plus"></i> Add Photo</button>
 							</div>
-							<input type="submit" value="Save">
+							<input id="hidden-category" hidden="hidden" name="category" value="">
+							<input type="submit" class="btn btn-primary" value="Save">
 						</form>
 					</div>
 				</div>
@@ -150,6 +152,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
 
 	<script src="add-laptop-category.js"></script>
+	<script>
+		$('#add-photo-button').click(function() {
+			// create a new "input" element of type "file"
+			const inputFile = $('<input>').attr({
+				'type': 'file',
+				'class': 'form-control-file',
+				'id': 'additional-photos',
+				'name': 'additional-photos[]',
+				'multiple': ''
+			});
+
+			// append the new "input" element to the DOM
+			$('.form-group:last-of-type').append(inputFile);
+		});
+	</script>
 
 </section>
 </body>

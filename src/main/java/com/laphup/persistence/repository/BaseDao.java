@@ -1,4 +1,4 @@
-package com.laphup.persistence.daos;
+package com.laphup.persistence.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;

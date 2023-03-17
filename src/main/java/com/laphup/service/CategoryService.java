@@ -11,13 +11,17 @@ public class CategoryService {
         laptopCategoryRepoImp = new LaptopCategoryRepoImp(request);
     }
 
-    public void saveCategory(String categoryName){
+    public LaptopCategory saveCategory(String categoryName){
         LaptopCategory category = new LaptopCategory();
         category.setCategoryName(categoryName);
-        laptopCategoryRepoImp.save(category);
+        return laptopCategoryRepoImp.save(category);
     }
 
     public Set<LaptopCategory> getAllCategories(){
         return laptopCategoryRepoImp.getAll(new LaptopCategory());
+    }
+
+    public LaptopCategory getCategoryName(String name){
+        return laptopCategoryRepoImp.getByCategoryName(name);
     }
 }

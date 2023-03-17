@@ -1,10 +1,9 @@
 package com.laphup.persistence.daosImp;
 
 import com.laphup.Listeners.RequestServlet;
-import com.laphup.persistence.daos.BaseDao;
-import com.laphup.persistence.daos.LaptopDao;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
+import com.laphup.persistence.repository.BaseDao;
 import com.laphup.util.Constants;
 import com.laphup.util.enums.Rate;
 import com.laphup.util.enums.SortBy;
