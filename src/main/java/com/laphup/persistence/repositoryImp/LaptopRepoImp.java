@@ -38,7 +38,7 @@ public class LaptopRepoImp extends BaseDao<Laptop, UUID, String> {
         return laptops;
     }
 
-    public void save(LaptopImage laptopImage){
+    public void saveImages(LaptopImage laptopImage){
         BaseDao<LaptopImage, UUID, String> laptopImageUUIDBaseDao = new BaseDao<>(request);
         laptopImageUUIDBaseDao.save(laptopImage);
     }

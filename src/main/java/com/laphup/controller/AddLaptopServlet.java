@@ -27,7 +27,8 @@ public class AddLaptopServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        response.getWriter().write("Hello add laptop");
-        request.getRequestDispatcher("add-new-post.html").forward(request, response);
+        System.out.println("Hello");
+        request.getRequestDispatcher("add-laptop.jsp").forward(request, response);
     }
 
     @Override

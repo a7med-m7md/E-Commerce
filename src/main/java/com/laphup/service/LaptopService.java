@@ -21,7 +21,7 @@ public class LaptopService {
     }
 
     public void saveImage(LaptopImage laptopImage) {
-        laptopRepoImp.save(laptopImage);
+        laptopRepoImp.saveImages(laptopImage);
     }
 
 //    public List<LaptopDTO> getPage(int pageNumber, int count, String laptopCategory,
