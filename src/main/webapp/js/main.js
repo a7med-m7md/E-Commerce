@@ -166,3 +166,22 @@
 	}
 
 })(jQuery);
+
+$(document).ready(function(){
+  // Activate the carousel
+  $("#myCarousel").carousel();
+
+  // Enable carousel indicators
+  $(".carousel-indicators li").click(function(){
+    $("#myCarousel").carousel(parseInt($(this).attr("data-slide-to")));
+  });
+
+  // Enable carousel controls
+  $(".carousel-control-prev").click(function(){
+    $("#myCarousel").carousel("prev");
+  });
+  $(".carousel-control-next").click(function(){
+    $("#myCarousel").carousel("next");
+  });
+});
+

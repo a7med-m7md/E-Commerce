@@ -1,5 +1,8 @@
 package com.laphup.controller;
 
+import com.laphup.dtos.LaptopDTO;
+import com.laphup.persistence.entities.Laptop;
+import com.laphup.service.LaptopService;
 import com.laphup.util.enums.SortBy;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
@@ -13,7 +16,7 @@ import java.util.List;
 
 public class LaptopServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /*int pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
         int count = Integer.parseInt(req.getParameter("count"));
         String laptopCategory = req.getParameter("laptopCategory");
@@ -28,5 +31,11 @@ public class LaptopServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println(messageJson);*/
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
