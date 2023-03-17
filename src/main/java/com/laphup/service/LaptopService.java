@@ -2,7 +2,7 @@ package com.laphup.service;
 
 import com.laphup.dtos.LaptopDTO;
 import com.laphup.mappers.LaptopMapper;
-import com.laphup.persistence.reposImp.LaptopRepoImp;
+import com.laphup.persistence.repositoryImp.LaptopRepoImp;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.util.enums.SortBy;
 import jakarta.servlet.http.HttpServletRequest;

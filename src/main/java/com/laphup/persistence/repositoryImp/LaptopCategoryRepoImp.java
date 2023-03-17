@@ -1,4 +1,4 @@
-package com.laphup.persistence.reposImp;
+package com.laphup.persistence.repositoryImp;
 
 import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.LaptopCategory;
