@@ -30,6 +30,7 @@ public class LaptopDaoImp extends BaseDao<LaptopCategory, UUID, String> {
         laptop.setRate(Rate.FIVE);
         laptop.setUuidLaptop(UUID.randomUUID());
 //        laptop.setLaptopCategory(new LaptopCategory());
+//        laptop.setPurchasingCount(5);
         //laptop.setImagPath(Constants.MAIN_DIR + "/webapps/store/img/laptops/dar.png");
         laptops.add(laptop);
         return laptops;
