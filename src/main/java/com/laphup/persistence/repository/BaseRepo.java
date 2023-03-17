@@ -4,12 +4,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletRequest;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BaseRepo<Table, ID, Name> {
+public class BaseRepo<Table,ID> {
     private EntityManager entityManager;
 
     public BaseRepo(HttpServletRequest request) {
@@ -31,16 +30,24 @@ public class BaseRepo<Table, ID, Name> {
 
     public Table save(Table obj) {
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(obj);
-        transaction.commit();
+        try {
+            transaction.begin();
+            entityManager.persist(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
         return obj;
     }
 
     public void delete(Table obj) {
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.remove(obj);
-        transaction.commit();
+        try {
+            transaction.begin();
+            entityManager.remove(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
     }
 }

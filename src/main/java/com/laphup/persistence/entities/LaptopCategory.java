@@ -15,7 +15,7 @@ public class LaptopCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID laptopCategoryUuid;
-    @OneToMany(mappedBy = "laptopCategory")
+    @OneToMany(mappedBy = "laptopCategory", fetch = FetchType.LAZY)
     private Set<Laptop> laptop;
     private String categoryName;
 }
