@@ -63,8 +63,8 @@ public class LaptopRepositoryImp extends BaseRepository<LaptopCategory, UUID> {
 
         //Get Result
         List<Laptop> laptopList = entityManager.createQuery(query_Laptop)
-                .setFirstResult(0) // starting index of the first result
-                .setMaxResults(10) // maximum number of results to retrieve
+                .setFirstResult((pageNumber-1)*count) // starting index of the first result
+                .setMaxResults(count) // maximum number of results to retrieve
                 .getResultList();
 
         return laptopList;
