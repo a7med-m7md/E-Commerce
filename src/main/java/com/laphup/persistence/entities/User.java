@@ -3,11 +3,11 @@ package com.laphup.persistence.entities;
 import com.laphup.util.enums.Gender;
 import com.laphup.util.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.modelmapper.internal.bytebuddy.implementation.bind.MethodDelegationBinder;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -38,11 +38,13 @@ public class User  implements Serializable {
     @NonNull
     private Gender gender;
     @NonNull
+    @Size(min = 6, max = 12, message = "Password must be exactly 6 letters")
     private String password;
     private String passwordSult;
     @NonNull
     private String job;
     @NonNull
+    @Email(message = "Email should be valid")
     @Column(unique = true,nullable = false)
     private String eMail;
     private long creditLimit;
