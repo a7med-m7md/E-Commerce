@@ -1,10 +1,8 @@
-package com.laphup.persistence.daosImp;
+package com.laphup.persistence.reposImp;
 
-import com.laphup.Listeners.RequestServlet;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
-import com.laphup.persistence.repository.BaseDao;
-import com.laphup.util.Constants;
+import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.util.enums.Rate;
 import com.laphup.util.enums.SortBy;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LaptopDaoImp extends BaseDao<LaptopCategory, UUID, String> {
+public class LaptopRepoImp extends BaseRepo<LaptopCategory, UUID, String> {
     private HttpServletRequest request;
-    public LaptopDaoImp(HttpServletRequest request){
+    public LaptopRepoImp(HttpServletRequest request){
         super(request);
         this.request = request;
     }

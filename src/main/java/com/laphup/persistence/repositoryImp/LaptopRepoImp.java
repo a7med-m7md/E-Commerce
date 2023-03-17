@@ -1,23 +1,18 @@
 package com.laphup.persistence.repositoryImp;
 
-import com.laphup.dtos.LaptopDTO;
 import com.laphup.persistence.entities.LaptopImage;
 //import com.laphup.persistence.repository.BaseDao;
 import com.laphup.persistence.entities.Laptop;
-import com.laphup.persistence.entities.LaptopCategory;
-import com.laphup.persistence.repository.BaseDao;
-import com.laphup.persistence.repository.LaptopRepo;
+import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.util.enums.Rate;
 import com.laphup.util.enums.SortBy;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LaptopRepoImp extends BaseDao<Laptop, UUID, String> {
+public class LaptopRepoImp extends BaseRepo<Laptop, UUID, String> {
 //public class LaptopRepoImp implements LaptopRepo{
     private HttpServletRequest request;
     public LaptopRepoImp(HttpServletRequest request){
@@ -40,8 +35,8 @@ public class LaptopRepoImp extends BaseDao<Laptop, UUID, String> {
     }
 
     public void saveImages(LaptopImage laptopImage){
-        BaseDao<LaptopImage, UUID, String> laptopImageUUIDBaseDao = new BaseDao<>(request);
-        laptopImageUUIDBaseDao.save(laptopImage);
+        BaseRepo<LaptopImage, UUID, String> laptopImageUUIDBaseRepo = new BaseRepo<>(request);
+        laptopImageUUIDBaseRepo.save(laptopImage);
     }
 
 //    public void save(LaptopDTO laptopDTO) {
