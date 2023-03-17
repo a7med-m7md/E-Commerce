@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BaseRepository<Table,ID> {
+public class BaseRepo<Table,ID> {
     private EntityManager entityManager;
-    public BaseRepository(HttpServletRequest request){
+    public BaseRepo(HttpServletRequest request){
         entityManager = (EntityManager) request.getAttribute("EntityManager");
     }
     public Set<Table> getAll(Table obj){

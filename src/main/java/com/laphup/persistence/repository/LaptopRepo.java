@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-public interface LaptopRepository {
+public interface LaptopRepo {
     public List<Laptop> getAll(HttpServletRequest requestServlet, int pageNumber, int count, String laptopCategory,
                                SortBy sortedBy, double minPrice, double maxPrice);
 }

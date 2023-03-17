@@ -1,4 +1,4 @@
 package com.laphup.persistence.repository;
 
-public interface LaptopCategoryRepository {
+public interface LaptopCategoryRepo {
 }

@@ -1,9 +1,7 @@
 package com.laphup;
 
-import com.laphup.persistence.daosImp.LaptopRepositoryImp;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
-import com.laphup.persistence.entities.OrderDetails;
 import com.laphup.util.enums.SortBy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,7 +11,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Main {
     public static void main(String... args) {

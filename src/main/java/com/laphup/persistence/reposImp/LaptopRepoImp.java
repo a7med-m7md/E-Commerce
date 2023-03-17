@@ -1,6 +1,6 @@
-package com.laphup.persistence.daosImp;
+package com.laphup.persistence.reposImp;
 
-import com.laphup.persistence.repository.BaseRepository;
+import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.enums.SortBy;
@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LaptopRepositoryImp extends BaseRepository<LaptopCategory, UUID> {
+public class LaptopRepoImp extends BaseRepo<LaptopCategory, UUID> {
     private HttpServletRequest request;
     private EntityManager entityManager;
     private CriteriaBuilder criteriaBuilder;
-    public LaptopRepositoryImp(HttpServletRequest request){
+    public LaptopRepoImp(HttpServletRequest request){
         super(request);
         this.request = request;
         this.entityManager = (EntityManager) request.getAttribute("EntityManager");

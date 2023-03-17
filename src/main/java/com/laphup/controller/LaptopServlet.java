@@ -1,8 +1,6 @@
 package com.laphup.controller;
 
 import com.laphup.dtos.LaptopDTO;
-import com.laphup.persistence.daosImp.LaptopRepositoryImp;
-import com.laphup.persistence.entities.Laptop;
 import com.laphup.service.LaptopService;
 import com.laphup.util.enums.SortBy;
 import com.google.gson.Gson;

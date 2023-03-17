@@ -1,21 +1,20 @@
-package com.laphup.persistence.daosImp;
+package com.laphup.persistence.reposImp;
 
-import com.laphup.persistence.repository.BaseRepository;
+import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.LaptopCategory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import jakarta.servlet.http.HttpServletRequest;
-import jdk.jfr.Category;
 
 import java.util.List;
 import java.util.UUID;
 
-public class LaptopCategoryRepositoryImp extends BaseRepository<LaptopCategory, UUID> {
+public class LaptopCategoryRepoImp extends BaseRepo<LaptopCategory, UUID> {
     private HttpServletRequest request;
     private EntityManager entityManager;
-    public LaptopCategoryRepositoryImp(HttpServletRequest request){
+    public LaptopCategoryRepoImp(HttpServletRequest request){
         super(request);
         this.request = request;
         this.entityManager = (EntityManager) request.getAttribute("EntityManager");
