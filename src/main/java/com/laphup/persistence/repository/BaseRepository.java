@@ -1,4 +1,4 @@
-package com.laphup.persistence.daos;
+package com.laphup.persistence.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BaseDao<Table,ID ,Name> {
+public class BaseRepository<Table,ID> {
     private EntityManager entityManager;
-    public BaseDao(HttpServletRequest request){
+    public BaseRepository(HttpServletRequest request){
         entityManager = (EntityManager) request.getAttribute("EntityManager");
     }
     public Set<Table> getAll(Table obj){
@@ -24,15 +24,23 @@ public class BaseDao<Table,ID ,Name> {
     }
     public Table save(Table obj){
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(obj);
-        transaction.commit();
+        try {
+            transaction.begin();
+            entityManager.persist(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
         return obj;
     }
     public void delete(Table obj){
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.remove(obj);
-        transaction.commit();
+        try {
+            transaction.begin();
+            entityManager.remove(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
     }
 }
