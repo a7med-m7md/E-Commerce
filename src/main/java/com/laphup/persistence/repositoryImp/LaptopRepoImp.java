@@ -1,5 +1,6 @@
 package com.laphup.persistence.repositoryImp;
 
+import com.laphup.persistence.entities.LaptopImage;
 import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LaptopRepoImp extends BaseRepo<LaptopCategory, UUID> {
+public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
     private HttpServletRequest request;
     private EntityManager entityManager;
     private CriteriaBuilder criteriaBuilder;
@@ -68,5 +69,9 @@ public class LaptopRepoImp extends BaseRepo<LaptopCategory, UUID> {
                 .getResultList();
 
         return laptopList;
+    }
+    public void saveImages(LaptopImage laptopImage){
+        BaseRepo<LaptopImage, UUID> laptopImageUUIDBaseDao = new BaseRepo<>(request);
+        laptopImageUUIDBaseDao.save(laptopImage);
     }
 }

@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.UUID;
 
-public class LaptopCategoryRepoImp extends BaseRepo<LaptopCategory, UUID, String> implements LaptopCategoryRepo {
+public class LaptopCategoryRepoImp extends BaseRepo<LaptopCategory, UUID> implements LaptopCategoryRepo {
     private HttpServletRequest request;
     private EntityManager entityManager;
     public LaptopCategoryRepoImp(HttpServletRequest request){

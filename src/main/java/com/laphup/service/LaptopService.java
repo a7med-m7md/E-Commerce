@@ -34,4 +34,3 @@ public class LaptopService {
         laptopRepoImp.saveImages(laptopImage);
     }
 }
-*/
