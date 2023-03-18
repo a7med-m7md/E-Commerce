@@ -10,11 +10,13 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
+@NamedQuery(name = "getByName", query = "FROM LaptopCategory c WHERE c.categoryName = :name")
 public class LaptopCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID laptopCategoryUuid;
-    @OneToMany(mappedBy = "laptopCategory")
+    @OneToMany(mappedBy = "laptopCategory", fetch = FetchType.LAZY)
     private Set<Laptop> laptop;
+    @Column(unique = true,nullable = false)
     private String categoryName;
 }

@@ -5,6 +5,7 @@ import com.laphup.dtos.UserDto;
 import com.laphup.service.SingUpService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet(name = "signup", value = "/signup")
 public class SignUpServlet extends HttpServlet {
     boolean exist = true;
 

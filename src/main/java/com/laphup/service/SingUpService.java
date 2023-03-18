@@ -1,23 +1,21 @@
 package com.laphup.service;
 
-import com.laphup.mappers.UserMapper;
-import com.laphup.persistence.daos.UserDao;
+import com.laphup.persistence.repositoryImp.UserRepo;
 import com.laphup.persistence.entities.User;
 
 import java.util.Optional;
 
 import com.laphup.dtos.UserDto;
-import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 
 public class SingUpService {
     HttpServletRequest request;
-    UserDao userDao;
+    UserRepo userDao;
 
     public SingUpService(HttpServletRequest request) {
         this.request = request;
-        userDao = new UserDao(request);
+        userDao = new UserRepo(request);
     }
 
     private ModelMapper modelMapper = new ModelMapper();
