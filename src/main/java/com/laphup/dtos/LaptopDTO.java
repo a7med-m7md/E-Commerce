@@ -22,7 +22,7 @@ public class LaptopDTO {
     private String laptopCategory;
     private String name;
     private double price;
-    private Rate rate;
+    private String rate;
     private int quantities;
     private String description;
 }

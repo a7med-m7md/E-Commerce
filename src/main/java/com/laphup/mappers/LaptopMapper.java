@@ -25,10 +25,14 @@ public class LaptopMapper {
         //Set Category as string
         laptopDTO.setLaptopCategory(laptop.getLaptopCategory().getCategoryName());
 
+        //Set rate as string
+        laptopDTO.setRate(String.valueOf(laptop.getRate().ordinal()));
+
         //Set Image list
         laptop.getLaptopImage().forEach(x -> {
             try {
-                laptopDTO.getImagByteList().add(imageConverter.converToByteArray(x.getImagPath()));
+                byte[] bytes = imageConverter.converToByteArray(x.getImagPath());
+                laptopDTO.getImagByteList().add(bytes);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

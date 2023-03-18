@@ -14,7 +14,7 @@ public class LaptopImage {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID laptopImageUuid;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
     private String imagPath;
