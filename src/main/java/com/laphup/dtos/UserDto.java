@@ -36,6 +36,9 @@ public class UserDto implements Serializable {
         this.interests = interests;
     }
 
+    public UserDto() {
+    }
+
     public Date getBirthDay() {
         return birthDay;
     }
