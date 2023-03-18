@@ -16,7 +16,7 @@ public class Laptop {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuidLaptop;
-    @OneToMany(mappedBy = "laptop")
+    @OneToMany(mappedBy = "laptop", fetch = FetchType.EAGER)
     private Set<LaptopImage> laptopImage = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "laptopCategoryUuid")
