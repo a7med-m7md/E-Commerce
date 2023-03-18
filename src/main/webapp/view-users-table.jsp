@@ -61,12 +61,17 @@
                     </div>
                     <div class="modal-body">
                         <p><strong>UID:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getUuid() %></p>
-                        <p><strong>Name:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getFName() %></p>
+                        <p><strong>Name:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getFName() + " " + ((List<User>) request.getAttribute("users")).get(i).getLName()%></p>
                         <p><strong>Gender:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getGender() %></p>
                         <p><strong>Address:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getAddress() %></p>
+                        <p><strong>Email:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getEMail() %></p>
+                        <p><strong>Job:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getJob() %></p>
+                        <p><strong>Credit Limit:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getCreditLimit() %></p>
+                        <p><strong>Birthdate:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getBirthDay() %></p>
+                        <p><strong>Number of orders:</strong> <%= ((List<User>) request.getAttribute("users")).get(i).getOrder().size() %></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary closeBTN" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

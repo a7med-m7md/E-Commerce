@@ -4,10 +4,19 @@ function goToUserPage(userId) {
 }
 
 $(document).ready(function () {
+    var target;
     $('tr[data-toggle="modal"]').click(function () {
-        var target = $(this).data('target');
+        target = $(this).data('target');
         $(target).modal('show');
     });
+
+    $('.closeBTN').click(function (){
+        $(target).modal('hide')
+        console.log("close")
+    })
+});
+
+
 });
 
 
