@@ -42,9 +42,10 @@ public class SignUpServlet extends HttpServlet {
         boolean exist = (boolean) request.getServletContext().getAttribute("exist");
         if (exist) {
             UserDto user = checkExistence(request, response);
-            System.out.println(user);
             SingUpService singUpService = new SingUpService(request);
             singUpService.register(user);
+            RequestDispatcher rd = request.getRequestDispatcher("SignIn");
+            rd.forward(request, response);
         }
     }
 

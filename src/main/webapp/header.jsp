@@ -10,7 +10,7 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign In</a></li>
+						<li><a href="signIn.html"><i class="fa fa-user-o"></i> ${sessionScope.uname}</a></li>
 					</ul>
 				</div>
 			</div>
