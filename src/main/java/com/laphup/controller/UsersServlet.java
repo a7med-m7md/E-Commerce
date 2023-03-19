@@ -1,6 +1,7 @@
 package com.laphup.controller;
 
 import com.google.gson.Gson;
+import com.laphup.controller.utility.JSPages;
 import com.laphup.persistence.entities.User;
 import com.laphup.service.UserService;
 import jakarta.servlet.ServletException;
@@ -36,6 +37,7 @@ public class UsersServlet extends HttpServlet {
 //            response.getWriter().write(userAsJSON);
             System.out.println("USER :: " + user.getFName());
         }
-        request.getRequestDispatcher("view-users-table.jsp").forward(request, response);
+//        request.getRequestDispatcher("view-users-table.jsp").forward(request, response);
+        JSPages.ADMIN_DISPLAY_USERS.forward(request, response);
     }
 }
