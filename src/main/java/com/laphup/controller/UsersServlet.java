@@ -1,6 +1,7 @@
 package com.laphup.controller;
 
 import com.google.gson.Gson;
+import com.laphup.controller.utility.JSPages;
 import com.laphup.persistence.entities.User;
 import com.laphup.service.UserService;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +24,7 @@ public class UsersServlet extends HttpServlet {
         if(id == null){
             System.out.println("id: " + id);
             List<User> users = userService.getAllUsers();
+//            List<String> userss = Arrays.asList("Ahmed", "Mohamed");
 //            Gson gson = new Gson();
 //            String userListAsJSON = gson.toJson(users);
             request.setAttribute("users", users);
@@ -32,7 +35,9 @@ public class UsersServlet extends HttpServlet {
 //            Gson gson = new Gson();
 //            String userAsJSON = gson.toJson(user);
 //            response.getWriter().write(userAsJSON);
+            System.out.println("USER :: " + user.getFName());
         }
-        request.getRequestDispatcher("view-users-table.jsp").forward(request, response);
+//        request.getRequestDispatcher("view-users-table.jsp").forward(request, response);
+        JSPages.ADMIN_DISPLAY_USERS.forward(request, response);
     }
 }

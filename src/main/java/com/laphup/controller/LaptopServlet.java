@@ -31,12 +31,11 @@ public class LaptopServlet extends HttpServlet {
         //Convert laptop page to json object
         Gson gson = new Gson();
         String messageJson = gson.toJson(laptops);
-
+        System.out.println(messageJson);
         //Write json resposte to client
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println(messageJson);
-        out.println("messageJson");
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

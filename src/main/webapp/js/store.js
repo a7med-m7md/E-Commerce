@@ -1,9 +1,26 @@
-import {PORT} from "./configuration";
-
+/*
 $(document).ready(function () {
-    let laptops = getLaptops(1, 10, 'hp', 'PRICE', 0, 10000);
+    getCategories();
+    //let laptops = getLaptops(1, 10, 'hp', 'PRICE', 0, 10000);
+
+
 });
 
+function getCategories(){
+    $.ajax({
+        url: "http://localhost:8082/store/category", // specify the URL of the API endpoint
+        type: "GET", // specify the type of request (GET in this case)
+        success: function (data) { // define a callback function to handle the response
+            addToCategory(data);
+        }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
+            console.log("Request failed. Status code: " + jqXHR.status);
+        }
+    });
+}
+
+function addToCategory(categories){
+    alert(categories);
+}
 
 function addToScrollbar(laptops) {
     var jsonLaptops = $.parseJSON(laptops);
@@ -46,70 +63,12 @@ function addToScrollbar(laptops) {
             `;
         container.innerHTML += newProduct;
     });
-    // definition
-    function loadScript(scriptUrl) {
-        const script = document.createElement('script');
-        script.src = scriptUrl;
-        document.body.appendChild(script);
 
-        return new Promise((res, rej) => {
-            script.onload = function() {
-                res();
-            }
-            script.onerror = function () {
-                rej();
-            }
-        });
-    }
-
-// use
-    loadScript(`http://localhost:${PORT}/store/js/jquery.min.js`)
-        .then(() => {
-            console.log('Script loaded!');
-        })
-        .catch(() => {
-            console.error('Script loading failed! Handle this error');
-        });
-    loadScript(`http://localhost:${PORT}/store/js/bootstrap.min.js`)
-        .then(() => {
-            console.log('Script loaded!');
-        })
-        .catch(() => {
-            console.error('Script loading failed! Handle this error');
-        });
-    loadScript(`http://localhost:${PORT}/store/js/slick.min.js`)
-        .then(() => {
-            console.log('Script loaded!');
-        })
-        .catch(() => {
-            console.error('Script loading failed! Handle this error');
-        });
-    loadScript(`http://localhost:${PORT}/store/js/nouislider.min.js`)
-        .then(() => {
-            console.log('Script loaded!');
-        })
-        .catch(() => {
-            console.error('Script loading failed! Handle this error');
-        });
-    loadScript(`http://localhost:${PORT}/store/js/jquery.zoom.min.js`)
-        .then(() => {
-            console.log('Script loaded!');
-        })
-        .catch(() => {
-            console.error('Script loading failed! Handle this error');
-        });
-    loadScript(`http://localhost:${PORT}/store/js/main.js`)
-        .then(() => {
-            console.log('Script loaded!');
-        })
-        .catch(() => {
-            console.error('Script loading failed! Handle this error');
-        });
 }
 
 function getLaptops(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
-        url: `http://localhost:${PORT}/store/laptopservlet`, // specify the URL of the API endpoint
+        url: "http://localhost:8082/store/laptopservlet", // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,
@@ -125,3 +84,4 @@ function getLaptops(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPr
         }
     });
 }
+*/
