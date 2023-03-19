@@ -1,3 +1,5 @@
+import {PORT} from "./configuration";
+
 $(document).ready(function () {
     let laptops = getLaptops(1, 10, 'hp', 'PRICE', 0, 10000);
 });
@@ -61,42 +63,42 @@ function addToScrollbar(laptops) {
     }
 
 // use
-    loadScript('http://localhost:8082/store/js/jquery.min.js')
+    loadScript(`http://localhost:${PORT}/store/js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript('http://localhost:8082/store/js/bootstrap.min.js')
+    loadScript(`http://localhost:${PORT}/store/js/bootstrap.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript('http://localhost:8082/store/js/slick.min.js')
+    loadScript(`http://localhost:${PORT}/store/js/slick.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript('http://localhost:8082/store/js/nouislider.min.js')
+    loadScript(`http://localhost:${PORT}/store/js/nouislider.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript('http://localhost:8082/store/js/jquery.zoom.min.js')
+    loadScript(`http://localhost:${PORT}/store/js/jquery.zoom.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript('http://localhost:8082/store/js/main.js')
+    loadScript(`http://localhost:${PORT}/store/js/main.js`)
         .then(() => {
             console.log('Script loaded!');
         })
@@ -107,7 +109,7 @@ function addToScrollbar(laptops) {
 
 function getLaptops(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
-        url: "http://localhost:8082/store/laptopservlet", // specify the URL of the API endpoint
+        url: `http://localhost:${PORT}/store/laptopservlet`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,
