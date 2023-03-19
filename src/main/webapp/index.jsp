@@ -38,7 +38,7 @@
 	</head>
 	<body>
 
-        <%@ include file="header.jsp" %>
+        <%@ include file="WEB-INF/header.jsp" %>
 		<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
@@ -970,7 +970,7 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="js/laptops.js"></script>
+		<script type="module" src="js/laptops.js"></script>
 <%--		<script src="js/jquery.min.js"></script>--%>
 <%--		<script src="js/bootstrap.min.js"></script>--%>
 <%--		<script src="js/slick.min.js"></script>--%>

@@ -1,4 +1,4 @@
-import {PORT} from "./configuration";
+import {PORT} from "./configuration.js";
 
 $(document).ready(function () {
     let laptops = getLaptops(1, 10, 'hp', 'PRICE', 0, 10000);

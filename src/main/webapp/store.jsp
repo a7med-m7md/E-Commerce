@@ -36,7 +36,7 @@
 
     </head>
 	<body>
-		<%@ include file="header.jsp" %>
+		<%@ include file="WEB-INF/header.jsp" %>
 
 		<!-- NAVIGATION -->
 		<nav id="navigation">

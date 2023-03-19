@@ -32,7 +32,7 @@ public class User  implements Serializable {
     @OneToOne(mappedBy = "user")
     private PaymentCard paymentCard;
     @NonNull
-    public String fName;
+    private String fName;
     @NonNull
     private String lName;
     @NonNull
@@ -54,4 +54,5 @@ public class User  implements Serializable {
     private String address;
     @NonNull
     private String interests;
+
 }
