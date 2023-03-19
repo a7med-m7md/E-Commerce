@@ -1,5 +1,6 @@
 package com.laphup.controller;
 
+import com.laphup.controller.utility.JSPages;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.persistence.entities.LaptopImage;
@@ -29,7 +30,8 @@ public class AddLaptopServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        response.getWriter().write("Hello add laptop");
         System.out.println("Hello");
-        request.getRequestDispatcher("add-laptop.jsp").forward(request, response);
+//        request.getRequestDispatcher("add-laptop.jsp").forward(request, response);
+        JSPages.ADD_LAPTOP.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -79,7 +81,8 @@ public class AddLaptopServlet extends HttpServlet {
         }
         images.forEach(image-> laptopService.saveImage(image));
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+//        request.getRequestDispatcher("index.jsp").forward(request, response);
+        JSPages.HOME_PAGE.forward(request, response);
     }
     private String getPartAsString(Part part) {
         try (BufferedReader val = new BufferedReader(new InputStreamReader(part.getInputStream()))) {
