@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -9,9 +10,28 @@
 						<li><a href="#"><i class="fa fa-map-marker"></i>1734 Smart Village</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-					    <li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
+
+						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
+<%--						<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
+						<c:if test="${userRole == 'ADMIN'}">
+<%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
+							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
+						</c:if>
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="signIn.html"><i class="fa fa-user-o"></i> ${sessionScope.uname}</a></li>
+<%--						<c:if test="not emptry userInfo">--%>
+<%--							<li><a href="signIn.html"><i class="fa fa-user-o"></i> <c:out value="${userInfo}" /></a></li>--%>
+<%--						</c:if>--%>
+						<c:set var="userInfo" value="${sessionScope.userInfo}" />
+
+						<c:if test="${not empty userInfo}">
+							<li><i class="fa fa-user-o"></i> <a><c:out value="${userInfo.fName}" /></a></li>
+						</c:if>
+
+
+						<c:if test="${empty userInfo}">
+							<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign in</a></li>
+						</c:if>
+
 					</ul>
 				</div>
 			</div>
@@ -27,7 +47,7 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="../img/logo.png" alt="">
 								</a>
 							</div>
 						</div>
@@ -73,7 +93,7 @@
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+													<img src="../img/product01.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -84,7 +104,7 @@
 
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product02.png" alt="">
+													<img src="../img/product02.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
