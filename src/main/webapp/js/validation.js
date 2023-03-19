@@ -32,7 +32,7 @@ $('#signupbtn').click(function () {
         interests: $('#interests').val(),
     })
     $.ajax({
-        url: 'SignUp', //servlet url
+        url: 'signup', //servlet url
         type: 'POST', //servlet request type
         contentType: 'application/json', //For input type
         data: user, //input data
@@ -56,7 +56,7 @@ function IsEmail(email) {
     }
 }
 $("#emailS").blur(function () {
-    $.get("SignUp?email=" + $("#emailS").val(), ajaxCallBack);
+    $.get("signup?email=" + $("#emailS").val(), ajaxCallBack);
     console.log("External content loaded successfully!");
 });
 function ajaxCallBack(responseTxt, statusTxt, xhr) {

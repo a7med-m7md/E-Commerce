@@ -30,6 +30,7 @@
 
 						<c:if test="${empty userInfo}">
 							<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign in</a></li>
+							<li><a href="signup"><i class="fa fa-user-o"></i> Sign up</a></li>
 						</c:if>
 
 					</ul>
