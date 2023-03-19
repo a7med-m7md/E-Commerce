@@ -26,6 +26,7 @@
 
 
 
+
     </style>
 </head>
 <!-- Section: Design Block -->
@@ -44,6 +45,7 @@
     }
 
 
+
     </style>
 
     <!-- Jumbotron -->
@@ -56,18 +58,16 @@
             ">
                     <div class="card-body p-5 shadow-5 text-center">
                         <h2 class="fw-bold mb-5">Sign In now</h2>
-                        <form>
-
-
+                        <form method="post" action="SignIn">
                             <!-- Email input -->
                             <div class="form-outline mb-4 input_style">
-                                <input type="text" id="emailL" class="form-control 3"/>
+                                <input type="text" id="emailL" name="emailL" class="form-control 3"/>
                                 <label class="form-label" for="emailL">Email address</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4 input_style">
-                                <input type="password" id="passwordL" class="form-control"/>
+                                <input type="password" id="passwordL" name="passwordL" class="form-control"/>
                                 <label class="form-label" for="passwordL">Password</label>
                             </div>
 

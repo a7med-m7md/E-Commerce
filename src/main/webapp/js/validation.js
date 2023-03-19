@@ -43,8 +43,7 @@ $('#signupbtn').click(function () {
         $('#emailS').addClass("error");
         return false;
     }
-    else if (ajaxCallBack() === true) {
-        window.location.href = "index.jsp"
+    else {
         $('#emailS').removeClass("error");
         return true;
     }

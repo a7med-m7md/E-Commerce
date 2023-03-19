@@ -33,5 +33,4 @@ public class SingUpService {
         return userEntity;
     }
 
-
 }
