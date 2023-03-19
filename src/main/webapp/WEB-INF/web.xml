@@ -5,25 +5,9 @@
         <servlet-name>LaptopServlet</servlet-name>
         <servlet-class>com.laphup.controller.LaptopServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>SignUpServlet</servlet-name>
-        <servlet-class>com.laphup.controller.SignUpServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.laphup.controller.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SignUpServlet</servlet-name>
-        <url-pattern>/SignUp</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LaptopServlet</servlet-name>
         <url-pattern>/laptopservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/SignIn</url-pattern>
     </servlet-mapping>
 <!--  <servlet>-->
 <!--    <servlet-name>LaptopServlet</servlet-name>-->
@@ -38,6 +22,6 @@
 <!--        <welcome-file>index.html</welcome-file>-->
 <!--    </welcome-file-list>-->
   <welcome-file-list>
-    <welcome-file>signIn.html</welcome-file>
+    <welcome-file>home</welcome-file>
   </welcome-file-list>
 </web-app>

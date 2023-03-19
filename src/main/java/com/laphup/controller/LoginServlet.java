@@ -10,12 +10,14 @@ import com.laphup.service.SignInService;
 import com.laphup.service.SingUpService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.Optional;
 
+@WebServlet("/signin")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
