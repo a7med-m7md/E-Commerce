@@ -3,6 +3,7 @@ package com.laphup.dtos;
 import com.laphup.persistence.entities.Card;
 import com.laphup.persistence.entities.Order;
 import com.laphup.persistence.entities.PaymentCard;
+import com.laphup.persistence.entities.User;
 import com.laphup.util.enums.Gender;
 import com.laphup.util.enums.Role;
 
@@ -23,7 +24,10 @@ public class UserDto implements Serializable {
     private String address;
     private String interests;
 
-    public UserDto(Date birthDay, String fName, String lName, Gender gender, String password, String job, String eMail, long creditLimit, String address, String interests) {
+
+    private String role;
+
+    public UserDto(Date birthDay, String fName, String lName, Gender gender, String password, String job, String eMail, long creditLimit, String address, String interests, String role) {
         this.birthDay = birthDay;
         this.fName = fName;
         this.lName = lName;
@@ -34,6 +38,7 @@ public class UserDto implements Serializable {
         this.creditLimit = creditLimit;
         this.address = address;
         this.interests = interests;
+        this.role = role;
     }
 
     public UserDto() {
@@ -118,4 +123,12 @@ public class UserDto implements Serializable {
     public void setInterests(String interests) {
         this.interests = interests;
     }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 }
