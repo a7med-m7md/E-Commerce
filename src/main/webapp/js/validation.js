@@ -19,6 +19,16 @@ $('#form').submit(function () {
     return true;
 });
 $('#signupbtn').click(function () {
+    console.log("helloooo")
+    var emailS = $('#emailS').val();
+    console.log("helyyyyyyloooo")
+    if (IsEmail(emailS) == false) {
+        $('#emailS').addClass("error");
+    }
+    else {
+        $('#emailS').removeClass("error");
+    }
+
     var user = JSON.stringify({
         birthDay: $('#dateS').val(),
         fName: $('#firstName').val(),
@@ -29,24 +39,21 @@ $('#signupbtn').click(function () {
         eMail: $('#emailS').val(),
         creditLimit: $('#creditL').val(),
         address: $('#address').val(),
-        interests: $('#interests').val(),
+        interests: $('#interests').val()
+        //        role : "false"
     })
+    console.log(user)
     $.ajax({
         url: 'signup', //servlet url
         type: 'POST', //servlet request type
         contentType: 'application/json', //For input type
         data: user, //input data
-        dataType: 'json'
+        dataType: 'json',
+        success: function (data) {
+            window.location.href = "signin"
+        }
     });
-    var emailS = $('#emailS').val();
-    if (IsEmail(emailS) == false) {
-        $('#emailS').addClass("error");
-        return false;
-    }
-    else {
-        $('#emailS').removeClass("error");
-        return true;
-    }
+
 });
 function IsEmail(email) {
     if (!(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/))) {
@@ -60,19 +67,18 @@ $("#emailS").blur(function () {
     console.log("External content loaded successfully!");
 });
 function ajaxCallBack(responseTxt, statusTxt, xhr) {
+
+    var errorMeassage = $("<label>").addClass("emailE");
     if (responseTxt == "Exist") {
-        var errorMeassage = $("<label>").addClass("emailE");
-        errorMeassage.empty();
+        $(".emailE").empty();
         errorMeassage.append("This Email is used");
         errorMeassage.addClass("errorMeassage");
         $("#emaildev").append(errorMeassage);
-        return false;
     }
     else {
         $(".emailE").empty();
         $(".emailE").removeClass("errorMeassage");
         $(".emailE").remove();
-        return true;
     }
 
 }

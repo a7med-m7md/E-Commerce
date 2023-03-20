@@ -1,8 +1,10 @@
 package com.laphup.controller;
 
 import com.google.gson.Gson;
+import com.laphup.controller.utility.JSPages;
 import com.laphup.dtos.UserDto;
 import com.laphup.service.SingUpService;
+import com.laphup.util.enums.Role;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,37 +26,31 @@ public class SignUpServlet extends HttpServlet {
         String email = request.getParameter("email");
         SingUpService singUpService = new SingUpService(request);
         if (email == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/siginUp.html");
-            rd.forward(request, response);
+            JSPages.SIGN_IN.forward(request, response);
         } else {
             if (singUpService.isNewUser(email)) {
                 System.out.println("This Mail Exist");
                 printWriter.print("Exist");
-                exist = false;
-            } else
-                exist = true;
+            }
         }
-        request.getServletContext().setAttribute("exist", exist);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getServletContext().getAttribute("exist"));
-        boolean exist = (boolean) request.getServletContext().getAttribute("exist");
-        if (exist) {
-            UserDto user = checkExistence(request, response);
-            SingUpService singUpService = new SingUpService(request);
-            singUpService.register(user);
-            RequestDispatcher rd = request.getRequestDispatcher("SignIn");
-            rd.forward(request, response);
-        }
+        UserDto user = getUserObject(request, response);
+        SingUpService singUpService = new SingUpService(request);
+        singUpService.register(user);
+        JSPages.SIGN_IN.forward(request, response);
+//        }
     }
 
-    public UserDto checkExistence(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public UserDto getUserObject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Gson gson = new Gson();
+        System.out.println(request.getReader().toString());
         UserDto userDto = gson.fromJson(request.getReader(), UserDto.class);
+        userDto.setRole(Role.USER);
         if (userDto != null)
             return userDto;
         else {
