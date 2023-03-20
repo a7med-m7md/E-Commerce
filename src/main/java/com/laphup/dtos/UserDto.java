@@ -25,9 +25,9 @@ public class UserDto implements Serializable {
     private String interests;
 
 
-    private String role;
+    private Role role;
 
-    public UserDto(Date birthDay, String fName, String lName, Gender gender, String password, String job, String eMail, long creditLimit, String address, String interests, String role) {
+    public UserDto(Date birthDay, String fName, String lName, Gender gender, String password, String job, String eMail, long creditLimit, String address, String interests) {
         this.birthDay = birthDay;
         this.fName = fName;
         this.lName = lName;
@@ -38,7 +38,7 @@ public class UserDto implements Serializable {
         this.creditLimit = creditLimit;
         this.address = address;
         this.interests = interests;
-        this.role = role;
+//        this.role = role;
     }
 
     public UserDto() {
@@ -123,11 +123,12 @@ public class UserDto implements Serializable {
     public void setInterests(String interests) {
         this.interests = interests;
     }
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
+
         this.role = role;
     }
 

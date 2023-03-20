@@ -29,7 +29,9 @@ public class BaseRepo<Table,ID> {
     }
 
     public Table save(Table obj) {
+        System.out.println("in loin333333333");
         EntityTransaction transaction = entityManager.getTransaction();
+        System.out.println("in loin333333333");
         try {
             transaction.begin();
             entityManager.persist(obj);
