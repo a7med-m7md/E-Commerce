@@ -26,7 +26,7 @@ public class SignUpServlet extends HttpServlet {
         String email = request.getParameter("email");
         SingUpService singUpService = new SingUpService(request);
         if (email == null) {
-            JSPages.SIGN_IN.forward(request, response);
+            JSPages.SIGN_UP.forward(request, response);
         } else {
             if (singUpService.isNewUser(email)) {
                 System.out.println("This Mail Exist");
@@ -54,8 +54,7 @@ public class SignUpServlet extends HttpServlet {
         if (userDto != null)
             return userDto;
         else {
-            RequestDispatcher rd = request.getRequestDispatcher("/siginUp.html");
-            rd.include(request, response);
+            JSPages.SIGN_UP.forward(request, response);
         }
         return null;
     }

@@ -11,7 +11,8 @@ public enum JSPages {
     HOME_PAGE("/index.jsp"),
     ADD_LAPTOP("/add-laptop.jsp"),
     ADMIN_DISPLAY_USERS("/WEB-INF/view-users-table.jsp"),
-    SIGN_IN("signIn.html");
+    SIGN_IN("signIn.html"),
+    SIGN_UP("siginUp.html");
     private final String path;
     JSPages(String path){
         this.path = path;
