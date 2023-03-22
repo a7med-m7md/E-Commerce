@@ -31,8 +31,10 @@ public class SignUpServlet extends HttpServlet {
             if (singUpService.isNewUser(email)) {
                 System.out.println("This Mail Exist");
                 printWriter.print("Exist");
+                return;
             }
         }
+        JSPages.HOME_PAGE.forward(request, response);
     }
 
     @Override
