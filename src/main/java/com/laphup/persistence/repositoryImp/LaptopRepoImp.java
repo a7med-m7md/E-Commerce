@@ -51,7 +51,7 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
 
         //Execute the query according filters  layers
         ArrayList<Predicate> predicates = new ArrayList<>();
-        if (laptopCategory != null)
+        if (laptopCategory != null && !laptopCategory.equals(""))
             predicates.add(categoryPredicate);
         if (minPrice != null && maxPrice != null)
             predicates.add(pricePredicate);
