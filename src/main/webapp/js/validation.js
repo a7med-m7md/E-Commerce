@@ -9,6 +9,7 @@ $(document).ready(function () {
     $("#creditCheck").hide();
     $("#interestsCheck").hide();
     let usernameError = true;
+    let duplicatedError = true;
     $("#usernames").keyup(function () {
         validateUsername();
     });
@@ -48,6 +49,7 @@ $(document).ready(function () {
             return false;
         } else {
             $("#lastusercheck").hide();
+            lastusercheck = true;
         }
     }
 
@@ -58,10 +60,12 @@ $(document).ready(function () {
         if (email) {
             if ((email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))) {
                 $("#isinvalid").hide();
-                emailError = false;
+                emailError = true;
+                return false;
             } else {
                 $("#isinvalid").show();
-                emailError = true;
+                emailError = false;
+                return false;
             }
         }
     }
@@ -85,7 +89,7 @@ $(document).ready(function () {
                 "**length of your password must be between 3 and 10"
             );
             $("#passcheck").css("color", "red");
-            passwordError = false;
+            passwordError = true;
             return false;
         } else {
             $("#passcheck").hide();
@@ -105,6 +109,7 @@ $(document).ready(function () {
             return false;
         } else {
             $("#dateCheck").hide();
+            dateError = true;
         }
     }
     // validate Gender
@@ -133,6 +138,7 @@ $(document).ready(function () {
             return false;
         } else {
             $("#jobCheck").hide();
+            jobError = true;
         }
     }
     // validate ADDRESS
@@ -149,6 +155,7 @@ $(document).ready(function () {
             return false;
         } else {
             $("#addressCheck").hide();
+            addressError = true;
         }
     }
     // validate CREDIT
@@ -165,6 +172,7 @@ $(document).ready(function () {
             return false;
         } else {
             $("#creditCheck").hide();
+            creditError = true;
         }
     }
     // validate Interests
@@ -176,7 +184,7 @@ $(document).ready(function () {
             return false;
         } else {
             $("#interestsCheck").hide();
-            interestsError = false;
+            interestsError = true;
             return false;
         }
     }
@@ -188,7 +196,7 @@ $(document).ready(function () {
     function ajaxCallBack(responseTxt, statusTxt, xhr) {
         var errorMeassage = $("<label>").addClass("emailE");
         if (responseTxt == "Exist") {
-            emailError = true;
+            duplicatedError = false;
             $(".emailE").empty();
             errorMeassage.append("This Email is used");
             errorMeassage.addClass("errorMeassage");
@@ -198,6 +206,7 @@ $(document).ready(function () {
             $(".emailE").empty();
             $(".emailE").removeClass("errorMeassage");
             $(".emailE").remove();
+            duplicatedError = true;
         }
     }
     //  // Submit button
@@ -212,12 +221,17 @@ $(document).ready(function () {
         validateAddress();
         validateCredit();
         validateInterests();
-        if (
-            !(usernameError == true && passwordError == true
-                && emailError == true && lastusercheck == true
-                && dateError == true && genderError == true
-                && jobError == true && addressError == true
-                && creditError == true && interestsError == true)
+                console.log(usernameError + " " + passwordError + " " +
+                    emailError + " " + lastusercheck + " " + dateError + " " +
+                    genderError + " " + jobError + " " + addressError + " " +
+                    creditError + " " + interestsError + " " +
+                    duplicatedError);
+        if ((usernameError == true && passwordError == true
+            && emailError == true && lastusercheck == true
+            && dateError == true && genderError == true
+            && jobError == true && addressError == true
+            && creditError == true && interestsError == true
+            && duplicatedError == true)
         ) {
             var user = JSON.stringify({
                 birthDay: $('#dateS').val(),
@@ -244,7 +258,6 @@ $(document).ready(function () {
             });
             return true;
         } else {
-
             return false;
         }
     });
