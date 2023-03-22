@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!-- HEADER -->
+
 		<header>
 			<!-- TOP HEADER -->
 			<div id="top-header">
@@ -24,7 +25,34 @@
 						<c:set var="userInfo" value="${sessionScope.userInfo}" />
 
 						<c:if test="${not empty userInfo}">
-							<li><i class="fa fa-user-o"></i> <a><c:out value="${userInfo.fName}" /></a></li>
+							<style>
+								/*.drop-menu-hov:hover{*/
+								/*	color: #D10024;*/
+								/*}*/
+								/*.drop-menu-hov{*/
+								/*	color: #1E1F29*/
+								/*}*/
+								.header-links li a[class="dropdown-item drop-menu-hov"]{
+									color: #1E1F29
+								}
+							</style>
+
+							<li>
+								<div class="dropdown show">
+									<i class="fa fa-user-o"></i>
+									<a class="btn btn-secondary dropdown-toggle product-name" href="#" role="button"
+									   id="dropdownMenuLink" data-toggle="dropdown"
+									   aria-haspopup="true" aria-expanded="false"
+									   style="padding: 0px; color: white"><c:out value="${userInfo.fName}" /></a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 115px;  padding: 5px; ">
+									<div><a class="dropdown-item drop-menu-hov" href="#" style="">Profile</a></div>
+									<hr style="visibility: hidden; height: 10px; margin: 0px">
+									<a class="dropdown-item drop-menu-hov" href="#" style="">Order History</a><br>
+									<hr style="margin: 7.5px">
+									<a class="dropdown-item drop-menu-hov" href="#" style="">Logout</a>
+								</div>
+								</div>
+							</li>
 						</c:if>
 
 
