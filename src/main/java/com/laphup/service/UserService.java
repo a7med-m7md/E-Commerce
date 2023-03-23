@@ -1,5 +1,6 @@
 package com.laphup.service;
 
+import com.laphup.dtos.UserDto;
 import com.laphup.persistence.entities.User;
 import com.laphup.persistence.repositoryImp.UserRepo;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,4 +22,9 @@ public class UserService {
     public User getUserById(UUID id){
         return userRepo.getUserById(id);
     }
+
+    public User updateUser(UserDto userDto){
+        return userRepo.updateUser(userDto);
+    }
+
 }

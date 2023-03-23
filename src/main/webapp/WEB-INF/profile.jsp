@@ -47,7 +47,8 @@
         <li class="list-group-item p-3">
           <div class="row">
             <div class="col">
-              <form action="profile" method="post">
+              <form  action="profile" method="post">
+                <input style="visibility: hidden" name="uuid" value= <c:out value="${userInfoo.uuid}" /> />
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="feFirstName">First Name</label>
@@ -93,6 +94,7 @@
                   <div class="form-group col-md-4">
                     <label for="datePicker">Birthdate</label>
                     <input type="date" name="birthday" value= <c:out value="${userInfoo.birthDay}" /> class="form-control" id="datePicker">
+                    <p><c:out value="${userInfoo.birthDay}" /></p>
                   </div>
                   <div class="input-group mb-3">
                     <label style="padding: 5px;">Credit Limit</label>
