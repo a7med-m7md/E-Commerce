@@ -14,15 +14,17 @@
 
 						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
 <%--						<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
+						<c:set var="userInfo" value="${sessionScope.userInfo}" />
 						<c:if test="${userRole == 'ADMIN'}">
 <%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
 						</c:if>
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+						<c:if test="${userRole == 'USER'}">
+						<li><a href="#"><i class="fa fa-dollar"></i> <c:out value="${userInfo.creditLimit}" /> EG</a></li>
+						</c:if>
 <%--						<c:if test="not emptry userInfo">--%>
 <%--							<li><a href="signIn.html"><i class="fa fa-user-o"></i> <c:out value="${userInfo}" /></a></li>--%>
 <%--						</c:if>--%>
-						<c:set var="userInfo" value="${sessionScope.userInfo}" />
 
 						<c:if test="${not empty userInfo}">
 							<style>
@@ -45,7 +47,7 @@
 									   aria-haspopup="true" aria-expanded="false"
 									   style="padding: 0px; color: white"><c:out value="${userInfo.fName}" /></a>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 115px;  padding: 5px; ">
-									<div><a class="dropdown-item drop-menu-hov" href="#" style="">Profile</a></div>
+									<div><a class="dropdown-item drop-menu-hov" href="profile" style="">Profile</a></div>
 									<hr style="visibility: hidden; height: 10px; margin: 0px">
 									<a class="dropdown-item drop-menu-hov" href="home" style="">Order History</a><br>
 									<hr style="margin: 7.5px">
@@ -76,7 +78,7 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="../img/logo.png" alt="">
+									<img src="img/logo.png" alt="">
 								</a>
 							</div>
 						</div>

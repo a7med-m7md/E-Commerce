@@ -36,7 +36,7 @@
 		<![endif]-->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-		<%@ include file="WEB-INF/header-info.jsp"%>
+<%--		<%@ include file="WEB-INF/header-info.jsp"%>--%>
 
 	</head>
 	<body>

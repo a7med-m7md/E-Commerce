@@ -6,13 +6,17 @@ import com.laphup.persistence.entities.PaymentCard;
 import com.laphup.persistence.entities.User;
 import com.laphup.util.enums.Gender;
 import com.laphup.util.enums.Role;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
+
 public class UserDto implements Serializable {
+    private UUID uuid;
     private Date birthDay;
     private String fName;
     private String lName;
@@ -41,7 +45,17 @@ public class UserDto implements Serializable {
 //        this.role = role;
     }
 
+    
+
     public UserDto() {
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public Date getBirthDay() {

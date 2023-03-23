@@ -22,7 +22,7 @@ public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @NonNull
     private Date birthDay;
     @OneToMany(mappedBy = "user")
