@@ -1,6 +1,7 @@
 package com.laphup.controller;
 
 
+import com.google.gson.Gson;
 import com.laphup.controller.utility.CookieUtility;
 import com.laphup.controller.utility.JSPages;
 import com.laphup.dtos.LoginDTO;
@@ -75,7 +76,10 @@ public class LoginServlet extends HttpServlet {
         }
         // todo Should refactor
         SignInService signInService = new SignInService(request);
-        LoginDTO loginDTO = new LoginDTO(email, password);
+//        LoginDTO loginDTO = new LoginDTO(email, password);
+        Gson gson = new Gson();
+        LoginDTO loginDTO = gson.fromJson(request.getReader(),LoginDTO.class);
+        System.out.println(loginDTO.geteMail());
         Optional<UserDto> user = signInService.logInto(loginDTO);
         // ==
         if (!user.isEmpty() && userFounded(user, loginDTO)) {

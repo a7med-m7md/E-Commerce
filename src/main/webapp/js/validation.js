@@ -253,7 +253,7 @@ $(document).ready(function () {
                 data: user, //input data
                 dataType: 'json',
                 success: function (data) {
-                    window.location.href = "signin"
+                    window.location.href = "signIn.html"
                 }
             });
             return true;
@@ -262,3 +262,4 @@ $(document).ready(function () {
         }
     });
 });
+
