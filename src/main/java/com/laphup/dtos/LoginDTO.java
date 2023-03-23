@@ -1,18 +1,16 @@
-package com.laphup.persistence.entities;
+package com.laphup.dtos;
+
+import lombok.Builder;
 
 import java.io.Serializable;
 
-public class LoginEntity implements Serializable {
-
+public class LoginDTO implements Serializable{
     private String eMail;
     private String password;
 
-    public LoginEntity(String eMail, String password) {
+    public LoginDTO(String eMail, String password) {
         this.eMail = eMail;
         this.password = password;
-    }
-
-    public LoginEntity() {
     }
 
     public String geteMail() {

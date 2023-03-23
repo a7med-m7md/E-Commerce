@@ -1,32 +1,30 @@
-package com.laphup.persistence.repositoryImp;
+package com.laphup;
 
-import com.laphup.persistence.entities.LaptopImage;
-import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.enums.SortBy;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.criteria.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
-    private HttpServletRequest request;
-    private EntityManager entityManager;
-    private CriteriaBuilder criteriaBuilder;
-    public LaptopRepoImp(HttpServletRequest request){
-        super(request);
-        this.request = request;
-        this.entityManager = (EntityManager) request.getAttribute("EntityManager");
-        this.criteriaBuilder = entityManager.getCriteriaBuilder();
+public class Main {
+    public static void main(String... args) {
+        Main m = new Main();
+        m.getPage(1, 1, "hp", null, 0d, 10000d);
     }
 
-    public List<Laptop> getPage(@NotNull int pageNumber, @NotNull int count, String laptopCategory, SortBy sortedBy, Double minPrice, Double maxPrice) {
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pu");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    Boolean getPage(@NotNull int pageNumber, @NotNull int count, String laptopCategory, SortBy sortedBy, Double minPrice, Double maxPrice) {
 
         //Create CriteriaQuery and root table (laptop)
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Laptop> query_Laptop = criteriaBuilder.createQuery(Laptop.class);
         Root<Laptop> laptopRoot = query_Laptop.from(Laptop.class);
 
@@ -37,7 +35,6 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         Predicate categoryPredicate = criteriaBuilder.equal(join.get("categoryName"), laptopCategory);
         Predicate pricePredicate = criteriaBuilder.between(laptopRoot.get("price"), minPrice, maxPrice);
 
-        //Choose which orderby
         Order order = null;
         if (sortedBy == SortBy.RATE)
             order = criteriaBuilder.asc(laptopRoot.get("rate"));
@@ -48,10 +45,12 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         else {
             order = criteriaBuilder.asc(laptopRoot.get("rate"));
         }
+        query_Laptop.where();
+
+        ArrayList<Predicate> predicates = new ArrayList<>();
 
         //Execute the query according filters  layers
-        ArrayList<Predicate> predicates = new ArrayList<>();
-        if (laptopCategory != null && !laptopCategory.equals(""))
+        if (laptopCategory != null)
             predicates.add(categoryPredicate);
         if (minPrice != null && maxPrice != null)
             predicates.add(pricePredicate);
@@ -64,14 +63,11 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
 
         //Get Result
         List<Laptop> laptopList = entityManager.createQuery(query_Laptop)
-                .setFirstResult((pageNumber-1)*count) // starting index of the first result
-                .setMaxResults(count) // maximum number of results to retrieve
+                .setFirstResult(0) // starting index of the first result
+                .setMaxResults(10) // maximum number of results to retrieve
                 .getResultList();
 
-        return laptopList;
+        return null;
     }
-    public void saveImages(LaptopImage laptopImage){
-        BaseRepo<LaptopImage, UUID> laptopImageUUIDBaseDao = new BaseRepo<>(request);
-        laptopImageUUIDBaseDao.save(laptopImage);
-    }
+
 }

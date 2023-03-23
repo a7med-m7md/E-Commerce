@@ -3,15 +3,20 @@ package com.laphup.dtos;
 import com.laphup.persistence.entities.Card;
 import com.laphup.persistence.entities.Order;
 import com.laphup.persistence.entities.PaymentCard;
+import com.laphup.persistence.entities.User;
 import com.laphup.util.enums.Gender;
 import com.laphup.util.enums.Role;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
+
 public class UserDto implements Serializable {
+    private UUID uuid;
     private Date birthDay;
     private String fName;
     private String lName;
@@ -22,6 +27,9 @@ public class UserDto implements Serializable {
     private long creditLimit;
     private String address;
     private String interests;
+
+
+    private Role role;
 
     public UserDto(Date birthDay, String fName, String lName, Gender gender, String password, String job, String eMail, long creditLimit, String address, String interests) {
         this.birthDay = birthDay;
@@ -34,6 +42,20 @@ public class UserDto implements Serializable {
         this.creditLimit = creditLimit;
         this.address = address;
         this.interests = interests;
+//        this.role = role;
+    }
+
+    
+
+    public UserDto() {
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public Date getBirthDay() {
@@ -115,4 +137,13 @@ public class UserDto implements Serializable {
     public void setInterests(String interests) {
         this.interests = interests;
     }
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+
+        this.role = role;
+    }
+
 }

@@ -1,17 +1,66 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!-- HEADER -->
+
 		<header>
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+						<li><a href="#"><i class="fa fa-phone"></i>+20-106-658-6741</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i>laphup@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i>1734 Smart Village</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-					    <li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
+
+						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
+<%--						<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
+						<c:if test="${userRole == 'ADMIN'}">
+<%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
+							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
+						</c:if>
 						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign In</a></li>
+<%--						<c:if test="not emptry userInfo">--%>
+<%--							<li><a href="signIn.html"><i class="fa fa-user-o"></i> <c:out value="${userInfo}" /></a></li>--%>
+<%--						</c:if>--%>
+						<c:set var="userInfo" value="${sessionScope.userInfo}" />
+
+						<c:if test="${not empty userInfo}">
+							<style>
+								/*.drop-menu-hov:hover{*/
+								/*	color: #D10024;*/
+								/*}*/
+								/*.drop-menu-hov{*/
+								/*	color: #1E1F29*/
+								/*}*/
+								.header-links li a[class="dropdown-item drop-menu-hov"]{
+									color: #1E1F29
+								}
+							</style>
+
+							<li>
+								<div class="dropdown show">
+									<i class="fa fa-user-o"></i>
+									<a class="btn btn-secondary dropdown-toggle product-name" href="#" role="button"
+									   id="dropdownMenuLink" data-toggle="dropdown"
+									   aria-haspopup="true" aria-expanded="false"
+									   style="padding: 0px; color: white"><c:out value="${userInfo.fName}" /></a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 115px;  padding: 5px; ">
+									<div><a class="dropdown-item drop-menu-hov" href="profile" style="">Profile</a></div>
+									<hr style="visibility: hidden; height: 10px; margin: 0px">
+									<a class="dropdown-item drop-menu-hov" href="home" style="">Order History</a><br>
+									<hr style="margin: 7.5px">
+									<a class="dropdown-item drop-menu-hov" href="logout" style="">Logout</a>
+								</div>
+								</div>
+							</li>
+						</c:if>
+
+
+						<c:if test="${empty userInfo}">
+							<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign in</a></li>
+							<li><a href="signup"><i class="fa fa-user-o"></i> Sign up</a></li>
+						</c:if>
+
 					</ul>
 				</div>
 			</div>
@@ -27,7 +76,7 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="../img/logo.png" alt="">
 								</a>
 							</div>
 						</div>
@@ -73,7 +122,7 @@
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+													<img src="../img/product01.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -84,7 +133,7 @@
 
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product02.png" alt="">
+													<img src="../img/product02.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>

@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>Laphup ECOMMERCE</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -28,8 +28,6 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
-		<link type="text/css" rel="stylesheet" href="css/slide.css"/>
-
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -37,12 +35,13 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="js/laptops.js"></script>
+
+<%--		<%@ include file="WEB-INF/header-info.jsp"%>--%>
 
 	</head>
 	<body>
 
-        <%@ include file="header.jsp" %>
+        <%@ include file="WEB-INF/header.jsp" %>
 		<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
@@ -52,12 +51,13 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+<%--						<li><a href="#">Hot Deals</a></li>--%>
+<%--						<li><a href="#">Categories</a></li>--%>
+<%--						<li><a href="#">Laptops</a></li>--%>
+<%--						<li><a href="#">Smartphones</a></li>--%>
+<%--						<li><a href="#">Cameras</a></li>--%>
+<%--						<li><a href="#">Accessories</a></li>--%>
+						<li><a href="store.jsp">All Products</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -143,17 +143,6 @@
 						</div>
 					</div>
 					<!-- /section title -->
-					<div class="carousel-container">
-						<div class="carousel-wrapper">
-							<div class="carousel">
-								<!-- items will be added dynamically using JavaScript -->
-							</div>
-						</div>
-						<div class="carousel-controls">
-							<button class="prev">&lt;</button>
-							<button class="next">&gt;</button>
-						</div>
-					</div>
 
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
@@ -521,7 +510,7 @@
 											</div>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
+												<h3 class="product-name"><a href="#">radwa</a></h3>
 												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -713,7 +702,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<h3 class="product-name"><a href="#">hnnnnnnnna</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -767,7 +756,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
+										<h3 class="product-name"><a href="#">Essssooo</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 									</div>
 								</div>
@@ -828,16 +817,16 @@
 								<!-- /product widget -->
 
 								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product06.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-									</div>
-								</div>
+<%--								<div class="product-widget">--%>
+<%--									<div class="product-img">--%>
+<%--										<img src="./img/product06.png" alt="">--%>
+<%--									</div>--%>
+<%--									<div class="product-body">--%>
+<%--										<p class="product-category">Category</p>--%>
+<%--										<h3 class="product-name"><a href="#">product name goes here</a></h3>--%>
+<%--										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>--%>
+<%--									</div>--%>
+<%--								</div>--%>
 								<!-- product widget -->
 							</div>
 						</div>
@@ -897,11 +886,11 @@
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<p>ECommerce Website to sell Laptops.</p>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Smart Village</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>+20-106-658-6741</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>laphup@gmail.com</a></li>
 								</ul>
 							</div>
 						</div>
@@ -915,6 +904,7 @@
 									<li><a href="#">Smartphones</a></li>
 									<li><a href="#">Cameras</a></li>
 									<li><a href="#">Accessories</a></li>
+									<li><a href="product.jsp">All Products</a></li>
 								</ul>
 							</div>
 						</div>
@@ -955,21 +945,21 @@
 
 			<!-- bottom footer -->
 			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+									<div class="container">
+										<!-- row -->
+										<div class="row">
+											<div class="col-md-12 text-center">
+												<ul class="footer-payments">
+													<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+													<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+													<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+													<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+													<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+													<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
 							</ul>
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by Laphup</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>
@@ -983,12 +973,13 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
+		<script type="module" src="js/laptops.js"></script>
+<%--		<script src="js/jquery.min.js"></script>--%>
+<%--		<script src="js/bootstrap.min.js"></script>--%>
+<%--		<script src="js/slick.min.js"></script>--%>
+<%--		<script src="js/nouislider.min.js"></script>--%>
+<%--		<script src="js/jquery.zoom.min.js"></script>--%>
+<%--		<script src="js/main.js"></script>--%>
 
 	</body>
 </html>

@@ -4,15 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletRequest;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BaseDao<Table, ID, Name> {
+public class BaseRepo<Table,ID> {
     private EntityManager entityManager;
 
-    public BaseDao(HttpServletRequest request) {
+    public BaseRepo(HttpServletRequest request) {
         if (request == null)
             System.out.println("Yarabbbbbbbbbbbb");
         entityManager = (EntityManager) request.getAttribute("EntityManager");
@@ -30,17 +29,27 @@ public class BaseDao<Table, ID, Name> {
     }
 
     public Table save(Table obj) {
+        System.out.println("in loin333333333");
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(obj);
-        transaction.commit();
+        System.out.println("in loin333333333");
+        try {
+            transaction.begin();
+            entityManager.persist(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
         return obj;
     }
 
     public void delete(Table obj) {
         EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.remove(obj);
-        transaction.commit();
+        try {
+            transaction.begin();
+            entityManager.remove(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
     }
 }
