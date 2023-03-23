@@ -1,7 +1,11 @@
 package com.laphup.dtos;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 
+
+@Builder
 public class LoginDTO implements Serializable{
     private String eMail;
     private String password;

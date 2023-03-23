@@ -12,17 +12,14 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/signin")
+@WebServlet(name = "signInServlet", value = "/signin")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         UserDto user = (UserDto)session.getAttribute("userInfo");
         boolean isAlreadyLoggedIn = user != null;

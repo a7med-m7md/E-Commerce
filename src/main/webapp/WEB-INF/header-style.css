@@ -1,14 +1,14 @@
-/*!* Dropdown menu *!*/
-/*.dropdown-menu {*/
-/*    border: none;*/
-/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
-/*}*/
+/* Dropdown menu */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
-/*.dropdown-menu a {*/
-/*    display: block;*/
-/*    padding: 10px;*/
-/*}*/
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+}
 
-/*.dropdown-menu a:hover {*/
-/*    background-color: #f1f1f1;*/
-/*}*/
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
