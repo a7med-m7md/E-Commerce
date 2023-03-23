@@ -1,3 +1,3 @@
 
   <style rel="stylesheet" href="header-style.css"></style>
-  <script src="header-script.js"></script>
+  <script src="../js/header-script.js"></script>
