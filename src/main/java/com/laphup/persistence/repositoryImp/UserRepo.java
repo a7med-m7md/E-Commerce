@@ -1,5 +1,7 @@
 package com.laphup.persistence.repositoryImp;
 
+import com.laphup.dtos.UserDto;
+import com.laphup.mappers.UserMapper;
 import com.laphup.persistence.entities.User;
 import com.laphup.persistence.repository.BaseRepo;
 import jakarta.persistence.EntityManager;
@@ -41,5 +43,21 @@ public class UserRepo extends BaseRepo<User, Integer> {
         //todo Here an exception may occur for invalid user id profile
         User user = (User)entityManager.createNamedQuery("getUserById").setParameter("id", id).getSingleResult();
         return user;
+    }
+
+    public User updateUser(UserDto user){
+        User currentUser = getUserById(user.getUuid());
+        currentUser.setFName(user.getfName());
+        currentUser.setLName(user.getlName());
+        currentUser.setEMail(user.geteMail());
+        currentUser.setGender(user.getGender());
+        currentUser.setAddress(user.getAddress());
+        currentUser.setJob(user.getJob());
+        currentUser.setBirthDay(user.getBirthDay());
+        currentUser.setCreditLimit(user.getCreditLimit());
+        currentUser.setPassword(user.getPassword());
+
+        save(currentUser);
+        return currentUser;
     }
 }
