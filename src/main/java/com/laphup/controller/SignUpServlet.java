@@ -44,7 +44,6 @@ public class SignUpServlet extends HttpServlet {
         SingUpService singUpService = new SingUpService(request);
         singUpService.register(user);
         JSPages.SIGN_IN.forward(request, response);
-//        }
     }
 
     public UserDto getUserObject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
