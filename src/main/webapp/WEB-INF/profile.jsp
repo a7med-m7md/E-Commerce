@@ -94,7 +94,6 @@
                   <div class="form-group col-md-4">
                     <label for="datePicker">Birthdate</label>
                     <input type="date" name="birthday" value= <c:out value="${userInfoo.birthDay}" /> class="form-control" id="datePicker">
-                    <p><c:out value="${userInfoo.birthDay}" /></p>
                   </div>
                   <div class="input-group mb-3">
                     <label style="padding: 5px;">Credit Limit</label>
