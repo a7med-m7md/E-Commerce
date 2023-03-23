@@ -4,17 +4,26 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class BaseRepo<Table,ID> {
     private EntityManager entityManager;
+    private Class<Table> type;
 
     public BaseRepo(HttpServletRequest request) {
         if (request == null)
             System.out.println("Yarabbbbbbbbbbbb");
         entityManager = (EntityManager) request.getAttribute("EntityManager");
+
+        //Detect class of Table
+        Type genericSuperclass = getClass().getGenericSuperclass();
+        ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
+        this.type = (Class<Table>) parameterizedType.getActualTypeArguments()[0];
     }
 
     public Set<Table> getAll(Table obj) {
@@ -24,7 +33,7 @@ public class BaseRepo<Table,ID> {
     }
 
     public Table getById(ID id) {
-        Table table = (Table) entityManager.find(id.getClass(), id);
+        Table table = (Table) entityManager.find(type, id);
         return table;
     }
 

@@ -9,6 +9,7 @@ import com.laphup.util.enums.SortBy;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class LaptopService {
@@ -32,5 +33,13 @@ public class LaptopService {
 
     public void saveImage(LaptopImage laptopImage) {
         laptopRepoImp.saveImages(laptopImage);
+    }
+
+    public LaptopDTO getLaptop (UUID uuid){
+        Laptop laptop = laptopRepoImp.getById(uuid);
+
+        LaptopDTO laptopDTO = LaptopMapper.convertToDto(laptop);
+
+        return laptopDTO;
     }
 }
