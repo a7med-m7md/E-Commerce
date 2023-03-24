@@ -1,16 +1,19 @@
 package com.laphup.persistence.repositoryImp;
 
 import com.laphup.persistence.entities.LaptopImage;
+import com.laphup.persistence.entities.User;
 import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.enums.SortBy;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.criteria.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
@@ -73,5 +76,16 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
     public void saveImages(LaptopImage laptopImage){
         BaseRepo<LaptopImage, UUID> laptopImageUUIDBaseDao = new BaseRepo<>(request);
         laptopImageUUIDBaseDao.save(laptopImage);
+    }
+
+    public Optional<Laptop> getLaptopByName(UUID uuid) {
+        String queryString = "from Laptop u where u.uuidLaptop = :uuidLaptop";
+        Query q = entityManager.createQuery(queryString);
+        q.setParameter("uuidLaptop", uuid);
+        List<Laptop> laptops = q.getResultList();
+        if (laptops.isEmpty())
+            return Optional.empty();
+        else
+            return Optional.of(laptops.get(0));
     }
 }

@@ -15,7 +15,7 @@ function addToScrollbar(container, laptops) {
             <div class="product">
                 <input type="hidden" value="${labtop.uuid}">
                 <div class="product-img">
-                    <img src="data:image/png;base64,${image}" 
+                    <img src="data:image/png;base64,${image}"
                             width="263" 
                             height="263"
                             alt="">
@@ -103,7 +103,7 @@ function addToScrollbar(container, laptops) {
 
 function getLaptops(container, pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
+        url: `http://localhost:${PORT}/${DOMINO}/laptopservlet`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,

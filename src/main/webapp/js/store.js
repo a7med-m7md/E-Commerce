@@ -1,5 +1,5 @@
-import {DOMINO, PORT} from "./configuration.js";
-
+import { DOMINO, PORT } from "./configuration.js";
+var carts = [];
 $(document).ready(function () {
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
@@ -44,7 +44,7 @@ $(document).ready(function () {
         });
     });
 });
-function getCategories(){
+function getCategories() {
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
@@ -57,7 +57,7 @@ function getCategories(){
     });
 }
 
-function addToCategory(categories){
+function addToCategory(categories) {
     let jsonCategories = $.parseJSON(categories);
 
     let category = $(".checkbox-filter")[0];
@@ -81,6 +81,7 @@ function addTopage(laptops) {
         let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
 
         let newProduct = `
+
                 <div class="col-md-4 col-xs-6">
                     <div class="product">
                         <input type="hidden" id="uuid" value="${labtop.uuid}">
@@ -115,6 +116,14 @@ function addTopage(laptops) {
             </div>
             `;
         container.innerHTML += newProduct;
+        const product = document.querySelectorAll(".product");
+        for (let i = 0; i < product.length; i++) {
+            product[i].addEventListener("click", function () {
+                product[i].classList.toggle(jsonLaptops[i].uuid);
+                $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
+            });
+        }
+
     });
 
 }
@@ -159,4 +168,23 @@ function getPage() {
         async: false
     });
 }
+function ajaxCallBack(responseTxt, statusTxt, xhr) {
+    console.log(JSON.stringify(responseTxt.laptopId))
+    carts.push(JSON.stringify(responseTxt.laptopId));
+    $.ajax({
+        type: "POST",
+        url: "addToCard",
+        data: JSON.stringify(responseTxt.laptopId)
+    });
+    localStorage.setItem("Cart", JSON.stringify(responseTxt));
+    return true;
+}
+
+function addToCardInLocalStorge(labtop) {
+    localStorage.setItem("labtop", JSON.stringify(labtop));
+    return true;
+}
+
+
+
 

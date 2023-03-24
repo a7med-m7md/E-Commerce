@@ -15,4 +15,9 @@ public class CardId implements Serializable {
     private UUID userId;
     @Column
     private UUID laptopId;
+
+    public CardId(UUID userId, UUID laptopId) {
+        this.userId = userId;
+        this.laptopId = laptopId;
+    }
 }

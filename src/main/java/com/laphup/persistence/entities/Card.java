@@ -20,4 +20,15 @@ public class Card {
     @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
     private int quantity;
+
+    public Card(CardId cardId, User user, Laptop laptop, int quantity) {
+        this.cardId = cardId;
+        this.user = user;
+        this.laptop = laptop;
+        this.quantity = quantity;
+    }
+
+    public Card() {
+
+    }
 }
