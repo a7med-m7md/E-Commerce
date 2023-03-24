@@ -1,5 +1,5 @@
-import {DOMINO, PORT} from "./configuration.js";
-
+import { DOMINO, PORT } from "./configuration.js";
+var carts = [];
 $(document).ready(function () {
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
@@ -25,7 +25,7 @@ $(document).ready(function () {
     //Get page of products from db
     getPage();
 });
-function getCategories(){
+function getCategories() {
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
@@ -38,7 +38,7 @@ function getCategories(){
     });
 }
 
-function addToCategory(categories){
+function addToCategory(categories) {
     let jsonCategories = $.parseJSON(categories);
 
     let category = $(".checkbox-filter")[0];
@@ -69,8 +69,8 @@ function addTopage(laptops) {
                 <input type="hidden" value="${labtop.uuid}">
                 <div class="product">
                     <div class="product-img">
-                        <img src="data:image/png;base64,${image}" 
-                                width="263" 
+                        <img src="data:image/png;base64,${image}"
+                                width="263"
                                 height="263"
                                 alt="">
                                 <div className="product-label">
@@ -84,7 +84,7 @@ function addTopage(laptops) {
                         <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
                         <div class="product-rating">
                     `;
-        for(var i=0 ; i< labtop.rate ; i++){
+        for (var i = 0; i < labtop.rate; i++) {
             newProduct += '<i className="fa fa-star"></i>';
         }
 
@@ -103,6 +103,14 @@ function addTopage(laptops) {
             </div>
             `;
         container.innerHTML += newProduct;
+        const product = document.querySelectorAll(".product");
+        for (let i = 0; i < product.length; i++) {
+            product[i].addEventListener("click", function () {
+                product[i].classList.toggle(jsonLaptops[i].uuid);
+                $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
+            });
+        }
+
     });
 
 }
@@ -142,4 +150,23 @@ function getPage() {
         async: false
     });
 }
+function ajaxCallBack(responseTxt, statusTxt, xhr) {
+    console.log(JSON.stringify(responseTxt.laptopId))
+    carts.push(JSON.stringify(responseTxt.laptopId));
+    $.ajax({
+        type: "POST",
+        url: "addToCard",
+        data: JSON.stringify(responseTxt.laptopId)
+    });
+    localStorage.setItem("Cart", JSON.stringify(responseTxt));
+    return true;
+}
+
+function addToCardInLocalStorge(labtop) {
+    localStorage.setItem("labtop", JSON.stringify(labtop));
+    return true;
+}
+
+
+
 
