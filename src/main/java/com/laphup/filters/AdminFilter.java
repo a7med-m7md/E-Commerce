@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminFilter", urlPatterns = {"/addLaptop", "/users"})
+@WebFilter(filterName = "AdminFilter", urlPatterns = {"/addLaptop", "/users", "/updateProduct"})
 public class AdminFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
