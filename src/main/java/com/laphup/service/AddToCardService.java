@@ -18,12 +18,9 @@ public class AddToCardService {
     public AddToCardService(HttpServletRequest request){
         laptopRepoImp = new LaptopRepoImp(request);
     }
-    public Optional<LaptopDTO> getLaptopByUuid(UUID uuid) {
-        Optional<LaptopDTO> laptop = laptopRepoImp.getLaptopByName(uuid);
-        if(laptop.isPresent())
-            return laptop;
-        else
-            return Optional.empty();
+    public LaptopDTO getLaptopByUuid(UUID uuid) {
+        LaptopDTO laptop = laptopRepoImp.getLaptopByName(uuid);
+       return  laptop;
     }
 
     public boolean addToCard(Card card) {

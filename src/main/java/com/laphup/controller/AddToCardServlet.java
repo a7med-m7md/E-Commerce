@@ -58,8 +58,8 @@ public class AddToCardServlet extends HttpServlet {
         Gson gson = new Gson();
         UUID uuidstr = gson.fromJson(req.getReader(), UUID.class);
         AddToCardService addToCardService = new AddToCardService(req);
-        Optional<LaptopDTO> laptop = addToCardService.getLaptopByUuid(uuidstr);
-        laptops.add(laptop.get());
+        LaptopDTO laptop = addToCardService.getLaptopByUuid(uuidstr);
+        laptops.add(laptop);
         System.out.println(laptops.size());
         for (LaptopDTO laptop1 : laptops)
             System.out.println(laptop1.getName());
