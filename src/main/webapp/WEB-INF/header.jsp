@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!-- HEADER -->
 
-		<header>
+		<header	>
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
@@ -18,6 +18,7 @@
 						<c:if test="${userRole == 'ADMIN'}">
 <%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
+							<li><a href="users"><i class="">Users</i></a></li>
 						</c:if>
 						<c:if test="${userRole == 'USER'}">
 						<li><a href="#"><i class="fa fa-dollar"></i> <c:out value="${userInfo.creditLimit}" /> EG</a></li>
@@ -59,7 +60,7 @@
 
 
 						<c:if test="${empty userInfo}">
-							<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign in</a></li>
+							<li><a href="signin"><i class="fa fa-user-o"></i> Sign in</a></li>
 							<li><a href="signup"><i class="fa fa-user-o"></i> Sign up</a></li>
 						</c:if>
 

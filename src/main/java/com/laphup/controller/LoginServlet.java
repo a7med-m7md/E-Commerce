@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 
     private boolean loggedInWithCookie(HttpServletRequest request) {
         Optional<Cookie> userCookie = CookieUtility.getCookie(request.getCookies(), "user_remember_cookie");
-        if(userCookie.isPresent()){
+        if(userCookie.isPresent() && !userCookie.isEmpty()){
             String userCookieVal = userCookie.get().getValue();
             String userEmailVal = userCookieVal.split("=")[0];
             String userPasswordVal = userCookieVal.split("=")[1];
