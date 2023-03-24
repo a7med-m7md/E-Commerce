@@ -61,9 +61,11 @@ public class AddToCardServlet extends HttpServlet {
         Optional<Laptop> laptop = addToCardService.getLaptopByUuid(uuidstr);
         laptops.add(laptop.get());
         System.out.println(laptops.size());
+        for (Laptop laptop1 : laptops)
+            laptop1.getName();
         Gson gson1 = new Gson();
-        resp.setContentType("application/json");
         resp.getWriter().print(gson1.toJson(laptops));
+
     }
 }
 
