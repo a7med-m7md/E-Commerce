@@ -1,5 +1,6 @@
 package com.laphup.persistence.repositoryImp;
 
+import com.laphup.dtos.LaptopDTO;
 import com.laphup.persistence.entities.LaptopImage;
 import com.laphup.persistence.entities.User;
 import com.laphup.persistence.repository.BaseRepo;
@@ -78,11 +79,11 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         laptopImageUUIDBaseDao.save(laptopImage);
     }
 
-    public Optional<Laptop> getLaptopByName(UUID uuid) {
+    public Optional<LaptopDTO> getLaptopByName(UUID uuid) {
         String queryString = "from Laptop u where u.uuidLaptop = :uuidLaptop";
         Query q = entityManager.createQuery(queryString);
         q.setParameter("uuidLaptop", uuid);
-        List<Laptop> laptops = q.getResultList();
+        List<LaptopDTO> laptops = q.getResultList();
         if (laptops.isEmpty())
             return Optional.empty();
         else
