@@ -13,6 +13,8 @@ public enum JSPages {
     ADMIN_DISPLAY_USERS("/WEB-INF/view-users-table.jsp"),
     SIGN_IN("signIn.html"),
     SIGN_UP("siginUp.html"),
+    STORE("store.jsp"),
+    PRODUCT("product.jsp"),
     PROFILE("WEB-INF/profile.jsp");
     private final String path;
     JSPages(String path){

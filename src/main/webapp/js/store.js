@@ -44,7 +44,7 @@ function addToCategory(categories) {
     let category = $(".checkbox-filter")[0];
     jsonCategories.forEach(async (item) => {
         category.innerHTML += `
-        <div className="input-checkbox">
+        <div class="input-checkbox">
             <input type="checkbox" id="brand-1">
                 <label htmlFor="brand-1">
                     <span></span>
@@ -65,39 +65,35 @@ function addTopage(laptops) {
         let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
 
         let newProduct = `
-            <div className="row" id="products">
-                <input type="hidden" value="${labtop.uuid}">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="data:image/png;base64,${image}"
-                                width="263"
-                                height="263"
-                                alt="">
-                                <div className="product-label">
-                                    <span className="sale">-30%</span>
-                                    <span className="new">NEW</span>
-                                </div>
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">${labtop.laptopCategory}</p>
-                        <h3 class="product-name"><a href="#">${labtop.name}</a></h3>
-                        <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
-                        <div class="product-rating">
+                <div class="col-md-4 col-xs-6">
+                    <div class="product">
+                        <input type="hidden" id="uuid" value="${labtop.uuid}">
+                        <div class="product-img">
+                            <img id="productImage" src="data:image/png;base64,${image}"
+                                    width="263"
+                                    height="263"
+                                    alt="">
+                                    <div class="product-label">
+                                        <span class="sale">-30%</span>
+                                        <span class="new">NEW</span>
+                                    </div>
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">${labtop.laptopCategory}</p>
+                            <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}">${labtop.name}</a></h3>
+                            <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
+                            <div class="product-rating">
                     `;
-        for (var i = 0; i < labtop.rate; i++) {
+        for(var i=0 ; i< labtop.rate ; i++){
             newProduct += '<i className="fa fa-star"></i>';
         }
 
         newProduct += `
+                            </div>
                         </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                         </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                     </div>
                 </div>
             </div>
@@ -131,6 +127,11 @@ function getPage() {
     let sortedBy = $("#sortBy")[0].value;
     let minPrice = $("#price-min")[0].value;
     let maxPrice = $("#price-max")[0].value;
+
+    if(minPrice == "")
+        minPrice = 0;
+    if(maxPrice == "")
+        maxPrice = 100000;
 
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint

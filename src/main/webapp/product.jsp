@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="u" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -37,6 +40,7 @@
 
     </head>
 	<body>
+
 	<%@ include file="WEB-INF/header.jsp" %>
 
 		<!-- NAVIGATION -->
@@ -47,8 +51,8 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.jsp">Home</a></li>
-						<li><a href="store.jsp">All products</a></li>
+						<li><a href="home">Home</a></li>
+						<li><a href="store">All products</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -66,8 +70,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="index.jsp">Home</a></li>
-							<li><a href="store.jsp">All Products</a></li>
+							<li><a href="home">Home</a></li>
+							<li><a href="store">All Products</a></li>
 							<li class="active">My Product</li>
 						</ul>
 					</div>
