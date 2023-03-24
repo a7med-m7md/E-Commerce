@@ -1,8 +1,13 @@
 import {DOMINO, PORT} from "./configuration.js";
 
 $(document).ready(function () {
+    // Get the URL search parameters
+    var searchParams = new URLSearchParams(window.location.search);
+    // Get the value of the "myParam" parameter
+    var myParamValue = searchParams.get("uuidProduct");
+
     //Get product data
-    getMyProduct("db950c3d-4f7c-4d5d-84d4-0fa520db7785");
+    getMyProduct(myParamValue);
 
     // definition
     function loadScript(scriptUrl) {
@@ -65,7 +70,7 @@ $(document).ready(function () {
         });
 });
 
-function getMyProduct(productId){
+export function getMyProduct(productId){
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/laptop`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)

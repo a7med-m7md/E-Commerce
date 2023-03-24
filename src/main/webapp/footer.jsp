@@ -27,7 +27,7 @@
                             <li><a href="#">Smartphones</a></li>
                             <li><a href="#">Cameras</a></li>
                             <li><a href="#">Accessories</a></li>
-                            <li><a href="store.jsp">All Products</a></li>
+                            <li><a href="store">All Products</a></li>
                         </ul>
                     </div>
                 </div>
