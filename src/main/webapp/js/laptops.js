@@ -10,13 +10,14 @@ function addToScrollbar(laptops) {
     let container = $(".products-slick")[1];
     $.each(jsonLaptops, function (index, labtop) {
         //var labtop = $.parseJSON(value);
-        const blob = new Blob(labtop.imagByteList[0], {type: "image/png"});
-        const url = URL.createObjectURL(blob);
-        let c = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
+        // const blob = new Blob(labtop.imagByteList[0], {type: "image/png"});
+        // const url = URL.createObjectURL(blob);
+        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
         let newProduct = `
             <div class="product">
+                <input type="hidden" value="${labtop.uuid}">
                 <div class="product-img">
-                    <img src="data:image/png;base64,${c}" 
+                    <img src="data:image/png;base64,${image}" 
                             width="263" 
                             height="263"
                             alt="">
@@ -109,7 +110,7 @@ function addToScrollbar(laptops) {
 
 function getLaptops(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptopservlet`, // specify the URL of the API endpoint
+        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,
