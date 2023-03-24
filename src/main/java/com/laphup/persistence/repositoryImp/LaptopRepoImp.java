@@ -1,5 +1,6 @@
 package com.laphup.persistence.repositoryImp;
 
+import com.laphup.dtos.LaptopDTO;
 import com.laphup.persistence.entities.LaptopImage;
 import com.laphup.persistence.entities.User;
 import com.laphup.persistence.repository.BaseRepo;
@@ -11,6 +12,8 @@ import jakarta.persistence.Query;
 import jakarta.persistence.criteria.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
+import org.modelmapper.ModelMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +23,9 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
     private HttpServletRequest request;
     private EntityManager entityManager;
     private CriteriaBuilder criteriaBuilder;
-    public LaptopRepoImp(HttpServletRequest request){
+    ModelMapper modelMapper = new ModelMapper();
+
+    public LaptopRepoImp(HttpServletRequest request) {
         super(request);
         this.request = request;
         this.entityManager = (EntityManager) request.getAttribute("EntityManager");
@@ -67,25 +72,25 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
 
         //Get Result
         List<Laptop> laptopList = entityManager.createQuery(query_Laptop)
-                .setFirstResult((pageNumber-1)*count) // starting index of the first result
+                .setFirstResult((pageNumber - 1) * count) // starting index of the first result
                 .setMaxResults(count) // maximum number of results to retrieve
                 .getResultList();
 
         return laptopList;
     }
-    public void saveImages(LaptopImage laptopImage){
+
+    public void saveImages(LaptopImage laptopImage) {
         BaseRepo<LaptopImage, UUID> laptopImageUUIDBaseDao = new BaseRepo<>(request);
         laptopImageUUIDBaseDao.save(laptopImage);
     }
 
-    public Optional<Laptop> getLaptopByName(UUID uuid) {
+    public LaptopDTO getLaptopByName(UUID uuid) {
         String queryString = "from Laptop u where u.uuidLaptop = :uuidLaptop";
         Query q = entityManager.createQuery(queryString);
         q.setParameter("uuidLaptop", uuid);
-        List<Laptop> laptops = q.getResultList();
-        if (laptops.isEmpty())
-            return Optional.empty();
-        else
-            return Optional.of(laptops.get(0));
+        Laptop laptops = (Laptop) q.getSingleResult();
+        LaptopDTO laptopDTOS = modelMapper.map(laptops, LaptopDTO.class);
+        return laptopDTOS;
     }
 }
+

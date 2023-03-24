@@ -1,5 +1,6 @@
 package com.laphup.service;
 
+import com.laphup.dtos.LaptopDTO;
 import com.laphup.persistence.entities.Card;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.repositoryImp.CardRepo;
@@ -17,12 +18,9 @@ public class AddToCardService {
     public AddToCardService(HttpServletRequest request){
         laptopRepoImp = new LaptopRepoImp(request);
     }
-    public Optional<Laptop> getLaptopByUuid(UUID uuid) {
-        Optional<Laptop> laptop = laptopRepoImp.getLaptopByName(uuid);
-        if(laptop.isPresent())
-            return laptop;
-        else
-            return Optional.empty();
+    public LaptopDTO getLaptopByUuid(UUID uuid) {
+        LaptopDTO laptop = laptopRepoImp.getLaptopByName(uuid);
+       return  laptop;
     }
 
     public boolean addToCard(Card card) {

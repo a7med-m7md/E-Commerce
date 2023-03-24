@@ -28,7 +28,7 @@ import java.util.*;
 @WebServlet("/addToCard")
 public class AddToCardServlet extends HttpServlet {
 
-    List<Laptop> laptops = new ArrayList<>();
+    List<LaptopDTO> laptops = new ArrayList<>();
     Map<UUID, Integer> hm = new HashMap<UUID, Integer>();
 
     @Override
@@ -58,12 +58,14 @@ public class AddToCardServlet extends HttpServlet {
         Gson gson = new Gson();
         UUID uuidstr = gson.fromJson(req.getReader(), UUID.class);
         AddToCardService addToCardService = new AddToCardService(req);
-        Optional<Laptop> laptop = addToCardService.getLaptopByUuid(uuidstr);
-        laptops.add(laptop.get());
+        LaptopDTO laptop = addToCardService.getLaptopByUuid(uuidstr);
+        laptops.add(laptop);
         System.out.println(laptops.size());
+        for (LaptopDTO laptop1 : laptops)
+            System.out.println(laptop1.getName());
         Gson gson1 = new Gson();
-        resp.setContentType("application/json");
         resp.getWriter().print(gson1.toJson(laptops));
+
     }
 }
 
