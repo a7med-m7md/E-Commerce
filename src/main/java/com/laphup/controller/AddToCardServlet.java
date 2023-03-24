@@ -53,8 +53,6 @@ public class AddToCardServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        System.out.println("inPost");
         Gson gson = new Gson();
         UUID uuidstr = gson.fromJson(req.getReader(), UUID.class);
         AddToCardService addToCardService = new AddToCardService(req);
