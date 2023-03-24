@@ -60,16 +60,16 @@ function addTopage(laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     let container = $("#products")[0];
     $.each(jsonLaptops, function (index, labtop) {
-        //var labtop = $.parseJSON(value);
-        const blob = new Blob(labtop.imagByteList[0], {type: "image/png"});
-        const url = URL.createObjectURL(blob);
-        let c = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
+        // const blob = new Blob(labtop.imagByteList[0], {type: "image/png"});
+        // const url = URL.createObjectURL(blob);
+        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
 
         let newProduct = `
-            <div className="row" id="products">        
+            <div className="row" id="products">
+                <input type="hidden" value="${labtop.uuid}">
                 <div class="product">
                     <div class="product-img">
-                        <img src="data:image/png;base64,${c}" 
+                        <img src="data:image/png;base64,${image}" 
                                 width="263" 
                                 height="263"
                                 alt="">
@@ -81,7 +81,7 @@ function addTopage(laptops) {
                     <div class="product-body">
                         <p class="product-category">${labtop.laptopCategory}</p>
                         <h3 class="product-name"><a href="#">${labtop.name}</a></h3>
-                        <h4 class="product-price">$${labtop.price} <del class="product-old-price">$990.00</del></h4>
+                        <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
                         <div class="product-rating">
                     `;
         for(var i=0 ; i< labtop.rate ; i++){
@@ -125,7 +125,7 @@ function getPage() {
     let maxPrice = $("#price-max")[0].value;
 
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptopservlet`, // specify the URL of the API endpoint
+        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,

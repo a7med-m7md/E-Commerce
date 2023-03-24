@@ -47,22 +47,30 @@ public class ProfileServlet extends HttpServlet {
             Gender gender = request.getParameter("gender").equals("Male") ? Gender.MALE : Gender.FEMALE;
             String birthday = request.getParameter("birthday");
             int creditLimit = Integer.parseInt(request.getParameter("creditlimit"));
-
+            UserDto currentUser = (UserDto)request.getSession().getAttribute("userInfo");
+            System.out.println("ROLE:: " + currentUser.getRole());
+            System.out.println("DATE :: T" + currentUser.getBirthDay());
             // Update it
             UserService userService = new UserService(request);
-            System.out.println("Birthday:: " + birthday);
+//            System.out.println("Birthday:: " + birthday);
             UserDto userDto = null;
+
 
             userDto = new UserDto(formatDate(birthday), firstName, lastName, gender, password, job, email, creditLimit, address, "");
 
             userDto.setUuid(UUID.fromString(uuid));
+            userDto.setRole(currentUser.getRole());
+
             userService.updateUser(userDto);
 
             // Update information in session
             if (request.getSession().getAttribute("userInfo") != null)
                 request.getSession().setAttribute("userInfo", userDto);
 
-            System.out.println("FNAME   " + firstName);
+            // Redirect with successful message
+            request.setAttribute("successMSG", "updated");
+            JSPages.PROFILE.forward(request, response);
+            System.out.println("DATE   " + userDto.getBirthDay());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -78,8 +86,6 @@ public class ProfileServlet extends HttpServlet {
 //                    .birthDay(new Date(birthday))
 //                    .creditLimit(creditLimit)
 //                    .build();
-
-        JSPages.PROFILE.forward(request, response);
     }
 
     public Date formatDate(String date) throws ParseException {

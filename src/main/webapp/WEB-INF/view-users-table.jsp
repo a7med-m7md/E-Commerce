@@ -83,6 +83,6 @@
 
     </table>
 </div>
-<script src="view-users-table-app.js"></script>
+<script src="js/view-users-table-app.js"></script>
 </body>
 </html>

@@ -1,44 +1,41 @@
 package com.laphup.controller;
 
-import com.laphup.dtos.LaptopDTO;
-import com.laphup.service.LaptopService;
-import com.laphup.util.enums.SortBy;
 import com.google.gson.Gson;
+import com.laphup.dtos.LaptopDTO;
+import com.laphup.persistence.entities.Laptop;
+import com.laphup.service.LaptopService;
+import jakarta.json.Json;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.UUID;
 
+@WebServlet(name = "laptop", value = "/laptop")
 public class LaptopServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-        int pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
-        int count = Integer.parseInt(req.getParameter("count"));
-        String laptopCategory = req.getParameter("laptopCategory");
-        SortBy sortBy = SortBy.valueOf(req.getParameter("sortedBy"));
-        double minPrice = Double.parseDouble(req.getParameter("minPrice"));
-        double maxPrice = Double.parseDouble(req.getParameter("maxPrice"));
-        System.out.println(pageNumber+count+laptopCategory+sortBy+minPrice+maxPrice);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //Get uuid from request
+        String uuid = req.getParameter("productId");
 
-        //Call servecie to get page of laptop according to layer of filter
+        //Convert uuid from string to UUID
+        UUID productUUID = UUID.fromString(uuid);
+
+        //Call service to call repositories to get laptop by uuid
         LaptopService laptopService = new LaptopService(req);
-        List<LaptopDTO> laptops = laptopService.getPage(pageNumber, count, laptopCategory, sortBy, minPrice, maxPrice);
+        LaptopDTO laptopDTO = laptopService.getLaptop(productUUID);
 
         //Convert laptop page to json object
-        Gson gson = new Gson();
-        String messageJson = gson.toJson(laptops);
-        System.out.println(messageJson);
+        Jsonb jsonb = JsonbBuilder.create();
+        String messageJson = jsonb.toJson(laptopDTO);
         //Write json resposte to client
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
         out.println(messageJson);
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

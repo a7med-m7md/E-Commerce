@@ -14,15 +14,17 @@
 
 						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
 <%--						<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
+						<c:set var="userInfo" value="${sessionScope.userInfo}" />
 						<c:if test="${userRole == 'ADMIN'}">
 <%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
 						</c:if>
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+						<c:if test="${userRole == 'USER'}">
+						<li><a href="#"><i class="fa fa-dollar"></i> <c:out value="${userInfo.creditLimit}" /> EG</a></li>
+						</c:if>
 <%--						<c:if test="not emptry userInfo">--%>
 <%--							<li><a href="signIn.html"><i class="fa fa-user-o"></i> <c:out value="${userInfo}" /></a></li>--%>
 <%--						</c:if>--%>
-						<c:set var="userInfo" value="${sessionScope.userInfo}" />
 
 						<c:if test="${not empty userInfo}">
 							<style>
@@ -75,8 +77,8 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="img/logo.png" alt="">
+								<a href="home" class="logo">
+									<img src="img/logo.png" width="160px" height="70px" alt="">
 								</a>
 							</div>
 						</div>
