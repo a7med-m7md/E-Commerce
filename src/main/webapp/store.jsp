@@ -47,7 +47,7 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.jsp">Home</a></li>
+						<li><a href="home">Home</a></li>
 						<li class="active"><a href="">All products</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -66,7 +66,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="index.jsp">Home</a></li>
+							<li><a href="home">Home</a></li>
 							<li class="active">All Products</li>
 						</ul>
 					</div>

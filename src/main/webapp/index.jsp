@@ -35,9 +35,6 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<%--		<%@ include file="WEB-INF/header-info.jsp"%>--%>
-
 	</head>
 	<body>
 
@@ -57,7 +54,7 @@
 <%--						<li><a href="#">Smartphones</a></li>--%>
 <%--						<li><a href="#">Cameras</a></li>--%>
 <%--						<li><a href="#">Accessories</a></li>--%>
-						<li><a href="store.jsp">All Products</a></li>
+						<li><a href="store">All Products</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -904,7 +901,7 @@
 									<li><a href="#">Smartphones</a></li>
 									<li><a href="#">Cameras</a></li>
 									<li><a href="#">Accessories</a></li>
-									<li><a href="product.jsp">All Products</a></li>
+									<li><a href="/product">All Products</a></li>
 								</ul>
 							</div>
 						</div>
