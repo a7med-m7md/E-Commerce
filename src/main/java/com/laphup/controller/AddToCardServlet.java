@@ -35,9 +35,21 @@ public class AddToCardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // get UUid Of Product
         UUID productUuid = UUID.fromString(req.getParameter("uuid"));
+
         // get User
         HttpSession session = req.getSession();
         UserDto user = null;
+        if(session.getAttribute("userInfo") == null){
+            System.out.println("annonumous");
+            CardId cardId = new CardId(UUID.fromString("00000000-0000-0000-0000-000000000000"), productUuid);
+            Gson gson = new Gson();
+            String jsonObject = gson.toJson(cardId);
+            resp.setContentType("application/json");
+            PrintWriter out = resp.getWriter();
+            out.print(jsonObject);
+            out.flush();
+            return;
+        }
         if (session != null) {
             user = (UserDto) session.getAttribute("userInfo");
         }
@@ -55,6 +67,7 @@ public class AddToCardServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         UUID uuidstr = gson.fromJson(req.getReader(), UUID.class);
+
         AddToCardService addToCardService = new AddToCardService(req);
         LaptopDTO laptop = addToCardService.getLaptopByUuid(uuidstr);
         laptops.add(laptop);
