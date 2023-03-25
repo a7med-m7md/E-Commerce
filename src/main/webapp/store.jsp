@@ -48,7 +48,7 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="home">Home</a></li>
-						<li class="active"><a href="">All products</a></li>
+						<li class="active"><a href="store">All products</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>

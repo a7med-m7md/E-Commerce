@@ -171,12 +171,12 @@ function addToPage(jsonLaptop){
                                 <span class="qty-down">-</span>
                         </div>
                     </div>
-                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</button>
                 </div>
         
                 <ul class="product-links">
                     <li>Category:</li>
-                    <li><a href="#">${laptop.laptopCategory}</a></li>
+                    <li><a href="store?category=${laptop.laptopCategory}">${laptop.laptopCategory}</a></li>
                 </ul>        
             </div>
         </div>

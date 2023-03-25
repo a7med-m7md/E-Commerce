@@ -52,13 +52,13 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         //Choose which orderby
         Order order = null;
         if (sortedBy == SortBy.RATE)
-            order = criteriaBuilder.asc(laptopRoot.get("rate"));
+            order = criteriaBuilder.desc(laptopRoot.get("rate"));
         else if (sortedBy == SortBy.PRICE)
             order = criteriaBuilder.asc(laptopRoot.get("price"));
 //        else if (sortedBy == SortBy.PURCHASINGNUMBER)
 //            order = criteriaBuilder.asc(laptopRoot.get("price"));
         else {
-            order = criteriaBuilder.asc(laptopRoot.get("rate"));
+            order = criteriaBuilder.desc(laptopRoot.get("rate"));
         }
 
         //Execute the query according filters  layers
