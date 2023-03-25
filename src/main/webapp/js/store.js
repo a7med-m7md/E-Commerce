@@ -1,6 +1,12 @@
 import { DOMINO, PORT } from "./configuration.js";
+import {updateCart} from "./cart-widget.js";
+
 var carts = [];
+
+var shoppingCart;
+var currentUserUUID;
 $(document).ready(function () {
+    shoppingCart = new ShoppingCart();
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
     liElements.forEach(li => {
@@ -16,6 +22,7 @@ $(document).ready(function () {
 
             //Send ajax to server to get new page of products
             getPage();
+            updateCart();
         });
     });
 
@@ -101,10 +108,12 @@ function addTopage(laptops) {
         container.innerHTML += newProduct;
         const product = document.querySelectorAll(".product");
         for (let i = 0; i < product.length; i++) {
-            product[i].addEventListener("click", function () {
+            product[i].addEventListener("click", async function () {
                 product[i].classList.toggle(jsonLaptops[i].uuid);
-                $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
+                await $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
+                updateCart()
             });
+
         }
 
     });
@@ -152,14 +161,28 @@ function getPage() {
     });
 }
 function ajaxCallBack(responseTxt, statusTxt, xhr) {
-    console.log(JSON.stringify(responseTxt.laptopId))
-    carts.push(JSON.stringify(responseTxt.laptopId));
+    console.log("TXT")
+    // console.log(JSON.parse(responseTxt))
+    // console.log(JSON.stringify(responseTxt.laptopId))
+    // carts.push(JSON.stringify(responseTxt.laptopId));
     $.ajax({
         type: "POST",
         url: "addToCard",
         data: JSON.stringify(responseTxt.laptopId)
     });
-    localStorage.setItem("Cart", JSON.stringify(responseTxt));
+    currentUserUUID = responseTxt.userId;
+    console.log("USer : " + currentUserUUID)
+    // localStorage.setItem("Cart", JSON.stringify(responseTxt));
+
+    let item = {
+        // userId: responseTxt.userId,
+        productId: responseTxt.laptopId,
+        quantity: 1
+    }
+
+    shoppingCart = new ShoppingCart();
+    shoppingCart.addItem(item)
+
     return true;
 }
 
@@ -167,6 +190,82 @@ function addToCardInLocalStorge(labtop) {
     localStorage.setItem("labtop", JSON.stringify(labtop));
     return true;
 }
+
+
+
+/// User Cart Class
+
+
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+        this.loadFromLocalStorage();
+    }
+
+    addItem(item) {
+        let existingItem = this.items.find(
+            (cartItem) => cartItem.productId === item.productId
+        );
+        if (existingItem) {
+            existingItem.quantity += item.quantity;
+        } else {
+            this.items.push(item);
+        }
+        this.saveToLocalStorage();
+    }
+
+
+    removeItem(item) {
+        const index = this.items.indexOf(item);
+        if (index !== -1) {
+            this.items.splice(index, 1);
+            this.saveToLocalStorage();
+        }
+    }
+
+    updateItemQuantity(item, quantity) {
+        item.quantity = quantity;
+        this.saveToLocalStorage();
+    }
+
+    clear() {
+        this.items = [];
+        this.saveToLocalStorage();
+    }
+
+    saveToLocalStorage() {
+        const userId = getUserId(); // get user ID from session or cookie
+        if (userId) {
+            const key = `cart-${userId}`;
+            const value = JSON.stringify(this.items);
+            localStorage.setItem(key, value);
+        }
+    }
+
+    loadFromLocalStorage() {
+        const userId = getUserId(); // get user ID from session or cookie
+        if (userId) {
+            const key = `cart-${userId}`;
+            const value = localStorage.getItem(key);
+            if (value) {
+                console.log("exist")
+                this.items = JSON.parse(value);
+            }
+        }
+    }
+}
+
+function getUserId() {
+    return currentUserUUID;
+}
+
+
+
+
+
+
+
+
 
 
 

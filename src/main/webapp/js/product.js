@@ -145,7 +145,10 @@ function addToPage(jsonLaptop){
                 <div>
                     <div class="product-rating">
     `;
-
+    let update = document.getElementById("updateBTN");
+    if(update){
+        update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
+    }
     for(let i = 0 ; i<laptop.rate ; i++){
         newProduct += `
             <i class="fa fa-star"></i>
@@ -153,6 +156,7 @@ function addToPage(jsonLaptop){
     }
 
     newProduct += `
+                
                 <div>
                     <h3 class="product-price">$${laptop.price} <del class="product-old-price">$${laptop.price}/del></h3>
                     <span class="product-available">In Stock</span>

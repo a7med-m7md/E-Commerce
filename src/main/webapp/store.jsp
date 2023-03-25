@@ -520,6 +520,6 @@
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
-
+	<script type="module" src="js/cart-widget.js"></script>
 	</body>
 </html>

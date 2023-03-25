@@ -89,10 +89,11 @@
 				<!-- row -->
 				<div class="row">
 					<div id="myProduct">
-
+						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
+						<c:if test="${userRole == 'ADMIN'}">
+							<button class="btn btn-warning"><a id="updateBTN" href="updateProduct?uuid=${laptop.uuid}">Update product</a></button>
+						</c:if>
 					</div>
-
-
 					<!-- Product tab -->
 					<div class="col-md-12">
 						<div id="product-tab">
@@ -308,5 +309,6 @@
 
 		<!-- jQuery Plugins -->
 		<script type="module" src="js/product.js"></script>
+
 	</body>
 </html>
