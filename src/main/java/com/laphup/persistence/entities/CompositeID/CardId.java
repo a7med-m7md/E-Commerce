@@ -20,4 +20,8 @@ public class CardId implements Serializable {
         this.userId = userId;
         this.laptopId = laptopId;
     }
+
+    public CardId() {
+
+    }
 }
