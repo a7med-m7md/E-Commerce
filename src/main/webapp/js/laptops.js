@@ -1,12 +1,53 @@
 import {DOMINO, PORT} from "./configuration.js";
 
 $(document).ready(function () {
+    //Get all categories in db
+    getCategories();
+
     let container1 = $(".products-slick")[0];
     getLaptops(container1, 1, 10, '', 'PRICE', 0, 10000);
 
     let container2 = $(".products-slick")[1];
     getLaptops(container2, 1, 10, '', 'RATE', 0, 10000);
 });
+
+
+function getCategories(){
+    $.ajax({
+        url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
+        type: "GET", // specify the type of request (GET in this case)
+        success: function (data) { // define a callback function to handle the response
+            addToCategory(data);
+        }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
+            console.log("Request failed. Status code: " + jqXHR.status);
+        },
+        async: false
+    });
+}
+function addToCategory(categories){
+    let jsonCategories = $.parseJSON(categories);
+
+    let category = $("#categories")[0];
+    jsonCategories.forEach((item,index) => {
+        if(index < 3){
+            category.innerHTML += `
+               <!-- shop -->
+                <div class="col-md-4 col-xs-6">
+                    <div class="shop">
+                        <div class="shop-img">
+                            <img src="./img/shop01.png" alt="">
+                        </div>
+                        <div class="shop-body">
+                            <h3>${item.categoryName}<br>Collection</h3>
+                            <a href="store?category=${item.categoryName}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /shop -->
+            `;
+        }
+    });
+}
 function addToScrollbar(container, laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     $.each(jsonLaptops, function (index, labtop) {
@@ -40,23 +81,9 @@ function addToScrollbar(container, laptops) {
             `;
         container.innerHTML += newProduct;
     });
-    // definition
-    function loadScript(scriptUrl) {
-        const script = document.createElement('script');
-        script.src = scriptUrl;
-        document.body.appendChild(script);
 
-        return new Promise((res, rej) => {
-            script.onload = function() {
-                res();
-            }
-            script.onerror = function () {
-                rej();
-            }
-        });
-    }
 
-// use
+    // use
     loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
@@ -118,5 +145,20 @@ function getLaptops(container, pageNumber, count, laptopCategory, sortedBy, minP
             console.log("Request failed. Status code: " + jqXHR.status);
         },
         async : false
+    });
+}
+// definition
+function loadScript(scriptUrl) {
+    const script = document.createElement('script');
+    script.src = scriptUrl;
+    document.body.appendChild(script);
+
+    return new Promise((res, rej) => {
+        script.onload = function() {
+            res();
+        }
+        script.onerror = function () {
+            rej();
+        }
     });
 }

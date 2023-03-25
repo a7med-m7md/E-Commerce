@@ -6,6 +6,11 @@ var carts = [];
 var shoppingCart;
 var currentUserUUID;
 $(document).ready(function () {
+    // Get the URL search parameters
+    var searchParams = new URLSearchParams(window.location.search);
+    // Get the value of the "myParam" parameter
+    var myParamValue = searchParams.get("myParamValue");
+
     shoppingCart = new ShoppingCart();
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
@@ -31,8 +36,27 @@ $(document).ready(function () {
 
     //Get page of products from db
     getPage();
+
+
+    //Handel pages buttons
+    const products = document.querySelectorAll('#productImage');
+    products.forEach(li => {
+        li.addEventListener('click', event => {
+            let uuid = document.querySelector(`#uuid + *`);
+            $.ajax({
+                url: `http://localhost:${PORT}/${DOMINO}/product?uuid=${uuid}`, // specify the URL of the API endpoint
+                type: "GET", // specify the type of request (GET in this case)
+                success: function (data) { // define a callback function to handle the response
+                    addToCategory(data);
+                }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
+                    console.log("Request failed. Status code: " + jqXHR.status);
+                },
+                async: false
+            });
+        });
+    });
 });
-function getCategories() {
+function getCategories(){
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
@@ -45,18 +69,17 @@ function getCategories() {
     });
 }
 
-function addToCategory(categories) {
+function addToCategory(categories){
     let jsonCategories = $.parseJSON(categories);
 
     let category = $(".checkbox-filter")[0];
-    jsonCategories.forEach(async (item) => {
+    jsonCategories.forEach(async (item, index) => {
         category.innerHTML += `
         <div class="input-checkbox">
-            <input type="checkbox" id="brand-1">
-                <label htmlFor="brand-1">
+            <input type="checkbox" id="brand-${index}">
+                <label for ="brand-${index}">
                     <span></span>
                     ${item.categoryName}
-                    <small>(578)</small>
                 </label>
         </div>
         `;
@@ -67,8 +90,6 @@ function addTopage(laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     let container = $("#products")[0];
     $.each(jsonLaptops, function (index, labtop) {
-        // const blob = new Blob(labtop.imagByteList[0], {type: "image/png"});
-        // const url = URL.createObjectURL(blob);
         let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
 
         let newProduct = `
@@ -76,8 +97,8 @@ function addTopage(laptops) {
                     <div class="product">
                         <input type="hidden" id="uuid" value="${labtop.uuid}">
                         <div class="product-img">
-                            <img id="productImage" src="data:image/png;base64,${image}"
-                                    width="263"
+                            <img id="productImage" src="data:image/png;base64,${image}" 
+                                    width="263" 
                                     height="263"
                                     alt="">
                                     <div class="product-label">
@@ -92,7 +113,7 @@ function addTopage(laptops) {
                             <div class="product-rating">
                     `;
         for(var i=0 ; i< labtop.rate ; i++){
-            newProduct += '<i className="fa fa-star"></i>';
+            newProduct += '<i class="fa fa-star"></i>';
         }
 
         newProduct += `
