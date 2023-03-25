@@ -13,7 +13,10 @@ export function updateCart() {
         console.log("remove")
         cartContainer.removeChild(cartContainer.lastChild);
     }
-    const userUUID = document.getElementById("userUUID").innerText
+    let userUUID = document.getElementById("userUUID").innerText
+    if(!userUUID){
+        userUUID = "00000000-0000-0000-0000-000000000000"
+    }
     const userId = JSON.parse(localStorage.getItem(`cart-${userUUID}`));
     if (userId) {
         var totalSum = 0;

@@ -170,6 +170,7 @@ function ajaxCallBack(responseTxt, statusTxt, xhr) {
         url: "addToCard",
         data: JSON.stringify(responseTxt.laptopId)
     });
+
     currentUserUUID = responseTxt.userId;
     console.log("USer : " + currentUserUUID)
     // localStorage.setItem("Cart", JSON.stringify(responseTxt));
