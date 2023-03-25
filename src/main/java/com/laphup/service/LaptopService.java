@@ -42,4 +42,9 @@ public class LaptopService {
 
         return laptopDTO;
     }
+
+    public Laptop getNLaptop(UUID uuid){
+        Laptop laptop = laptopRepoImp.getById(uuid);
+        return laptop;
+    }
 }
