@@ -1,4 +1,6 @@
 import { DOMINO, PORT } from "./configuration.js";
+import {updateCart} from "./cart-widget.js";
+
 var carts = [];
 
 var shoppingCart;
@@ -20,6 +22,7 @@ $(document).ready(function () {
 
             //Send ajax to server to get new page of products
             getPage();
+            updateCart();
         });
     });
 
@@ -105,10 +108,12 @@ function addTopage(laptops) {
         container.innerHTML += newProduct;
         const product = document.querySelectorAll(".product");
         for (let i = 0; i < product.length; i++) {
-            product[i].addEventListener("click", function () {
+            product[i].addEventListener("click", async function () {
                 product[i].classList.toggle(jsonLaptops[i].uuid);
-                $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
+                await $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
+                updateCart()
             });
+
         }
 
     });

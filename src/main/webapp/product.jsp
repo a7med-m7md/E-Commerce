@@ -309,5 +309,6 @@
 
 		<!-- jQuery Plugins -->
 		<script type="module" src="js/product.js"></script>
+
 	</body>
 </html>

@@ -120,7 +120,7 @@
 									<a class="dropdown-toggle" id="Card" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty" id="items-num">0</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list" id="cart-container">
@@ -147,8 +147,8 @@
 <%--											</div>--%>
 										</div>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small id="item-number-sum"></small>
+											<h5 id="item-total-price"></h5>
 										</div>
 										<div class="cart-btns">
 											<a href="#">View Cart</a>
@@ -178,4 +178,4 @@
 		</header>
 		<!-- /HEADER -->
 
-	<script src="js/cart-widget.js"></script>
+	<script type="module" src="js/cart-widget.js"></script>
