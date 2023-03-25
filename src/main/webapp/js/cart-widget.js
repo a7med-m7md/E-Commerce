@@ -2,6 +2,21 @@
 // loop through each product ID and make an AJAX GET request to retrieve product information
 $(document).ready(function () {
     updateCart();
+    $('#logout-btn').click(async function (){
+
+        let userID = document.getElementById("userUUID").innerText;
+
+        let storageDate = localStorage.getItem(`cart-${userID}`)
+        if(storageDate){
+            await $.post("logout", {
+                data: storageDate,
+                 contentType: "application/x-www-form-urlencoded"
+            })
+        }
+
+        $.get("logout")
+        location.reload()
+    })
 })
 
 export function updateCart() {

@@ -218,7 +218,7 @@ function addToCardInLocalStorge(labtop) {
 /// User Cart Class
 
 
-class ShoppingCart {
+export class ShoppingCart {
     constructor() {
         this.items = [];
         this.loadFromLocalStorage();
@@ -274,6 +274,26 @@ class ShoppingCart {
                 this.items = JSON.parse(value);
             }
         }
+    }
+
+    mergeItemsByKey(keyToMerge, targetKey) {
+        this.items.forEach((item) => {
+            if (item.hasOwnProperty(keyToMerge)) {
+                const targetItem = this.items.find(
+                    (i) => i.hasOwnProperty(targetKey) && i[targetKey] === item[keyToMerge]
+                );
+                if (targetItem) {
+                    targetItem.quantity += item.quantity;
+                    this.removeItem(item);
+                } else {
+                    const newItem = { ...item };
+                    newItem[targetKey] = item[keyToMerge];
+                    delete newItem[keyToMerge];
+                    this.addItem(newItem);
+                    this.removeItem(item);
+                }
+            }
+        });
     }
 }
 

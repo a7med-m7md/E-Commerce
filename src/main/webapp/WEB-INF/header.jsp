@@ -53,7 +53,7 @@
 									<hr style="visibility: hidden; height: 10px; margin: 0px">
 									<a class="dropdown-item drop-menu-hov" href="home" style="">Order History</a><br>
 									<hr style="margin: 7.5px">
-									<a class="dropdown-item drop-menu-hov" href="logout" style="">Logout</a>
+									<button id="logout-btn" style="background-color: transparent;border: none;outline: none;" style="font-weight: bold">Logout</button>
 								</div>
 								</div>
 							</li>
