@@ -6,11 +6,6 @@ var carts = [];
 var shoppingCart;
 var currentUserUUID;
 $(document).ready(function () {
-    // Get the URL search parameters
-    var searchParams = new URLSearchParams(window.location.search);
-    // Get the value of the "myParam" parameter
-    var myParamValue = searchParams.get("myParamValue");
-
     shoppingCart = new ShoppingCart();
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
@@ -70,14 +65,20 @@ function getCategories(){
 }
 
 function addToCategory(categories){
+    // Get the URL search parameters
+    var searchParams = new URLSearchParams(window.location.search);
+    // Get the value of the "myParam" parameter
+    var myParamValue = searchParams.get("category");
+
+    //Get json from string
     let jsonCategories = $.parseJSON(categories);
 
     let category = $(".checkbox-filter")[0];
     jsonCategories.forEach(async (item, index) => {
         category.innerHTML += `
         <div class="input-checkbox">
-            <input type="checkbox" id="brand-${index}">
-                <label for ="brand-${index}">
+            <input type="checkbox" id="${item.categoryName}" ${item.categoryName == myParamValue ? 'checked' : ''}>
+                <label for ="${item.categoryName}">
                     <span></span>
                     ${item.categoryName}
                 </label>
@@ -150,10 +151,17 @@ function getPage() {
     const activeLi = document.querySelector('.store-pagination li.active');
     const activeLiNumber = parseInt(activeLi.textContent);
 
+    //Detect checked categories
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    const values = [];
+    checkboxes.forEach((checkbox) => {
+        values.push(checkbox.id);
+    });
+
     //Detect filters data
+    let laptopCategory = values;
     let pageNumber = activeLiNumber;
     let count = $("#count")[0].value;
-    let laptopCategory = "";//$("")[0];
     let sortedBy = $("#sortBy")[0].value;
     let minPrice = $("#price-min")[0].value;
     let maxPrice = $("#price-max")[0].value;
@@ -169,7 +177,7 @@ function getPage() {
         data: {
             pageNumber: pageNumber,
             count: count,
-            laptopCategory: laptopCategory,
+            laptopCategory: laptopCategory.join(','),
             sortedBy: sortedBy,
             minPrice: minPrice,
             maxPrice: maxPrice

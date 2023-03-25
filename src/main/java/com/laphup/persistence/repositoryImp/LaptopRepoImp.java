@@ -32,7 +32,7 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
-    public List<Laptop> getPage(@NotNull int pageNumber, @NotNull int count, String laptopCategory, SortBy sortedBy, Double minPrice, Double maxPrice) {
+    public List<Laptop> getPage(@NotNull int pageNumber, @NotNull int count, String[] laptopCategoryies, SortBy sortedBy, Double minPrice, Double maxPrice) {
 
         //Create CriteriaQuery and root table (laptop)
         CriteriaQuery<Laptop> query_Laptop = criteriaBuilder.createQuery(Laptop.class);
@@ -42,7 +42,11 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         Join<Laptop, LaptopCategory> join = laptopRoot.join("laptopCategory");
 
         //Initiate predicates
-        Predicate categoryPredicate = criteriaBuilder.equal(join.get("categoryName"), laptopCategory);
+        ArrayList<Predicate> categoryPredicates = new ArrayList<>();
+        if(laptopCategoryies!=null)
+            for(String category : laptopCategoryies)
+                if(!category.equals(""))
+                    categoryPredicates.add(criteriaBuilder.equal(join.get("categoryName"), category));
         Predicate pricePredicate = criteriaBuilder.between(laptopRoot.get("price"), minPrice, maxPrice);
 
         //Choose which orderby
@@ -59,8 +63,8 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
 
         //Execute the query according filters  layers
         ArrayList<Predicate> predicates = new ArrayList<>();
-        if (laptopCategory != null && !laptopCategory.equals(""))
-            predicates.add(categoryPredicate);
+        if (categoryPredicates.size()>0)
+            predicates.add(criteriaBuilder.or(categoryPredicates.toArray(new Predicate[0])));
         if (minPrice != null && maxPrice != null)
             predicates.add(pricePredicate);
 

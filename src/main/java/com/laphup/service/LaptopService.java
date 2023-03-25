@@ -18,7 +18,7 @@ public class LaptopService {
     public LaptopService(HttpServletRequest request){
         laptopRepoImp = new LaptopRepoImp(request);
     }
-    public List<LaptopDTO> getPage(int pageNumber, int count, String laptopCategory,
+    public List<LaptopDTO> getPage(int pageNumber, int count, String[] laptopCategory,
                                    SortBy sortedBy, double minPrice, double maxPrice){
         List<Laptop> laptops = laptopRepoImp.getPage(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice);
 
