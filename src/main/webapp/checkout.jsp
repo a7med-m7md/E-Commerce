@@ -193,7 +193,7 @@
 						<div class="order-summary">
 							<div class="order-col">
 								<div><strong>PRODUCT</strong></div>
-								<div id="totalPrice"><strong>TOTAL</strong></div>
+								<div><strong>TOTAL</strong></div>
 							</div>
 							<div class="order-products">
 								<div class="order-col">
@@ -211,7 +211,7 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div id="totalPrice"><strong class="order-total">$2940.00</strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -246,14 +246,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="input-checkbox">
+						<div class="input-checkbox" >
 							<input type="checkbox" id="terms">
 							<label for="terms">
 								<span></span>
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
+						<a href="#" class="primary-btn order-submit" id="placeOrder">Place order</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -402,7 +402,7 @@
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
-		<script src="js/checkout.js"></script>
+		<script type="module"  src="js/checkout.js"></script>
 	</body>
 
 </html>

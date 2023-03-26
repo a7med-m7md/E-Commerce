@@ -1,6 +1,6 @@
 // assume productIds is an array of product IDs saved in localStorage
 // loop through each product ID and make an AJAX GET request to retrieve product information
-import {PORT} from "./configuration.js";
+import {DOMINO, PORT} from "./configuration.js";
 
 
 $(document).ready(function () {
@@ -41,7 +41,7 @@ export function updateCart() {
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
         userId.forEach((product, index) => {
-            $.get(`http://localhost:${PORT}/store/laptop?productId=${product.productId}`, response => {
+            $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 

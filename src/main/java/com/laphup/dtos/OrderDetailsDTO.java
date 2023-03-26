@@ -8,15 +8,15 @@ import jakarta.persistence.*;
 public class OrderDetailsDTO {
 
     private OrderDetailsIdDTO orderDetailsId;
-    private OrderDTO order;
-    private LaptopDTO laptop;
+    private Order order;
+    private Laptop laptop;
     private int quantity;
 
     public OrderDetailsDTO() {
 
     }
 
-    public OrderDetailsDTO(OrderDTO order, LaptopDTO laptop, int quantity) {
+    public OrderDetailsDTO(Laptop laptop, int quantity) {
         this.orderDetailsId = orderDetailsId;
         this.order = order;
         this.laptop = laptop;

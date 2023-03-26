@@ -22,6 +22,10 @@ public class AddToCardService {
         LaptopDTO laptop = laptopRepoImp.getLaptopByName(uuid);
        return  laptop;
     }
+    public Laptop getLaptopByUuid2(UUID uuid) {
+        Laptop laptop = laptopRepoImp.getById(uuid);
+        return  laptop;
+    }
 
     public boolean addToCard(Card card) {
         Card card1 = cardRepo.addToCard(card);

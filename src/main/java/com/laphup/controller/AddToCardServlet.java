@@ -28,7 +28,7 @@ import java.util.*;
 @WebServlet("/addToCard")
 public class AddToCardServlet extends HttpServlet {
 
-    List<LaptopDTO> laptops = new ArrayList<>();
+    static List<LaptopDTO> laptops = new ArrayList<>();
     Map<UUID, Integer> hm = new HashMap<UUID, Integer>();
 
     @Override
