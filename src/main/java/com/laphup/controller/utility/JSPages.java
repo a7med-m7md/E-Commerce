@@ -11,7 +11,7 @@ public enum JSPages {
     HOME_PAGE("/index.jsp"),
     ADD_LAPTOP("/add-laptop.jsp"),
     ADMIN_DISPLAY_USERS("/WEB-INF/view-users-table.jsp"),
-    SIGN_IN("signIn.html"),
+    SIGN_IN("signin.jsp"),
     SIGN_UP("siginUp.html"),
     STORE("store.jsp"),
     PRODUCT("product.jsp"),

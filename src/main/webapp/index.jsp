@@ -686,6 +686,7 @@
 
 		<!-- jQuery Plugins -->
 		<script type="module" src="js/laptops.js"></script>
+		<script type="module" src="js/product.js"></script>
 <%--		<script src="js/jquery.min.js"></script>--%>
 <%--		<script src="js/bootstrap.min.js"></script>--%>
 <%--		<script src="js/slick.min.js"></script>--%>

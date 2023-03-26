@@ -29,14 +29,14 @@ public class LaptopMapper {
         laptopDTO.setRate(String.valueOf(laptop.getRate().ordinal()));
 
         //Set Image list
-        laptop.getLaptopImage().forEach(x -> {
-            try {
-                byte[] bytes = imageConverter.converToByteArray(x.getImagPath());
-                laptopDTO.getImagByteList().add(bytes);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+//        laptop.getLaptopImage().forEach(x -> {
+//            try {
+//                byte[] bytes = imageConverter.converToByteArray(x.getImagPath());
+//                laptopDTO.getImagByteList().add(bytes);
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//        });
 
         return laptopDTO;
     }

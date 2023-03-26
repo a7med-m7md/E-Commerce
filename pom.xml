@@ -77,7 +77,7 @@
     </dependency>
 
 
-    // FIREBASE
+<!--     FIREBASE-->
 
       <dependency>
         <groupId>com.google.firebase</groupId>
@@ -209,7 +209,7 @@
           <configuration>
             <username>admin</username>
             <password>admin</password>
-            <url>http://localhost:8082/manager/text</url>
+            <url>http://localhost:8081/manager/text</url>
             <path>/store</path>
           </configuration>
         </plugin>
