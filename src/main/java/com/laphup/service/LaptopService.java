@@ -47,4 +47,8 @@ public class LaptopService {
         Laptop laptop = laptopRepoImp.getById(uuid);
         return laptop;
     }
+
+    public Long getLaptopCount(){
+        return laptopRepoImp.getLaptopCount();
+    }
 }

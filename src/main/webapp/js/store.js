@@ -6,6 +6,9 @@ var carts = [];
 var shoppingCart;
 var currentUserUUID;
 $(document).ready(function () {
+    //Detect count of pages
+    getPagesCount();
+
     shoppingCart = new ShoppingCart();
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
@@ -51,6 +54,26 @@ $(document).ready(function () {
         });
     });
 });
+function getPagesCount(){
+    $.ajax({
+        url: `http://localhost:${PORT}/${DOMINO}/pagesCount`, // specify the URL of the API endpoint
+        type: "GET", // specify the type of request (GET in this case)
+        success: function (data) { // define a callback function to handle the response
+            let count = $("#count")[0].value;
+            let numberOfPages = Math.ceil(Math.round(data/count));
+            let container = $(".store-pagination")[0];
+            for (let i =2 ; i<=numberOfPages ; i++){
+                container.innerHTML += `
+                    <li><a>${i}</a></li>
+                `;
+            }
+            container.innerHTML += '<li><a><i class="fa fa-angle-right"></i></a></li>';
+        }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
+            console.log("Request failed. Status code: " + jqXHR.status);
+        },
+        async: false
+    });
+}
 function getCategories(){
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint

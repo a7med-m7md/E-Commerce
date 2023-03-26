@@ -7,6 +7,7 @@ import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.enums.SortBy;
+import com.mysql.cj.log.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.*;
@@ -95,6 +96,16 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         Laptop laptops = (Laptop) q.getSingleResult();
         LaptopDTO laptopDTOS = modelMapper.map(laptops, LaptopDTO.class);
         return laptopDTOS;
+    }
+
+    public Long getLaptopCount(){
+        //Create CriteriaQuery and root table (laptop)
+        CriteriaQuery<Long> query_Laptop = criteriaBuilder.createQuery(Long.class);
+        Root<Laptop> laptopRoot = query_Laptop.from(Laptop.class);
+        query_Laptop.select(criteriaBuilder.count(laptopRoot));
+
+        Long count = entityManager.createQuery(query_Laptop).getSingleResult();
+        return count;
     }
 }
 

@@ -176,10 +176,10 @@
 									</select>
 								</label>
 							</div>
-							<ul class="store-grid">
-								<li class="active"><i class="fa fa-th"></i></li>
-								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-							</ul>
+<%--							<ul class="store-grid">--%>
+<%--								<li class="active"><i class="fa fa-th"></i></li>--%>
+<%--								<li><a href="#"><i class="fa fa-th-list"></i></a></li>--%>
+<%--							</ul>--%>
 						</div>
 						<!-- /store top filter -->
 
@@ -454,10 +454,6 @@
 							<span class="store-qty">Showing 20-100 products</span>
 							<ul class="store-pagination">
 								<li class="active"><a>1</a></li>
-								<li><a>2</a></li>
-								<li><a>3</a></li>
-								<li><a>4</a></li>
-								<li><a><i class="fa fa-angle-right"></i></a></li>
 							</ul>
 						</div>
 						<!-- /store bottom filter -->
@@ -470,41 +466,41 @@
 		</div>
 		<!-- /SECTION -->
 
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-<%--							<ul class="newsletter-follow">--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-facebook"></i></a>--%>
-<%--								</li>--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-twitter"></i></a>--%>
-<%--								</li>--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-instagram"></i></a>--%>
-<%--								</li>--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-pinterest"></i></a>--%>
-<%--								</li>--%>
-<%--							</ul>--%>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
+<%--		<!-- NEWSLETTER -->--%>
+<%--		<div id="newsletter" class="section">--%>
+<%--			<!-- container -->--%>
+<%--			<div class="container">--%>
+<%--				<!-- row -->--%>
+<%--				<div class="row">--%>
+<%--					<div class="col-md-12">--%>
+<%--						<div class="newsletter">--%>
+<%--							<p>Sign Up for the <strong>NEWSLETTER</strong></p>--%>
+<%--							<form>--%>
+<%--								<input class="input" type="email" placeholder="Enter Your Email">--%>
+<%--								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>--%>
+<%--							</form>--%>
+<%--&lt;%&ndash;							<ul class="newsletter-follow">&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-facebook"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-twitter"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-instagram"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-pinterest"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;							</ul>&ndash;%&gt;--%>
+<%--						</div>--%>
+<%--					</div>--%>
+<%--				</div>--%>
+<%--				<!-- /row -->--%>
+<%--			</div>--%>
+<%--			<!-- /container -->--%>
+<%--		</div>--%>
+<%--		<!-- /NEWSLETTER -->--%>
 
 		<!-- FOOTER -->
 		<footer id="footer">
