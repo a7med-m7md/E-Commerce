@@ -38,7 +38,7 @@ export function updateCart() {
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
         userId.forEach((product, index) => {
-            $.get(`http://localhost:8081/store/laptop?productId=${product.productId}`, response => {
+            $.get(`http://localhost:9090/store/laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
@@ -50,7 +50,7 @@ export function updateCart() {
                     src: `data:image/png;base64,${image}`,
                     alt: ""
                 })));
-                $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:8081/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
+                $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:9090/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
                 // todo add delete functionality
                 $newProduct.append($("<button>", {class: "delete"}).append($("<i>", {class: "fa fa-close"})));
 
