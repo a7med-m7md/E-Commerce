@@ -8,10 +8,10 @@ https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <properties>
-            <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />-->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/laphupdb"/>
+<!--        <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />-->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/laphup"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="123456789"/>
+            <property name="jakarta.persistence.jdbc.password" value="1234"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
         </properties>
     </persistence-unit>
