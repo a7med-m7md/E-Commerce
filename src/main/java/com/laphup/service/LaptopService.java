@@ -35,6 +35,12 @@ public class LaptopService {
         laptopRepoImp.saveImages(laptopImage);
     }
 
+
+    public  void updateLaptop(Laptop laptop){
+        laptopRepoImp.save(laptop);
+    }
+
+
     public LaptopDTO getLaptop (UUID uuid){
         Laptop laptop = laptopRepoImp.getById(uuid);
 
@@ -50,5 +56,9 @@ public class LaptopService {
 
     public Long getLaptopCount(){
         return laptopRepoImp.getLaptopCount();
+    }
+
+    public boolean removeLaptop(Laptop laptop) {
+        return laptopRepoImp.removeLaptop(laptop);
     }
 }

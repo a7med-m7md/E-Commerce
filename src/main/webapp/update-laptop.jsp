@@ -43,7 +43,7 @@
 						<h6 class="m-0">Update Laptop</h6>
 					</div>
 					<div class='card-body p-3'>
-						<form method="post" action="addLaptop" enctype="multipart/form-data">
+						<form method="post" action="updateProduct" >
 							<input name="uuid" style="visibility: hidden" value="<c:out value="${item.uuid}" />">
 							<div class="form-group">
 								<label for="laptop-name">Laptop Name</label>
@@ -61,7 +61,7 @@
 								<label for="laptop-quantity">Laptop Quantity</label>
 								<input type="number" min="1" class="form-control" id="laptop-quantity" placeholder="Enter Laptop Quantity" name="laptop-quantity" value="<c:out value="${item.quantities}"/>" >
 							</div>
-							<p style="visibility: hidden" id="laptop-category"><c:out value="${item.laptopCategory}" /></p>
+							<input style="visibility: hidden" id="laptop-category" name="category" value="<c:out value="${item.laptopCategory}"/>" />
 <%--							<div class="form-group">--%>
 <%--								<label for="laptop-photo">Laptop Photo</label>--%>
 <%--								<input type="file" class="form-control-file" id="laptop-photo" name="product-image">--%>

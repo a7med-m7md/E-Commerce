@@ -92,6 +92,30 @@
 						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
 						<c:if test="${userRole == 'ADMIN'}">
 							<button class="btn btn-warning"><a id="updateBTN" href="updateProduct?uuid=${laptop.uuid}">Update product</a></button>
+							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Delete Item</button>
+
+							<!-- Confirm Delete Modal -->
+							<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											Are you sure you want to delete this item?
+										</div>
+<%--										<c:set var="currentproduct" value="${param.uuid}"/>--%>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-danger" id="confirmDeleteButton"><a id="confirmDeleteButtonAnch">Delete</a></button>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</c:if>
 					</div>
 					<!-- Product tab -->
@@ -309,6 +333,11 @@
 
 		<!-- jQuery Plugins -->
 		<script type="module" src="js/product.js"></script>
+		<script>
+			const urlParams = new URLSearchParams(window.location.search);
+			const id = urlParams.get('uuidProduct');
+			document.getElementById("confirmDeleteButtonAnch").href = `removeProduct?uuid=${id}`
+		</script>
 
 	</body>
 </html>
