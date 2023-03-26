@@ -1,5 +1,8 @@
 // assume productIds is an array of product IDs saved in localStorage
 // loop through each product ID and make an AJAX GET request to retrieve product information
+import {PORT} from "./configuration.js";
+
+
 $(document).ready(function () {
     updateCart();
     $('#logout-btn').click(async function (){
@@ -38,7 +41,7 @@ export function updateCart() {
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
         userId.forEach((product, index) => {
-            $.get(`http://localhost:9090/store/laptop?productId=${product.productId}`, response => {
+            $.get(`http://localhost:${PORT}/store/laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
@@ -50,7 +53,7 @@ export function updateCart() {
                     src: `data:image/png;base64,${image}`,
                     alt: ""
                 })));
-                $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:9090/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
+                $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:${PORT}/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
                 // todo add delete functionality
                 $newProduct.append($("<button>", {class: "delete"}).append($("<i>", {class: "fa fa-close"})));
 

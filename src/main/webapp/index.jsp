@@ -35,6 +35,7 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	</head>
 	<body>
 
