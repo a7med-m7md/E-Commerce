@@ -4,6 +4,8 @@ import com.laphup.dtos.LaptopDTO;
 import com.laphup.dtos.OrderDTO;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.Order;
+import com.laphup.persistence.entities.OrderDetails;
+import com.laphup.persistence.repository.OrderdetailsRepo;
 import com.laphup.persistence.repositoryImp.LaptopRepoImp;
 import com.laphup.persistence.repositoryImp.OrderRepo;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,22 +16,27 @@ public class OrderServices {
     private LaptopRepoImp laptopRepoImp;
     private OrderRepo orderRepo;
 
+    private OrderdetailsRepo orderdetailsRepo;
+
     public OrderServices(HttpServletRequest request) {
 
         laptopRepoImp = new LaptopRepoImp(request);
         orderRepo = new OrderRepo(request);
+        orderdetailsRepo = new OrderdetailsRepo(request);
     }
 
-    public boolean updateLaptops(LaptopDTO laptopDTO) {
-        Laptop laptop = modelMapper.map(laptopDTO, Laptop.class);
-        if (laptopRepoImp.updateLaptop(laptop))
+    public boolean updateLaptops(Laptop laptopEntity) {
+        if (laptopRepoImp.updateLaptop(laptopEntity))
             return true;
         return false;
     }
 
-    public void checkOut(OrderDTO orderDTO) {
-        Order order = modelMapper.map(orderDTO,Order.class);
-        orderRepo.checkOut(order);
+    public void checkOut(Order orderEntity) {
+        orderRepo.checkOut(orderEntity);
+    }
+
+    public void saveOrderDetails(OrderDetails orderDetails) {
+        orderdetailsRepo.saveOrderDetails(orderDetails);
     }
 
 }
