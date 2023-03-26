@@ -1,5 +1,4 @@
 import {DOMINO, PORT} from "./configuration.js";
-
 $(document).ready(function () {
     //Get all categories in db
     getCategories();
