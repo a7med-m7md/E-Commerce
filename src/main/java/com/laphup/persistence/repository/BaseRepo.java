@@ -75,6 +75,7 @@ public class BaseRepo<Table,ID> {
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
         }
     }
 }

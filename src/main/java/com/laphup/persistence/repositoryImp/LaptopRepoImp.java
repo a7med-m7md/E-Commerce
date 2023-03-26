@@ -85,7 +85,7 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
 
     public void saveImages(LaptopImage laptopImage) {
         BaseRepo<LaptopImage, UUID> laptopImageUUIDBaseDao = new BaseRepo<>(request);
-        laptopImageUUIDBaseDao.save(laptopImage);
+        laptopImageUUIDBaseDao.merge(laptopImage);
     }
 
     public LaptopDTO getLaptopByName(UUID uuid) {
@@ -113,6 +113,11 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
 
         Long count = entityManager.createQuery(query_Laptop).getSingleResult();
         return count;
+    }
+
+    public boolean removeLaptop(Laptop laptop){
+        delete(laptop);
+        return true;
     }
 }
 

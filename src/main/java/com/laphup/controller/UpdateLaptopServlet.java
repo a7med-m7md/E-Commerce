@@ -2,6 +2,7 @@ package com.laphup.controller;
 
 import com.laphup.controller.utility.JSPages;
 import com.laphup.dtos.LaptopDTO;
+import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.service.CategoryService;
 import com.laphup.service.LaptopService;
@@ -31,35 +32,38 @@ public class UpdateLaptopServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uuid = getPartAsString(request.getPart("uuid"));
-        String laptopName = getPartAsString(request.getPart("laptop-name"));
-        Double laptopPrice = Double.parseDouble(getPartAsString(request.getPart("laptop-price")));
-        String laptopDescription = getPartAsString(request.getPart("laptop-description"));
-        Integer laptopQuantity = Integer.parseInt(getPartAsString(request.getPart("laptop-quantity")));
-        String laptopCategory = getPartAsString(request.getPart("category"));
+        String uuid = request.getParameter("uuid");
+        String laptopName = request.getParameter("laptop-name");
+        Double laptopPrice = Double.parseDouble(request.getParameter("laptop-price"));
+        String laptopDescription = request.getParameter("laptop-description");
+        Integer laptopQuantity = Integer.parseInt(request.getParameter("laptop-quantity"));
+        String laptopCategory = request.getParameter("category");
+
+        System.out.println("Category: " + laptopCategory);
+
 
         LaptopService laptopService = new LaptopService(request);
         CategoryService categoryService = new CategoryService(request);
 
-        LaptopCategory category = categoryService.getCategoryName(laptopName);
+        LaptopCategory category = categoryService.getCategoryName(laptopCategory);
 
-        LaptopDTO laptop = laptopService.getLaptop(UUID.fromString(uuid));
+        System.out.println("Res Cat: " + category.getCategoryName());
+
+        Laptop laptop = laptopService.getNLaptop(UUID.fromString(uuid));
+
 
         laptop.setName(laptopName);
         laptop.setPrice(laptopPrice);
         laptop.setDescription(laptopDescription);
         laptop.setQuantities(laptopQuantity);
-//        laptop.setLaptopCategory();
+        laptop.setLaptopCategory(category);
 
+
+        laptopService.updateLaptop(laptop);
+
+        String referrer = request.getHeader("referer");
+        response.sendRedirect(referrer);
 
     }
 
-
-    private String getPartAsString(Part part) {
-        try (BufferedReader val = new BufferedReader(new InputStreamReader(part.getInputStream()))) {
-            return val.readLine();
-        } catch (IOException ex) {
-        }
-        return null;
-    }
 }
