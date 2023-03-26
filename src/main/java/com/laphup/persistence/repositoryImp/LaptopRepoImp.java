@@ -7,7 +7,6 @@ import com.laphup.persistence.repository.BaseRepo;
 import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.enums.SortBy;
-import com.mysql.cj.log.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.*;
@@ -98,6 +97,14 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         return laptopDTOS;
     }
 
+    public boolean updateLaptop(Laptop laptop) {
+        String queryString = "UPDATE Laptop SET quantities = quantities - " + laptop.getQuantities() + " WHERE uuidLaptop =  " + laptop.getUuidLaptop();
+        Query q = entityManager.createQuery(queryString);
+        int updateCount = q.executeUpdate();
+        if (updateCount != 0)
+            return true;
+        return false;
+    }
     public Long getLaptopCount(){
         //Create CriteriaQuery and root table (laptop)
         CriteriaQuery<Long> query_Laptop = criteriaBuilder.createQuery(Long.class);
