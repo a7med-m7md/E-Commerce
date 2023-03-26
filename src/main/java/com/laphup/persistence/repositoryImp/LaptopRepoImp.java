@@ -92,5 +92,14 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         LaptopDTO laptopDTOS = modelMapper.map(laptops, LaptopDTO.class);
         return laptopDTOS;
     }
+
+    public boolean updateLaptop(Laptop laptop) {
+        String queryString = "UPDATE Laptop SET quantities = quantities - " + laptop.getQuantities() + " WHERE uuidLaptop =  " + laptop.getUuidLaptop();
+        Query q = entityManager.createQuery(queryString);
+        int updateCount = q.executeUpdate();
+        if (updateCount != 0)
+            return true;
+        return false;
+    }
 }
 
