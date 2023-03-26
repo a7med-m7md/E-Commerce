@@ -1,6 +1,7 @@
 package com.laphup.persistence.entities;
 
 import com.laphup.util.enums.Rate;
+import jakarta.enterprise.inject.Default;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class Laptop {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuidLaptop;
-    @OneToMany(mappedBy = "laptop", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "laptop", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<LaptopImage> laptopImage = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "laptopCategoryUuid")
@@ -25,7 +26,7 @@ public class Laptop {
     private Set<OrderDetails> orderDetails;
     private String name;
     private double price;
-    private Rate rate;
+    private Rate rate = Rate.FIVE;
     private int quantities;
     private String description;
 }

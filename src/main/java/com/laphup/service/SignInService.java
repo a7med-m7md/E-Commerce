@@ -26,11 +26,14 @@ public class SignInService {
     public Optional<UserDto> logInto(LoginDTO loginDTO) {
         LoginEntity userEntity = modelMapper.map(loginDTO, LoginEntity.class);
         Optional<User> user = userDao.getByEmail(userEntity.geteMail());
-        UserDto userDto = modelMapper.map(user, UserDto.class);
-        if (Optional.of(userDto).isPresent())
+        if (user.isPresent()) {
+            UserDto userDto = modelMapper.map(user.get(), UserDto.class);
             return Optional.of(userDto);
-        return Optional.empty();
+        } else {
+            return Optional.empty();
+        }
     }
+
 
 }
 

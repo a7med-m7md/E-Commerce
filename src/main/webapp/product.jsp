@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="u" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -37,6 +40,7 @@
 
     </head>
 	<body>
+
 	<%@ include file="WEB-INF/header.jsp" %>
 
 		<!-- NAVIGATION -->
@@ -47,8 +51,8 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.jsp">Home</a></li>
-						<li><a href="store.jsp">All products</a></li>
+						<li><a href="home">Home</a></li>
+						<li><a href="store">All products</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -66,8 +70,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="index.jsp">Home</a></li>
-							<li><a href="store.jsp">All Products</a></li>
+							<li><a href="home">Home</a></li>
+							<li><a href="store">All Products</a></li>
 							<li class="active">My Product</li>
 						</ul>
 					</div>
@@ -85,10 +89,35 @@
 				<!-- row -->
 				<div class="row">
 					<div id="myProduct">
+						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
+						<c:if test="${userRole == 'ADMIN'}">
+							<button class="btn btn-warning"><a id="updateBTN" href="updateProduct?uuid=${laptop.uuid}">Update product</a></button>
+							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Delete Item</button>
 
+							<!-- Confirm Delete Modal -->
+							<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											Are you sure you want to delete this item?
+										</div>
+<%--										<c:set var="currentproduct" value="${param.uuid}"/>--%>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-danger" id="confirmDeleteButton"><a id="confirmDeleteButtonAnch">Delete</a></button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</c:if>
 					</div>
-
-
 					<!-- Product tab -->
 					<div class="col-md-12">
 						<div id="product-tab">
@@ -260,41 +289,41 @@
 		</div>
 		<!-- /Section -->
 
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-<%--							<ul class="newsletter-follow">--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-facebook"></i></a>--%>
-<%--								</li>--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-twitter"></i></a>--%>
-<%--								</li>--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-instagram"></i></a>--%>
-<%--								</li>--%>
-<%--								<li>--%>
-<%--									<a href="#"><i class="fa fa-pinterest"></i></a>--%>
-<%--								</li>--%>
-<%--							</ul>--%>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
+<%--		<!-- NEWSLETTER -->--%>
+<%--		<div id="newsletter" class="section">--%>
+<%--			<!-- container -->--%>
+<%--			<div class="container">--%>
+<%--				<!-- row -->--%>
+<%--				<div class="row">--%>
+<%--					<div class="col-md-12">--%>
+<%--						<div class="newsletter">--%>
+<%--							<p>Sign Up for the <strong>NEWSLETTER</strong></p>--%>
+<%--							<form>--%>
+<%--								<input class="input" type="email" placeholder="Enter Your Email">--%>
+<%--								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>--%>
+<%--							</form>--%>
+<%--&lt;%&ndash;							<ul class="newsletter-follow">&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-facebook"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-twitter"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-instagram"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								<li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;									<a href="#"><i class="fa fa-pinterest"></i></a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;								</li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;							</ul>&ndash;%&gt;--%>
+<%--						</div>--%>
+<%--					</div>--%>
+<%--				</div>--%>
+<%--				<!-- /row -->--%>
+<%--			</div>--%>
+<%--			<!-- /container -->--%>
+<%--		</div>--%>
+<%--		<!-- /NEWSLETTER -->--%>
 
 		<!-- FOOTER -->
 		<footer id="footer">
@@ -304,5 +333,11 @@
 
 		<!-- jQuery Plugins -->
 		<script type="module" src="js/product.js"></script>
+		<script>
+			const urlParams = new URLSearchParams(window.location.search);
+			const id = urlParams.get('uuidProduct');
+			document.getElementById("confirmDeleteButtonAnch").href = `removeProduct?uuid=${id}`
+		</script>
+
 	</body>
 </html>

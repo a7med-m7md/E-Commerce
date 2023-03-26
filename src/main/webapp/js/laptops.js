@@ -1,43 +1,76 @@
 import {DOMINO, PORT} from "./configuration.js";
-
 $(document).ready(function () {
-    let laptops = getLaptops(1, 10, 'hp', 'PRICE', 0, 10000);
+    //Get all categories in db
+    getCategories();
+
+    let container1 = $(".products-slick")[0];
+    getLaptops(container1, 1, 10, '', 'PRICE', 0, 10000);
+
+    let container2 = $(".products-slick")[1];
+    getLaptops(container2, 1, 10, '', 'RATE', 0, 10000);
 });
 
 
-function addToScrollbar(laptops) {
+function getCategories(){
+    $.ajax({
+        url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
+        type: "GET", // specify the type of request (GET in this case)
+        success: function (data) { // define a callback function to handle the response
+            addToCategory(data);
+        }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
+            console.log("Request failed. Status code: " + jqXHR.status);
+        },
+        async: false
+    });
+}
+function addToCategory(categories){
+    let jsonCategories = $.parseJSON(categories);
+
+    let category = $("#categories")[0];
+    jsonCategories.forEach((item,index) => {
+        if(index < 3){
+            category.innerHTML += `
+               <!-- shop -->
+                <div class="col-md-4 col-xs-6">
+                    <div class="shop">
+                        <div class="shop-img">
+                            <img src="./img/shop01.png" alt="">
+                        </div>
+                        <div class="shop-body">
+                            <h3>${item.categoryName}<br>Collection</h3>
+                            <a href="store?category=${item.categoryName}" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /shop -->
+            `;
+        }
+    });
+}
+function addToScrollbar(container, laptops) {
     var jsonLaptops = $.parseJSON(laptops);
-    let container = $(".products-slick")[1];
     $.each(jsonLaptops, function (index, labtop) {
-        //var labtop = $.parseJSON(value);
-        // const blob = new Blob(labtop.imagByteList[0], {type: "image/png"});
-        // const url = URL.createObjectURL(blob);
         let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
         let newProduct = `
             <div class="product">
                 <input type="hidden" value="${labtop.uuid}">
                 <div class="product-img">
-                    <img src="data:image/png;base64,${image}" 
+                    <img src="data:image/png;base64,${image}"
                             width="263" 
                             height="263"
                             alt="">
                 </div>
                 <div class="product-body">
                     <p class="product-category">${labtop.laptopCategory}</p>
-                    <h3 class="product-name"><a href="#">${labtop.name}</a></h3>
-                    <h4 class="product-price">$${labtop.price} <del class="product-old-price">$990.00</del></h4>
+                    <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}">${labtop.name}</a></h3>
+                    <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
                     <div class="product-rating">
                     `;
         for(var i=0 ; i< labtop.rate ; i++){
-            newProduct += '<i className="fa fa-star"></i>';
+            newProduct += '<i class="fa fa-star"></i>';
         }
 
         newProduct += `
-                    </div>
-                    <div class="product-btns">
-                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                     </div>
                 </div>
                 <div class="add-to-cart">
@@ -47,23 +80,9 @@ function addToScrollbar(laptops) {
             `;
         container.innerHTML += newProduct;
     });
-    // definition
-    function loadScript(scriptUrl) {
-        const script = document.createElement('script');
-        script.src = scriptUrl;
-        document.body.appendChild(script);
 
-        return new Promise((res, rej) => {
-            script.onload = function() {
-                res();
-            }
-            script.onerror = function () {
-                rej();
-            }
-        });
-    }
 
-// use
+    // use
     loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
@@ -108,7 +127,7 @@ function addToScrollbar(laptops) {
         });
 }
 
-function getLaptops(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
+function getLaptops(container, pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
@@ -120,9 +139,25 @@ function getLaptops(pageNumber, count, laptopCategory, sortedBy, minPrice, maxPr
             minPrice: minPrice,
             maxPrice: maxPrice
         }, success: function (data) { // define a callback function to handle the response
-            addToScrollbar(data);
+            addToScrollbar(container, data);
         }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
             console.log("Request failed. Status code: " + jqXHR.status);
+        },
+        async : false
+    });
+}
+// definition
+function loadScript(scriptUrl) {
+    const script = document.createElement('script');
+    script.src = scriptUrl;
+    document.body.appendChild(script);
+
+    return new Promise((res, rej) => {
+        script.onload = function() {
+            res();
+        }
+        script.onerror = function () {
+            rej();
         }
     });
 }

@@ -14,4 +14,12 @@ import java.util.UUID;
 public class OrderDetailsId implements Serializable {
     private UUID orderUuid;
     private UUID uuidLaptop;
+
+    public OrderDetailsId() {
+    }
+
+    public OrderDetailsId(UUID orderUuid, UUID uuidLaptop) {
+        this.orderUuid = orderUuid;
+        this.uuidLaptop = uuidLaptop;
+    }
 }

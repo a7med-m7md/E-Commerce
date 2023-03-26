@@ -37,13 +37,15 @@ public class LoginServlet extends HttpServlet {
         }
 
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/signIn.html");
-        requestDispatcher.include(request, response);
+        JSPages.SIGN_IN.forward(request, response);
+
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/signIn.html");
+//        requestDispatcher.include(request, response);
     }
 
     private boolean loggedInWithCookie(HttpServletRequest request) {
         Optional<Cookie> userCookie = CookieUtility.getCookie(request.getCookies(), "user_remember_cookie");
-        if(userCookie.isPresent()){
+        if(userCookie.isPresent() && !userCookie.isEmpty()){
             String userCookieVal = userCookie.get().getValue();
             String userEmailVal = userCookieVal.split("=")[0];
             String userPasswordVal = userCookieVal.split("=")[1];
@@ -76,17 +78,22 @@ public class LoginServlet extends HttpServlet {
         Optional<UserDto> user = signInService.logInto(loginDTO);
         // ==
         if (!user.isEmpty() && userFounded(user, loginDTO)) {
-                System.out.println("Login Success");
-                HttpSession session = request.getSession();
+            System.out.println("Login Success");
+            HttpSession session = request.getSession();
 //                String fullName = user.get().getfName() + " " + user.get().getlName();
-                session.setAttribute("userInfo", user.get());
-                SaveSession(loginDTO, request, response);
-                response.sendRedirect("home");
-                return;
-            }
+            session.setAttribute("userInfo", user.get());
+            SaveSession(loginDTO, request, response);
+            response.sendRedirect("home");
+            return;
+        }
 
-            System.out.println("Login failed");
-            JSPages.SIGN_IN.forward(request, response);
+//        request.setAttribute("invalidCredentials", true);
+
+        System.out.println("Login failed");
+//        response.sendRedirect("signin");
+//        request.getRequestDispatcher("signin?invalidCredentials=true").forward(request, response);
+        response.sendRedirect("signin?invalidCredentials=true");
+
     }
 
     public void SaveSession(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

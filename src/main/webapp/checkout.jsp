@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -92,32 +93,33 @@
 					<div class="col-md-7">
 						<!-- Billing Details -->
 						<div class="billing-details">
+						<c:set var="userInfo" value="${sessionScope.userInfo}" />
 							<div class="section-title">
 								<h3 class="title">Billing address</h3>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
+								<input class="input" type="text" name="first-name" placeholder="First Name" value =  <c:out value="${userInfo.fName}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
+								<input class="input" type="text" name="last-name" placeholder="Last Name" value = <c:out value="${userInfo.lName}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
+								<input class="input" type="email" name="email" placeholder="Email" value = <c:out value="${userInfo.eMail}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Address">
+								<input class="input" type="text" name="address" placeholder="Address"value =  <c:out value="${userInfo.address}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
+								<input class="input" type="text" name="city" placeholder="Gender" value = <c:out value="${userInfo.gender}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
+								<input class="input" type="text" name="country" placeholder="job" value =<c:out value="${userInfo.job}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+								<input class="input" type="text" name="zip-code" placeholder="Credit Limit" value=<c:out value="${userInfo.creditLimit}" />>
 							</div>
 							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
+								<input class="input" type="tel" name="tel" placeholder="Birth Date" value=<c:out value="${userInfo.birthDay}" />>
 							</div>
 							<div class="form-group">
 								<div class="input-checkbox">
@@ -209,7 +211,7 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div id="totalPrice"><strong class="order-total">$2940.00</strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -244,14 +246,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="input-checkbox">
+						<div class="input-checkbox" >
 							<input type="checkbox" id="terms">
 							<label for="terms">
 								<span></span>
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
+						<a href="#" class="primary-btn order-submit" id="placeOrder">Place order</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -400,6 +402,7 @@
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
-
+		<script type="module"  src="js/checkout.js"></script>
 	</body>
+
 </html>

@@ -1,8 +1,13 @@
 import {DOMINO, PORT} from "./configuration.js";
 
 $(document).ready(function () {
+    // Get the URL search parameters
+    var searchParams = new URLSearchParams(window.location.search);
+    // Get the value of the "myParam" parameter
+    var myParamValue = searchParams.get("uuidProduct");
+
     //Get product data
-    getMyProduct("db950c3d-4f7c-4d5d-84d4-0fa520db7785");
+    getMyProduct(myParamValue);
 
     // definition
     function loadScript(scriptUrl) {
@@ -65,7 +70,7 @@ $(document).ready(function () {
         });
 });
 
-function getMyProduct(productId){
+export function getMyProduct(productId){
     $.ajax({
         url: `http://localhost:${PORT}/${DOMINO}/laptop`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
@@ -140,7 +145,10 @@ function addToPage(jsonLaptop){
                 <div>
                     <div class="product-rating">
     `;
-
+    let update = document.getElementById("updateBTN");
+    if(update){
+        update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
+    }
     for(let i = 0 ; i<laptop.rate ; i++){
         newProduct += `
             <i class="fa fa-star"></i>
@@ -148,6 +156,7 @@ function addToPage(jsonLaptop){
     }
 
     newProduct += `
+                
                 <div>
                     <h3 class="product-price">$${laptop.price} <del class="product-old-price">$${laptop.price}/del></h3>
                     <span class="product-available">In Stock</span>
@@ -162,12 +171,12 @@ function addToPage(jsonLaptop){
                                 <span class="qty-down">-</span>
                         </div>
                     </div>
-                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</button>
                 </div>
         
                 <ul class="product-links">
                     <li>Category:</li>
-                    <li><a href="#">${laptop.laptopCategory}</a></li>
+                    <li><a href="store?category=${laptop.laptopCategory}">${laptop.laptopCategory}</a></li>
                 </ul>        
             </div>
         </div>

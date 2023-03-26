@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!-- HEADER -->
 
-		<header>
+		<header	>
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
@@ -15,9 +15,11 @@
 						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
 <%--						<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 						<c:set var="userInfo" value="${sessionScope.userInfo}" />
+							<p hidden="hidden" id="userUUID"><c:out value="${userInfo.uuid}"/></p>
 						<c:if test="${userRole == 'ADMIN'}">
 <%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
+							<li><a href="users"><i class="">Users</i></a></li>
 						</c:if>
 						<c:if test="${userRole == 'USER'}">
 						<li><a href="#"><i class="fa fa-dollar"></i> <c:out value="${userInfo.creditLimit}" /> EG</a></li>
@@ -51,7 +53,7 @@
 									<hr style="visibility: hidden; height: 10px; margin: 0px">
 									<a class="dropdown-item drop-menu-hov" href="home" style="">Order History</a><br>
 									<hr style="margin: 7.5px">
-									<a class="dropdown-item drop-menu-hov" href="logout" style="">Logout</a>
+									<button id="logout-btn" style="background-color: transparent;border: none;outline: none;" style="font-weight: bold">Logout</button>
 								</div>
 								</div>
 							</li>
@@ -59,7 +61,7 @@
 
 
 						<c:if test="${empty userInfo}">
-							<li><a href="signIn.html"><i class="fa fa-user-o"></i> Sign in</a></li>
+							<li><a href="signin"><i class="fa fa-user-o"></i> Sign in</a></li>
 							<li><a href="signup"><i class="fa fa-user-o"></i> Sign up</a></li>
 						</c:if>
 
@@ -115,42 +117,42 @@
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a class="dropdown-toggle" id="Card" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty" id="items-num">0</div>
 									</a>
 									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="../img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+										<div class="cart-list" id="cart-container">
+<%--											<div class="product-widget">--%>
+<%--												<div class="product-img">--%>
+<%--													<img src="../img/product01.png" alt="">--%>
+<%--												</div>--%>
+<%--												<div class="product-body">--%>
+<%--													<h3 class="product-name"><a href="#">product name goes here</a></h3>--%>
+<%--													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>--%>
+<%--												</div>--%>
+<%--												<button class="delete"><i class="fa fa-close"></i></button>--%>
+<%--											</div>--%>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="../img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+<%--											<div class="product-widget">--%>
+<%--												<div class="product-img">--%>
+<%--													<img src="../img/product02.png" alt="">--%>
+<%--												</div>--%>
+<%--												<div class="product-body">--%>
+<%--													<h3 class="product-name"><a href="#">product name goes here</a></h3>--%>
+<%--													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>--%>
+<%--												</div>--%>
+<%--												<button class="delete"><i class="fa fa-close"></i></button>--%>
+<%--											</div>--%>
 										</div>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small id="item-number-sum"></small>
+											<h5 id="item-total-price"></h5>
 										</div>
 										<div class="cart-btns">
 											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="checkout.jsp">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -175,3 +177,5 @@
 			<!-- /MAIN HEADER -->
 		</header>
 		<!-- /HEADER -->
+
+	<script type="module" src="js/cart-widget.js"></script>

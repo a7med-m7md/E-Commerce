@@ -20,7 +20,7 @@ public class LaptopPaginationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         int pageNumber = Integer.parseInt(req.getParameter("pageNumber"));
         int count = Integer.parseInt(req.getParameter("count"));
-        String laptopCategory = req.getParameter("laptopCategory");
+        String[] laptopCategory = req.getParameter("laptopCategory").split(",");
         SortBy sortBy = SortBy.valueOf(req.getParameter("sortedBy"));
         double minPrice = Double.parseDouble(req.getParameter("minPrice"));
         double maxPrice = Double.parseDouble(req.getParameter("maxPrice"));

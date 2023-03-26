@@ -47,6 +47,22 @@ public class BaseRepo<Table,ID> {
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    public Table merge(Table obj) {
+        System.out.println("in loin333333333");
+        EntityTransaction transaction = entityManager.getTransaction();
+        System.out.println("in loin333333333");
+        try {
+            transaction.begin();
+            entityManager.merge(obj);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
         }
         return obj;
     }
@@ -59,6 +75,7 @@ public class BaseRepo<Table,ID> {
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
         }
     }
 }
