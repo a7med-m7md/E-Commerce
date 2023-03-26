@@ -5,8 +5,6 @@ import com.laphup.persistence.entities.Laptop;
 import com.laphup.util.ImageConverter;
 import org.modelmapper.ModelMapper;
 
-import java.io.IOException;
-
 public class LaptopMapper {
 
     private ModelMapper modelMapper;
@@ -30,12 +28,7 @@ public class LaptopMapper {
 
         //Set Image list
         laptop.getLaptopImage().forEach(x -> {
-            try {
-                byte[] bytes = imageConverter.converToByteArray(x.getImagPath());
-                laptopDTO.getImagByteList().add(bytes);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            laptopDTO.getImagList().add(x.getImagPath());
         });
 
         return laptopDTO;

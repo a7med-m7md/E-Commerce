@@ -45,7 +45,7 @@ export function updateCart() {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
-                let image = btoa(String.fromCharCode.apply(null, new Uint8Array(currentProduct.imagByteList[0])));
+                let image = btoa(String.fromCharCode.apply(null, new Uint8Array(currentProduct.imagList[0])));
 
                 // create a new product widget
                 var $newProduct = $("<div>", {class: "product-widget"});
