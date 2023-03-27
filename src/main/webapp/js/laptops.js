@@ -4,10 +4,10 @@ $(document).ready(function () {
     getCategories();
 
     let container1 = $(".products-slick")[0];
-    getLaptops(container1, 1, 10, '', 'PRICE', 0, 10000);
+    getLaptops(container1, 1, 10, '', 'PRICE', 0, 1000000);
 
     let container2 = $(".products-slick")[1];
-    getLaptops(container2, 1, 10, '', 'RATE', 0, 10000);
+    getLaptops(container2, 1, 10, '', 'RATE', 0, 1000000);
 });
 
 
@@ -50,12 +50,11 @@ function addToCategory(categories){
 function addToScrollbar(container, laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     $.each(jsonLaptops, function (index, labtop) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
         let newProduct = `
             <div class="product">
                 <input type="hidden" value="${labtop.uuid}">
                 <div class="product-img">
-                    <img src="data:image/png;base64,${image}"
+                    <img src="${labtop.imagList[0]}"
                             width="263" 
                             height="263"
                             alt="">

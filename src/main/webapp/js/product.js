@@ -95,11 +95,10 @@ function addToPage(jsonLaptop){
             <div id="product-main-img">
     `;
 
-    $.each(laptop.imagByteList, function (index, bytes) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(bytes)));
+    $.each(laptop.imagList, function (index, bytes) {
         newProduct += `
                 <div class="product-preview">
-                    <img src="data:image/png;base64,${image}"
+                    <img src="${bytes}"
                      width="600" 
                      height="600"
                      alt="">
@@ -119,11 +118,10 @@ function addToPage(jsonLaptop){
             <div id="product-imgs">
     `;
 
-    $.each(laptop.imagByteList, function (index, bytes) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(bytes)));
+    $.each(laptop.imagList, function (index, bytes) {
         newProduct += `
                 <div class="product-preview">
-                    <img src="data:image/png;base64,${image}"
+                    <img src="${bytes}"
                      width="153" 
                      height="153"
                      alt="">

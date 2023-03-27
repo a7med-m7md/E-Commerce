@@ -23,11 +23,11 @@ $(document).ready(function () {
 
 function listProduct() {
     let container = $(".order-products")[0];
+    let userUUID = document.getElementById("userUUID").innerHTML;
     container.innerHTML = "";
-
+  
     let userUUID = document.getElementById("userUUID").innerHTML;
     var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
-    //    var jsonLaptops = $.parseJSON(localStorage.getItem("cart-e060af7d-1849-450d-942f-d1ddd338a98c"))
     $.each(jsonLaptops, function (index, labtop) {
         console.log(labtop);
         $.get("checkout?uuid=" + labtop.productId, function (data, status) {

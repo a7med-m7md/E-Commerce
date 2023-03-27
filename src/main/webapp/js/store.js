@@ -114,14 +114,13 @@ function addTopage(laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     let container = $("#products")[0];
     $.each(jsonLaptops, function (index, labtop) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
 
         let newProduct = `
                 <div class="col-md-4 col-xs-6">
                     <div class="product">
                         <input type="hidden" id="uuid" value="${labtop.uuid}">
                         <div class="product-img">
-                            <img id="productImage" src="data:image/png;base64,${image}" 
+                            <img id="productImage" src="${labtop.imagList[0]}" 
                                     width="263" 
                                     height="263"
                                     alt="">
