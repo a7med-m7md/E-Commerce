@@ -3,7 +3,7 @@
 import {DOMINO, PORT} from "./configuration.js";
 
 
-$(document).ready(async function () {
+$(document).ready(function () {
     updateCart();
     $('#logout-btn').click(async function (){
 
@@ -13,48 +13,13 @@ $(document).ready(async function () {
         if(storageDate){
             await $.post("logout", {
                 data: storageDate,
-                 contentType: "application/x-www-form-urlencoded"
+                contentType: "application/x-www-form-urlencoded"
             })
         }
 
-        await $.get("logout")
+        $.get("logout")
         location.reload()
     })
-
-    let email;
-    let pass;
-
-    console.log("CCCCC")
-    console.log(document.cookie)
-
-    if(!document.cookie.indexOf("loggedIn") != -1) {
-
-        let cookies = document.cookie.split(';') ;
-
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i].trim();
-            console.log("=== " + cookie + " ====")
-            if (cookie.startsWith('user_remember_cookie=')) {
-                let credentials = cookie.substring('user_remember_cookie='.length, cookie.length);
-                let values = credentials.split("=")
-                email = values[0];
-                pass = values[1];
-
-                await $.post("signin", {
-                    emailL: email,
-                    passwordL: pass
-                }, function (response) {
-                    location.reload()
-                })
-
-                document.cookie += ";loggedIn=true;";
-                console.log(username);
-                break;
-            }
-        }
-    }
-
-
 })
 
 export function updateCart() {
@@ -75,13 +40,13 @@ export function updateCart() {
         var totalSum = 0;
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
-        userId.forEach(async (product, index) => {
-            await $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
+        userId.forEach((product, index) => {
+            $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
-                let image = currentProduct.imagList[0];
-
+                console.log(currentProduct)
+                let image = currentProduct.imagList[0]
                 // create a new product widget
                 var $newProduct = $("<div>", {class: "product-widget"});
                 $newProduct.append($("<div>", {class: "product-img"}).append($("<img>", {
