@@ -3,7 +3,7 @@
 import {DOMINO, PORT} from "./configuration.js";
 
 
-$(document).ready(function () {
+$(document).ready(async function () {
     updateCart();
     $('#logout-btn').click(async function (){
 
@@ -17,9 +17,44 @@ $(document).ready(function () {
             })
         }
 
-        $.get("logout")
+        await $.get("logout")
         location.reload()
     })
+
+    let email;
+    let pass;
+
+    console.log("CCCCC")
+    console.log(document.cookie)
+
+    if(!document.cookie.indexOf("loggedIn") != -1) {
+
+        let cookies = document.cookie.split(';') ;
+
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            console.log("=== " + cookie + " ====")
+            if (cookie.startsWith('user_remember_cookie=')) {
+                let credentials = cookie.substring('user_remember_cookie='.length, cookie.length);
+                let values = credentials.split("=")
+                email = values[0];
+                pass = values[1];
+
+                await $.post("signin", {
+                    emailL: email,
+                    passwordL: pass
+                }, function (response) {
+                    location.reload()
+                })
+
+                document.cookie += ";loggedIn=true;";
+                console.log(username);
+                break;
+            }
+        }
+    }
+
+
 })
 
 export function updateCart() {
