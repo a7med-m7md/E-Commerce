@@ -1,12 +1,5 @@
 package com.laphup.dtos;
 
-import com.laphup.persistence.entities.LaptopCategory;
-import com.laphup.persistence.entities.LaptopImage;
-import com.laphup.persistence.entities.OrderDetails;
-import com.laphup.util.enums.Rate;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +11,7 @@ import java.util.UUID;
 @Setter
 public class LaptopDTO {
     private UUID uuid;
-    private Set<byte[]> imagByteList = new HashSet<>();
+    private Set<String> imagList = new HashSet<>();
     private String laptopCategory;
     private String name;
     private double price;
@@ -30,9 +23,9 @@ public class LaptopDTO {
 
     }
 
-    public LaptopDTO(UUID uuid, Set<byte[]> imagByteList, String laptopCategory, String name, double price, String rate, int quantities, String description) {
+    public LaptopDTO(UUID uuid, Set<String> imagList, String laptopCategory, String name, double price, String rate, int quantities, String description) {
         this.uuid = uuid;
-        this.imagByteList = imagByteList;
+        this.imagList = imagList;
         this.laptopCategory = laptopCategory;
         this.name = name;
         this.price = price;
@@ -49,12 +42,12 @@ public class LaptopDTO {
         this.uuid = uuid;
     }
 
-    public Set<byte[]> getImagByteList() {
-        return imagByteList;
+    public Set<String> getImagList() {
+        return imagList;
     }
 
-    public void setImagByteList(Set<byte[]> imagByteList) {
-        this.imagByteList = imagByteList;
+    public void setImagList(Set<String> imagList) {
+        this.imagList = imagList;
     }
 
     public String getLaptopCategory() {
