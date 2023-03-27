@@ -249,7 +249,8 @@ function addToCardInLocalStorge(labtop) {
 
 
 export class ShoppingCart {
-    constructor() {
+    constructor(userID) {
+        this.userID = userID;
         this.items = [];
         this.loadFromLocalStorage();
     }
@@ -259,11 +260,15 @@ export class ShoppingCart {
             (cartItem) => cartItem.productId === item.productId
         );
         if (existingItem) {
+            console.log("EXist")
             existingItem.quantity += item.quantity;
         } else {
+            console.log("Not exist")
             this.items.push(item);
         }
         this.saveToLocalStorage();
+        console.log(this.items)
+        console.log("added")
     }
 
 
@@ -286,16 +291,28 @@ export class ShoppingCart {
     }
 
     saveToLocalStorage() {
-        const userId = getUserId(); // get user ID from session or cookie
+        if(!this.userID)
+            var userId = getUserId(); // get user ID from session or cookie
+        else
+            var userId = this.userID
+        console.log("UUSER ID : " + userId)
         if (userId) {
+            console.log("SAVED")
             const key = `cart-${userId}`;
             const value = JSON.stringify(this.items);
             localStorage.setItem(key, value);
+            updateCart()
         }
     }
 
     loadFromLocalStorage() {
-        const userId = getUserId(); // get user ID from session or cookie
+
+        if(!this.userID)
+            var userId = getUserId(); // get user ID from session or cookie
+        else
+            var userId = this.userID
+
+        // const userId = getUserId(); // get user ID from session or cookie
         if (userId) {
             const key = `cart-${userId}`;
             const value = localStorage.getItem(key);
