@@ -1,4 +1,5 @@
 import {DOMINO, PORT} from "./configuration.js";
+import {ShoppingCart} from "./store.js";
 
 $(document).ready(function () {
     // Get the URL search parameters
@@ -162,14 +163,14 @@ function addToPage(jsonLaptop){
         
                 <div class="add-to-cart">
                     <div class="qty-label">
-                        Qty
+                        Quantity
                         <div class="input-number">
-                            <input type="number">
+                            <input type="number" id="qty-val" value="1" min="1"  required>
                                 <span class="qty-up">+</span>
                                 <span class="qty-down">-</span>
                         </div>
                     </div>
-                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</button>
+                    <button class="add-to-cart-btn" id="add-tocart-btn"><i class="fa fa-shopping-cart" ></i>add to cart</button>
                 </div>
         
                 <ul class="product-links">
@@ -188,4 +189,45 @@ function addToPage(jsonLaptop){
     desc.innerHTML += `
         <p>${laptop.description}</p>
     `;
+
+    document.getElementById("add-tocart-btn").addEventListener('click', function (){
+        let quantityVal = document.getElementById("qty-val").value;
+        if (quantityVal) {
+            let productId = laptop.uuid
+            let quantity = parseInt(document.getElementById("qty-val").value);
+            let item = {
+                productId,
+                quantity
+            }
+            console.log(item)
+            console.log("UUID : " + document.getElementById("userUUID").innerHTML)
+            let cart = new ShoppingCart(document.getElementById("userUUID").innerHTML);
+            cart.addItem(item)
+        }
+        else {
+            alert("Quantity must be specified")
+        }
+    })
+
+    document.querySelector(".qty-up").addEventListener('click', function (){
+        let quantity = document.getElementById("qty-val");
+        quantity.value = parseInt(quantity.value) + 1;
+    })
+    document.querySelector(".qty-down").addEventListener('click', function (){
+        let quantity = document.getElementById("qty-val").value;
+        quantity.value = parseInt(quantity.value) - 1;
+    })
+
+}
+
+
+addToPage()
+
+
+
+
+
+
+function addToCard(uuid){
+    console.log("Hello "+ uuid)
 }
