@@ -47,7 +47,7 @@ public class CheckOutServlet extends HttpServlet {
         laptops = AddToCardServlet.laptops;
 //        calculateCheckOut(laptops, req);
         System.out.println("Laptop Size" + laptops.size());
-        if (checkQuantities(laptops, req)) {
+        if (presistOrder(laptops, req)) {
             resp.getWriter().println(totalPrice);
         } else {
             resp.getWriter().println("Our Store Cant Fit Your Order");
@@ -61,8 +61,9 @@ public class CheckOutServlet extends HttpServlet {
 //        return totalPrice;
 //    }
 
-    public boolean checkQuantities(List<LaptopDTO> laptops, HttpServletRequest request) {
-         totalPrice = 0;
+    public boolean presistOrder(List<LaptopDTO> laptops, HttpServletRequest request) {
+        totalPrice = 0;
+
         OrderServices services = new OrderServices(request);
         HttpSession session = request.getSession();
         UserDto user = (UserDto) session.getAttribute("userInfo");
@@ -73,19 +74,49 @@ public class CheckOutServlet extends HttpServlet {
             totalPrice += laptopDTO.getPrice();
             map.put(laptopDTO.getUuid(), (j == null) ? 1 : j + 1);
         }
-        java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
-        order = new Order(userEntity, date, totalPrice);
-        for (Map.Entry<UUID, Integer> val : map.entrySet()) {
-            UUID uuidLaptop = val.getKey();
-            AddToCardService addToCardService = new AddToCardService(request);
-            Laptop laptopDTO = addToCardService.getLaptopByUuid2(uuidLaptop);
-            // if (!services.updateLaptops(laptopEntity)) {
-            OrderDetailsId orderDetailsId = new OrderDetailsId(order.getOrderUuid(), laptopDTO.getUuidLaptop());
-            OrderDetails orderDetails = new OrderDetails(orderDetailsId, order, laptopDTO, val.getValue());
+        if (checkQuantities(map, request)) {
+            java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+            order = new Order(userEntity, date, totalPrice);
+            for (Map.Entry<UUID, Integer> val : map.entrySet()) {
+                UUID uuidLaptop = val.getKey();
+                AddToCardService addToCardService = new AddToCardService(request);
+                Laptop laptopDTO = addToCardService.getLaptopByUuid2(uuidLaptop);
+                // if (!services.updateLaptops(laptopEntity)) {
+                OrderDetailsId orderDetailsId = new OrderDetailsId(order.getOrderUuid(), laptopDTO.getUuidLaptop());
+                OrderDetails orderDetails = new OrderDetails(orderDetailsId, order, laptopDTO, val.getValue());
 //            orderDetailsDTOSet.add(orderDetails);
-            services.saveOrderDetails(orderDetails);
+                services.saveOrderDetails(orderDetails);
+            }
+            services.checkOut(order);
+            return true;
         }
-        services.checkOut(order);
         return false;
     }
+
+    public boolean checkQuantities(Map<UUID, Integer> map, HttpServletRequest request) {
+        for (Map.Entry<UUID, Integer> val : map.entrySet()) {
+            AddToCardService addToCardService = new AddToCardService(request);
+            Laptop laptop = addToCardService.getLaptopByUuid2(val.getKey());
+            OrderServices services = new OrderServices(request);
+            System.out.println("Quantity before :" + laptop.getQuantities());
+            if (val.getValue()> laptop.getQuantities())
+                return false;
+            else {
+                laptop.setQuantities(laptop.getQuantities() - val.getValue());
+                Laptop laptop1 = services.updateLaptops(laptop);
+                Laptop laptoptes = addToCardService.getLaptopByUuid2(val.getKey());
+                System.out.println("Quantity After :" + laptoptes.getQuantities());
+                System.out.println("Quantity After :" + laptop1.getQuantities());
+                if (laptop1 != null) {
+                    System.out.println("Update Success");
+                    return true;
+                }
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+
 }

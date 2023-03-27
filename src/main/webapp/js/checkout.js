@@ -15,7 +15,7 @@ $(document).ready(function () {
             data: JSON.stringify(productList), //input data
             dataType: 'json',
             success: function (data) {
-                console.log("sucess");
+                console.log(data);
             }
         });
     });
@@ -25,6 +25,8 @@ function listProduct() {
     let container = $(".order-products")[0];
     let userUUID = document.getElementById("userUUID").innerHTML;
     container.innerHTML = "";
+  
+    let userUUID = document.getElementById("userUUID").innerHTML;
     var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
     $.each(jsonLaptops, function (index, labtop) {
         console.log(labtop);

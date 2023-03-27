@@ -25,10 +25,9 @@ public class OrderServices {
         orderdetailsRepo = new OrderdetailsRepo(request);
     }
 
-    public boolean updateLaptops(Laptop laptopEntity) {
-        if (laptopRepoImp.updateLaptop(laptopEntity))
-            return true;
-        return false;
+    public Laptop updateLaptops(Laptop laptopEntity) {
+        Laptop laptop = laptopRepoImp.updateLaptop(laptopEntity);
+        return laptop;
     }
 
     public void checkOut(Order orderEntity) {
