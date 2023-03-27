@@ -54,3 +54,11 @@ function addNewCategory(event) {
         $("#list-category-val").append(li);
     })
 }
+
+
+function showSpinner(){
+    console.log("HELLO")
+    let button = document.getElementById('saveBtn');
+    button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
+    button.disabled = true;
+}
