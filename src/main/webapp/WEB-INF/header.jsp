@@ -15,8 +15,7 @@
 						<c:set var="userRole" value="${sessionScope.userInfo.role}" />
 <%--						<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 						<c:set var="userInfo" value="${sessionScope.userInfo}" />
-							<p hidden="hidden" id="userUUID">
-								<c:out value="${userInfo.uuid}"/></p>
+							<p hidden="hidden" id="userUUID"><c:out value="${userInfo.uuid}"/></p>
 						<c:if test="${userRole == 'ADMIN'}">
 <%--							<li><a href="addLaptop"><i class=""><c:out value="${userRole}" /></i></a></li>--%>
 							<li><a href="addLaptop"><i class="">Add Laptop</i></a></li>
