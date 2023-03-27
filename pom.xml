@@ -211,7 +211,7 @@
             <username>admin</username>
             <password>admin</password>
 
-            <url>http://localhost:9090/manager/text</url>
+            <url>http://localhost:8081/manager/text</url>
 
             <path>/store</path>
           </configuration>

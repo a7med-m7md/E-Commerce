@@ -1,5 +1,5 @@
 import {DOMINO, PORT} from "./configuration.js";
-import {ShoppingCart} from "./store.js";
+import {ShoppingCart} from "./local-storage-handler.js";
 
 $(document).ready(function () {
     // Get the URL search parameters
@@ -86,18 +86,22 @@ export function getMyProduct(productId){
     });
 }
 
-function addToPage(jsonLaptop){
-    var laptop = $.parseJSON(jsonLaptop);
-    let container = $("#myProduct")[0];
 
-    let newProduct = `
+// todo it returns undefined
+function addToPage(jsonLaptop){
+    console.log(jsonLaptop)
+    if(jsonLaptop) {
+        var laptop = $.parseJSON(jsonLaptop);
+        let container = $("#myProduct")[0];
+
+        let newProduct = `
         <!-- Product main img -->
         <div class="col-md-5 col-md-push-2">
             <div id="product-main-img">
     `;
 
-    $.each(laptop.imagList, function (index, bytes) {
-        newProduct += `
+        $.each(laptop.imagList, function (index, bytes) {
+            newProduct += `
                 <div class="product-preview">
                     <img src="${bytes}"
                      width="600" 
@@ -105,22 +109,22 @@ function addToPage(jsonLaptop){
                      alt="">
                 </div>
         `;
-    });
+        });
 
-    newProduct += `
+        newProduct += `
             </div>
         </div>
         <!-- /Product main img -->
     `;
 
-    newProduct += `
+        newProduct += `
         <!-- Product thumb imgs -->
         <div class="col-md-2  col-md-pull-5">
             <div id="product-imgs">
     `;
 
-    $.each(laptop.imagList, function (index, bytes) {
-        newProduct += `
+        $.each(laptop.imagList, function (index, bytes) {
+            newProduct += `
                 <div class="product-preview">
                     <img src="${bytes}"
                      width="153" 
@@ -128,15 +132,15 @@ function addToPage(jsonLaptop){
                      alt="">
                 </div>
         `;
-    });
+        });
 
-    newProduct += `
+        newProduct += `
             </div>
         </div>
         <!-- /Product main img -->
     `;
 
-    newProduct += `
+        newProduct += `
         <!-- Product details -->
         <div class="col-md-5">
             <div class="product-details">
@@ -144,17 +148,17 @@ function addToPage(jsonLaptop){
                 <div>
                     <div class="product-rating">
     `;
-    let update = document.getElementById("updateBTN");
-    if(update){
-        update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
-    }
-    for(let i = 0 ; i<laptop.rate ; i++){
-        newProduct += `
+        let update = document.getElementById("updateBTN");
+        if (update) {
+            update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
+        }
+        for (let i = 0; i < laptop.rate; i++) {
+            newProduct += `
             <i class="fa fa-star"></i>
         `;
-    }
+        }
 
-    newProduct += `
+        newProduct += `
                 
                 <div>
                     <h3 class="product-price">$${laptop.price} <del class="product-old-price">$${laptop.price}/del></h3>
@@ -182,42 +186,41 @@ function addToPage(jsonLaptop){
         <!-- /Product details -->
     `;
 
-    container.innerHTML += newProduct;
+        container.innerHTML += newProduct;
 
-    //Add description to details tap
-    let desc = $('#desc')[0];
-    desc.innerHTML += `
+        //Add description to details tap
+        let desc = $('#desc')[0];
+        desc.innerHTML += `
         <p>${laptop.description}</p>
     `;
 
-    document.getElementById("add-tocart-btn").addEventListener('click', function (){
-        let quantityVal = document.getElementById("qty-val").value;
-        if (quantityVal) {
-            let productId = laptop.uuid
-            let quantity = parseInt(document.getElementById("qty-val").value);
-            let item = {
-                productId,
-                quantity
+        document.getElementById("add-tocart-btn").addEventListener('click', function () {
+            let quantityVal = document.getElementById("qty-val").value;
+            if (quantityVal) {
+                let productId = laptop.uuid
+                let quantity = parseInt(document.getElementById("qty-val").value);
+                let item = {
+                    productId,
+                    quantity
+                }
+                console.log(item)
+                console.log("UUID : " + document.getElementById("userUUID").innerHTML)
+                let cart = new ShoppingCart(document.getElementById("userUUID").innerHTML);
+                cart.addItem(item)
+            } else {
+                alert("Quantity must be specified")
             }
-            console.log(item)
-            console.log("UUID : " + document.getElementById("userUUID").innerHTML)
-            let cart = new ShoppingCart(document.getElementById("userUUID").innerHTML);
-            cart.addItem(item)
-        }
-        else {
-            alert("Quantity must be specified")
-        }
-    })
+        })
 
-    document.querySelector(".qty-up").addEventListener('click', function (){
-        let quantity = document.getElementById("qty-val");
-        quantity.value = parseInt(quantity.value) + 1;
-    })
-    document.querySelector(".qty-down").addEventListener('click', function (){
-        let quantity = document.getElementById("qty-val").value;
-        quantity.value = parseInt(quantity.value) - 1;
-    })
-
+        document.querySelector(".qty-up").addEventListener('click', function () {
+            let quantity = document.getElementById("qty-val");
+            quantity.value = parseInt(quantity.value) + 1;
+        })
+        document.querySelector(".qty-down").addEventListener('click', function () {
+            let quantity = document.getElementById("qty-val").value;
+            quantity.value = parseInt(quantity.value) - 1;
+        })
+    }
 }
 
 
