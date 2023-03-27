@@ -23,8 +23,9 @@ $(document).ready(function () {
 
 function listProduct() {
     let container = $(".order-products")[0];
+    let userUUID = document.getElementById("userUUID").innerHTML;
     container.innerHTML = "";
-    var jsonLaptops = $.parseJSON(localStorage.getItem("cart-0acd314f-2958-4a43-afac-03ee669533ec"))
+    var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
     $.each(jsonLaptops, function (index, labtop) {
         console.log(labtop);
         $.get("checkout?uuid=" + labtop.productId, function (data, status) {

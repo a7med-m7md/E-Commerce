@@ -100,6 +100,10 @@ public class AddLaptopServlet extends HttpServlet {
 //        images.forEach(image -> laptopService.saveImage(image));
 
         images.forEach(image -> imageService.saveImage(image));
+        images.forEach(image ->{
+            System.out.println("======");
+            System.out.println(image.getImgaeType());
+        });
 //        request.getRequestDispatcher("index.jsp").forward(request, response);
         JSPages.HOME_PAGE.forward(request, response);
     }
@@ -154,7 +158,7 @@ public class AddLaptopServlet extends HttpServlet {
     private void createImage(ImgaeType type, String path, Laptop laptop, Set<LaptopImage> images, LaptopService laptopService) {
         LaptopImage laptopImage = new LaptopImage();
         laptopImage.setImagPath(path);
-        laptopImage.setImgaeType(ImgaeType.PRODUCT_IMAGE);
+        laptopImage.setImgaeType(type);
         laptopImage.setLaptop(laptop);
         images.add(laptopImage);
         laptopService.addLaptop(laptop);
