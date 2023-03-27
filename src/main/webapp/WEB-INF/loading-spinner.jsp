@@ -5,15 +5,7 @@
   Time: 7:21 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <script>
-    window.onload = function(){
-      var overlay = document.getElementById("overlay");
-      overlay.style.display = 'none';
-    };
-  </script>
+
   <style>
     #overlay {
       display: flex;
@@ -47,5 +39,9 @@
 <div id="overlay">
   <div class="spinner"></div>
 </div>
-</body>
-</html>
+<script>
+  window.onload = function(){
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = 'none';
+  };
+</script>

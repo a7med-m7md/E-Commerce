@@ -34,6 +34,7 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
     </head>
 	<body>
@@ -396,12 +397,13 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
+<%--		<script src="js/jquery.min.js"></script>--%>
+<%--		<script src="js/bootstrap.min.js"></script>--%>
+<%--		<script src="js/slick.min.js"></script>--%>
+<%--		<script src="js/nouislider.min.js"></script>--%>
+<%--		<script src="js/jquery.zoom.min.js"></script>--%>
+<%--		<script src="js/main.js"></script>--%>
+
 		<script type="module"  src="js/checkout.js"></script>
 	</body>
 

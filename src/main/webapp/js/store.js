@@ -155,7 +155,7 @@ function addTopage(laptops) {
             product[i].addEventListener("click", async function () {
                 product[i].classList.toggle(jsonLaptops[i].uuid);
                 await $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
-                updateCart()
+                // updateCart()
             });
 
         }
@@ -260,20 +260,20 @@ export class ShoppingCart {
             (cartItem) => cartItem.productId === item.productId
         );
         if (existingItem) {
-            console.log("EXist")
             existingItem.quantity += item.quantity;
         } else {
-            console.log("Not exist")
             this.items.push(item);
         }
         this.saveToLocalStorage();
-        console.log(this.items)
-        console.log("added")
     }
 
 
     removeItem(item) {
-        const index = this.items.indexOf(item);
+        const productId = item.productId; // assuming each item has a unique 'id' property
+        const index = this.items.findIndex(i => i.productId === productId);
+        // const index = this.items.indexOf(item);
+        console.log(this.items)
+        console.log(item)
         if (index !== -1) {
             this.items.splice(index, 1);
             this.saveToLocalStorage();
@@ -295,18 +295,15 @@ export class ShoppingCart {
             var userId = getUserId(); // get user ID from session or cookie
         else
             var userId = this.userID
-        console.log("UUSER ID : " + userId)
         if (userId) {
-            console.log("SAVED")
             const key = `cart-${userId}`;
             const value = JSON.stringify(this.items);
             localStorage.setItem(key, value);
-            updateCart()
         }
+        updateCart()
     }
 
     loadFromLocalStorage() {
-
         if(!this.userID)
             var userId = getUserId(); // get user ID from session or cookie
         else

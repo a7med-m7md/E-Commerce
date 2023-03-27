@@ -1,6 +1,7 @@
 // assume productIds is an array of product IDs saved in localStorage
 // loop through each product ID and make an AJAX GET request to retrieve product information
 import {DOMINO, PORT} from "./configuration.js";
+import {ShoppingCart} from "./store.js";
 
 
 $(document).ready(function () {
@@ -55,8 +56,8 @@ export function updateCart() {
                 })));
                 $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:${PORT}/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
                 // todo add delete functionality
-                $newProduct.append($("<button>", {class: "delete"}).append($("<i>", {class: "fa fa-close"})));
-
+                $newProduct.append($("<button>", {class: "delete", click: ()=>removeProduct(currentProduct.uuid)}).append($("<i>", {class: "fa fa-close"})));
+                console.log("aaa" + currentProduct.uuid)
                 // append the new product widget to the container
                 $("#cart-container").append($newProduct);
 
@@ -66,5 +67,11 @@ export function updateCart() {
                 $('#item-total-price').text(`SUBTOTAL: EG${totalPrice}`)
             });
         });
+    }
+
+    function removeProduct(productId){
+        console.log("×××")
+        let cart = new ShoppingCart(userUUID);
+        cart.removeItem({productId, quantity: 1});
     }
 }
