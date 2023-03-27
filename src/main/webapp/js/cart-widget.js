@@ -1,7 +1,7 @@
 // assume productIds is an array of product IDs saved in localStorage
 // loop through each product ID and make an AJAX GET request to retrieve product information
 import {DOMINO, PORT} from "./configuration.js";
-import {ShoppingCart} from "./store.js";
+import {ShoppingCart} from "./local-storage-handler.js";
 
 
 $(document).ready(function () {
