@@ -3,7 +3,7 @@
 import {DOMINO, PORT} from "./configuration.js";
 
 
-$(document).ready(function () {
+$(document).ready(async function () {
     updateCart();
     $('#logout-btn').click(async function (){
 
@@ -17,9 +17,44 @@ $(document).ready(function () {
             })
         }
 
-        $.get("logout")
+        await $.get("logout")
         location.reload()
     })
+
+    let email;
+    let pass;
+
+    console.log("CCCCC")
+    console.log(document.cookie)
+
+    if(!document.cookie.indexOf("loggedIn") != -1) {
+
+        let cookies = document.cookie.split(';') ;
+
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            console.log("=== " + cookie + " ====")
+            if (cookie.startsWith('user_remember_cookie=')) {
+                let credentials = cookie.substring('user_remember_cookie='.length, cookie.length);
+                let values = credentials.split("=")
+                email = values[0];
+                pass = values[1];
+
+                await $.post("signin", {
+                    emailL: email,
+                    passwordL: pass
+                }, function (response) {
+                    location.reload()
+                })
+
+                document.cookie += ";loggedIn=true;";
+                console.log(username);
+                break;
+            }
+        }
+    }
+
+
 })
 
 export function updateCart() {
@@ -40,17 +75,17 @@ export function updateCart() {
         var totalSum = 0;
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
-        userId.forEach((product, index) => {
-            $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
+        userId.forEach(async (product, index) => {
+            await $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
-                let image = btoa(String.fromCharCode.apply(null, new Uint8Array(currentProduct.imagList[0])));
+                let image = currentProduct.imagList[0];
 
                 // create a new product widget
                 var $newProduct = $("<div>", {class: "product-widget"});
                 $newProduct.append($("<div>", {class: "product-img"}).append($("<img>", {
-                    src: `data:image/png;base64,${image}`,
+                    src: image,
                     alt: ""
                 })));
                 $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:${PORT}/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
