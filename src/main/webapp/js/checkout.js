@@ -15,7 +15,7 @@ $(document).ready(function () {
             data: JSON.stringify(productList), //input data
             dataType: 'json',
             success: function (data) {
-                console.log("sucess");
+                console.log(data);
             }
         });
     });
@@ -24,7 +24,10 @@ $(document).ready(function () {
 function listProduct() {
     let container = $(".order-products")[0];
     container.innerHTML = "";
-    var jsonLaptops = $.parseJSON(localStorage.getItem("cart-0acd314f-2958-4a43-afac-03ee669533ec"))
+
+    let userUUID = document.getElementById("userUUID").innerHTML;
+    var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
+    //    var jsonLaptops = $.parseJSON(localStorage.getItem("cart-e060af7d-1849-450d-942f-d1ddd338a98c"))
     $.each(jsonLaptops, function (index, labtop) {
         console.log(labtop);
         $.get("checkout?uuid=" + labtop.productId, function (data, status) {
