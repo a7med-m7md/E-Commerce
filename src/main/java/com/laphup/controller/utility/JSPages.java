@@ -15,6 +15,7 @@ public enum JSPages {
     SIGN_UP("siginUp.html"),
     STORE("store.jsp"),
     PRODUCT("product.jsp"),
+    CHECKOUT("/checkout.jsp"),
     PROFILE("WEB-INF/profile.jsp"),
     UPDATE_PRODUCT("/update-laptop.jsp");
     private final String path;
