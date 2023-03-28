@@ -29,6 +29,11 @@ $(document).ready(function () {
             updateCart();
         });
     });
+    const filter = document.querySelectorAll('.filter-btn')[0];
+    filter.addEventListener("click", function() {
+        getPage();
+    });
+
 
     //Get all categories in db
     getCategories();
@@ -135,7 +140,7 @@ function addTopage(laptops) {
                         </div>
                         <div class="product-body">
                             <p class="product-category">${labtop.laptopCategory}</p>
-                            <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}">${labtop.name}</a></h3>
+                            <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}" class="two-lines">${labtop.name}</a></h3>
                             <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
                             <div class="product-rating">
                     `;
