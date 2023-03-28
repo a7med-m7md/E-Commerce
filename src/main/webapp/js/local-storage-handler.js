@@ -1,9 +1,11 @@
 import {updateCart} from "./cart-widget.js";
 
 export class ShoppingCart {
-    constructor(userID) {
+    constructor(userID, load) {
+        console.log("loggedIn")
         this.userID = userID;
         this.items = [];
+
         this.loadFromLocalStorage();
     }
 
@@ -16,35 +18,31 @@ export class ShoppingCart {
         } else {
             this.items.push(item);
         }
-        this.saveToLocalStorage();
+        this.saveToLocalStorage(true);
     }
-
 
     removeItem(item) {
         const productId = item.productId; // assuming each item has a unique 'id' property
         const index = this.items.findIndex(i => i.productId === productId);
-        // const index = this.items.indexOf(item);
-        console.log(this.items)
-        console.log(item)
         if (index !== -1) {
             this.items.splice(index, 1);
-            this.saveToLocalStorage();
+            this.saveToLocalStorage(true);
         }
     }
 
     updateItemQuantity(item, quantity) {
         item.quantity = quantity;
-        this.saveToLocalStorage();
+        this.saveToLocalStorage(true);
     }
 
     clear() {
         this.items = [];
-        this.saveToLocalStorage();
+        this.saveToLocalStorage(true);
     }
 
-    saveToLocalStorage() {
+    saveToLocalStorage(updateCartEnabled = true) {
         if (!this.userID)
-            var userId = getUserId(); // get user ID from session or cookie
+            var userId = "00000000-0000-0000-0000-000000000000"; // get user ID from session or cookie
         else
             var userId = this.userID
         if (userId) {
@@ -52,16 +50,16 @@ export class ShoppingCart {
             const value = JSON.stringify(this.items);
             localStorage.setItem(key, value);
         }
-        updateCart()
+        if (updateCartEnabled) {
+            updateCart();
+        }
     }
 
     loadFromLocalStorage() {
         if (!this.userID)
-            var userId = getUserId(); // get user ID from session or cookie
+            var userId = "00000000-0000-0000-0000-000000000000"; // get user ID from session or cookie
         else
             var userId = this.userID
-
-        // const userId = getUserId(); // get user ID from session or cookie
         if (userId) {
             const key = `cart-${userId}`;
             const value = localStorage.getItem(key);
@@ -70,6 +68,34 @@ export class ShoppingCart {
                 this.items = JSON.parse(value);
             }
         }
+    }
+
+    mergeWithGivenCart(givenUserID = "00000000-0000-0000-0000-000000000000") {
+        console.log("--2-3-")
+        const givenCart = new ShoppingCart(givenUserID);
+        // givenCart.loadFromLocalStorage();
+
+        givenCart.items.forEach((item) => {
+            this.addItem(item);
+        });
+
+        this.saveToLocalStorage(false);
+        // window.location.reload()
+        givenCart.clear()
+    }
+
+    mergeWithCurrentCart() {
+        const currentCart = new ShoppingCart(this.userID);
+        currentCart.loadFromLocalStorage();
+        currentCart.mergeItemsByKey(`cart-${this.userID}`, "cart-00000000-0000-0000-0000-000000000000");
+        console.log("-------")
+        console.log(currentCart.items)
+        this.items = currentCart.items;
+        this.saveToLocalStorage();
+
+        const oldCart = new ShoppingCart("00000000-0000-0000-0000-000000000000");
+        oldCart.clear();
+        oldCart.saveToLocalStorage(false);
     }
 
     mergeItemsByKey(keyToMerge, targetKey) {
