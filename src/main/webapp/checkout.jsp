@@ -90,7 +90,9 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
+                <div class="alert alert-danger" role="alert" id="Out">
+                        Invalid email or password. Please try again.
+                    </div>
 					<div class="col-md-7">
 						<!-- Billing Details -->
 						<div class="billing-details">
@@ -254,7 +256,7 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit" id="placeOrder">Place order</a>
+						<a class="primary-btn order-submit" id="placeOrder">Place order</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
