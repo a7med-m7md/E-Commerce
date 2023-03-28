@@ -5,13 +5,24 @@ import {ShoppingCart} from "./local-storage-handler.js";
 
 
 $(document).ready(function () {
-    updateCart();
-    $('#logout-btn').click(async function (){
+    let userUUID = document.getElementById("userUUID").innerText
+    let items = JSON.parse(localStorage.getItem("cart-00000000-0000-0000-0000-000000000000"))
+    console.log(userUUID.length)
+    if (userUUID && items.length != 0 && userUUID != "00000000-0000-0000-0000-000000000000") {
+        const cart = new ShoppingCart(userUUID);
+        cart.mergeWithGivenCart();
+        console.log("UIDD " + userUUID)
+        console.log("INSIDDE" + userUUID + "   " + 0)
+    }
+
+    updateCart()
+
+    $('#logout-btn').click(async function () {
 
         let userID = document.getElementById("userUUID").innerText;
 
         let storageDate = localStorage.getItem(`cart-${userID}`)
-        if(storageDate){
+        if (storageDate) {
             await $.post("logout", {
                 data: storageDate,
                 contentType: "application/x-www-form-urlencoded"
@@ -24,16 +35,9 @@ $(document).ready(function () {
 })
 
 export function updateCart() {
-    var cartContainer = document.getElementById("cart-container");
-    // var clearCartButton = document.getElementById("clear-cart");
-    console.log("updated")
-    // Remove all child nodes of the cart container element
-    while (cartContainer.firstChild) {
-        console.log("remove")
-        cartContainer.removeChild(cartContainer.lastChild);
-    }
+    removeCartUIElement()
     let userUUID = document.getElementById("userUUID").innerText
-    if(!userUUID){
+    if (!userUUID) {
         userUUID = "00000000-0000-0000-0000-000000000000"
     }
     const userId = JSON.parse(localStorage.getItem(`cart-${userUUID}`));
@@ -41,8 +45,8 @@ export function updateCart() {
         var totalSum = 0;
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
-        userId.forEach((product, index) => {
-            $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
+        userId.forEach(async (product, index) => {
+            await $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
@@ -56,7 +60,10 @@ export function updateCart() {
                 })));
                 $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:${PORT}/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
                 // todo add delete functionality
-                $newProduct.append($("<button>", {class: "delete", click: ()=>removeProduct(currentProduct.uuid)}).append($("<i>", {class: "fa fa-close"})));
+                $newProduct.append($("<button>", {
+                    class: "delete",
+                    click: () => removeProduct(currentProduct.uuid)
+                }).append($("<i>", {class: "fa fa-close"})));
                 console.log("aaa" + currentProduct.uuid)
                 // append the new product widget to the container
                 $("#cart-container").append($newProduct);
@@ -69,9 +76,21 @@ export function updateCart() {
         });
     }
 
-    function removeProduct(productId){
+    function removeProduct(productId) {
         console.log("×××")
         let cart = new ShoppingCart(userUUID);
         cart.removeItem({productId, quantity: 1});
+    }
+
+}
+
+export function removeCartUIElement() {
+    var cartContainer = document.getElementById("cart-container");
+    // var clearCartButton = document.getElementById("clear-cart");
+    console.log("updated")
+    // Remove all child nodes of the cart container element
+    while (cartContainer.firstChild) {
+        console.log("remove")
+        cartContainer.removeChild(cartContainer.lastChild);
     }
 }

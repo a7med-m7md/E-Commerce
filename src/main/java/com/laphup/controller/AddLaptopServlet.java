@@ -51,10 +51,10 @@ public class AddLaptopServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String laptopName = getPartAsString(request.getPart("laptop-name"));
-        Double laptopPrice = Double.parseDouble(getPartAsString(request.getPart("laptop-price")));
+        Double laptopPrice = Double.parseDouble(getPartAsNum(request.getPart("laptop-price")));
         String laptopDescription = getPartAsString(request.getPart("laptop-description"));
-        Integer laptopQuantity = Integer.parseInt(getPartAsString(request.getPart("laptop-quantity")));
-        String laptopCategory = getPartAsString(request.getPart("category"));
+        Integer laptopQuantity = Integer.parseInt(getPartAsNum(request.getPart("laptop-quantity")));
+        String laptopCategory = getPartAsNum(request.getPart("category"));
         System.out.println(laptopCategory + " category");
         Collection<Part> allParts = request.getParts();
         List<Part> additionalImagesParts = allParts.stream().filter(part -> part.getName().equals("additional-photos[]")).collect(Collectors.toList());
@@ -108,13 +108,30 @@ public class AddLaptopServlet extends HttpServlet {
         JSPages.HOME_PAGE.forward(request, response);
     }
 
-    private String getPartAsString(Part part) {
+
+    private String getPartAsNum(Part part) {
         try (BufferedReader val = new BufferedReader(new InputStreamReader(part.getInputStream()))) {
             return val.readLine();
         } catch (IOException ex) {
         }
         return null;
     }
+
+    private String getPartAsString(Part part) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(part.getInputStream()))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append(System.lineSeparator()); // Add line separator after each line
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace(); // Handle the exception appropriately
+            return null;
+        }
+        return stringBuilder.toString();
+    }
+
 
 //    private void saveImage(File file, InputStream fileContent) {
 //        try (OutputStream outputStream = new FileOutputStream(file)) {
