@@ -35,18 +35,18 @@ public class UserRepo extends BaseRepo<User, Integer> {
             return Optional.of(users.get(0));
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         List<User> users = entityManager.createNamedQuery("getAllUsers").getResultList();
         return users;
     }
 
-    public User getUserById(UUID id){
+    public User getUserById(UUID id) {
         //todo Here an exception may occur for invalid user id profile
-        User user = (User)entityManager.createNamedQuery("getUserById").setParameter("id", id).getSingleResult();
+        User user = (User) entityManager.createNamedQuery("getUserById").setParameter("id", id).getSingleResult();
         return user;
     }
 
-    public User updateUser(UserDto user){
+    public User updateUser(UserDto user) {
 //        User currentUser = getUserById(user.getUuid());
 //        currentUser.setFName(user.getfName());
 //        currentUser.setLName(user.getlName());
@@ -62,5 +62,10 @@ public class UserRepo extends BaseRepo<User, Integer> {
         User currentUser = modelMapper.map(user, User.class);
         save(currentUser);
         return currentUser;
+    }
+
+    public User updateUserEntity(User user) {
+        save(user);
+        return user;
     }
 }

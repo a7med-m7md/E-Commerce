@@ -94,6 +94,7 @@ public class CheckOutServlet extends HttpServlet {
                 services.saveOrderDetails(orderDetails);
             }
             services.checkOut(order);
+            updateCreditLimit(user.getUuid(), request);
         }
         return 1;
     }
@@ -132,6 +133,13 @@ public class CheckOutServlet extends HttpServlet {
             return false;
         return true;
 
+    }
+
+    public void updateCreditLimit(UUID uuid, HttpServletRequest request) {
+        UserService userService = new UserService(request);
+        User user = userService.getUserById(uuid);
+        user.setCreditLimit(user.getCreditLimit() - totalPrice);
+        userService.updateUserEntity(user);
     }
 
 }
