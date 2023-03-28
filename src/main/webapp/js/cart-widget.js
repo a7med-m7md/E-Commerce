@@ -8,31 +8,50 @@ $(document).ready(function () {
     let userUUID = document.getElementById("userUUID").innerText
     let items = JSON.parse(localStorage.getItem("cart-00000000-0000-0000-0000-000000000000"))
     console.log(userUUID.length)
-    if (userUUID && items.length != 0 && userUUID != "00000000-0000-0000-0000-000000000000") {
-        const cart = new ShoppingCart(userUUID);
-        cart.mergeWithGivenCart();
-        console.log("UIDD " + userUUID)
-        console.log("INSIDDE" + userUUID + "   " + 0)
+
+    // Create a Promise that resolves when the $.get request is complete
+
+    if (userUUID && items && items.length != 0 && userUUID != "00000000-0000-0000-0000-000000000000") {
+        const cartPromise = new Promise(function (resolve, reject) {
+            $.get(`http://localhost:${PORT}/${DOMINO}/cart`, function (response) {
+                localStorage.setItem(`cart-${userUUID}`, response)
+                console.log("VVVAA")
+                console.log(response)
+
+                // Resolve the Promise with the response data
+                resolve(response);
+            });
+        });
+
+        // Wait for the Promise to resolve before continuing
+        cartPromise.then(function (response) {
+            removeCartUIElement()
+            if (userUUID && items && items.length != 0 && userUUID != "00000000-0000-0000-0000-000000000000") {
+                const cart = new ShoppingCart(userUUID);
+                cart.mergeWithGivenCart();
+                console.log("UIDD " + userUUID)
+                console.log("INSIDDE" + userUUID + "   " + 0)
+            }
+
+        });
     }
-
     updateCart()
-
     $('#logout-btn').click(async function () {
-
         let userID = document.getElementById("userUUID").innerText;
+        let storageDate = localStorage.getItem(`cart-${userID}`);
 
-        let storageDate = localStorage.getItem(`cart-${userID}`)
         if (storageDate) {
             await $.post("logout", {
                 data: storageDate,
                 contentType: "application/x-www-form-urlencoded"
-            })
+            });
         }
 
         $.get("logout")
         location.reload()
     })
-})
+});
+
 
 export function updateCart() {
     removeCartUIElement()
