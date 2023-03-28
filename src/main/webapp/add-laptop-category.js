@@ -3,7 +3,6 @@ $(document).ready(function () {
         type: "GET",
         url: "category",
         success: function (response) {
-
             var categoryList = JSON.parse(response);
             console.log(categoryList)
             for (var i = 0; i < categoryList.length; i++) {
@@ -42,7 +41,15 @@ function addNewCategory(event) {
     event.preventDefault();
     let categoryName = $("#category-name").val();
     $.post("category", {"category-name": categoryName}, function (response) {
+        console.log(response)
         let categoryInfo = JSON.parse(response);
+        if(categoryInfo.error){
+            console.log("errrrrr");
+            $('#errorModal').modal('show');
+            $('#close').click(()=>$('#errorModal').modal('hide'));
+            $('#category-name').val("")
+            return;
+        }
         var li = $("<li>").addClass("list-group-item d-flex justify-content-between align-items-center");
         var div = $("<div>").addClass("custom-control custom-radio");
         var input = $("<input>").attr("type", "radio").attr("id", categoryInfo.laptopCategoryUuid).attr("name", "category").addClass("custom-control-input");
