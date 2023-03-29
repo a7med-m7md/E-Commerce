@@ -27,42 +27,42 @@ $(document).ready(function () {
     }
 
 // use
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
+    loadScript(`js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/bootstrap.min.js`)
+    loadScript(`js/bootstrap.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/slick.min.js`)
+    loadScript(`js/slick.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/nouislider.min.js`)
+    loadScript(`js/nouislider.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.zoom.min.js`)
+    loadScript(`js/jquery.zoom.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/main.js`)
+    loadScript(`js/main.js`)
         .then(() => {
             console.log('Script loaded!');
         })
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
 export function getMyProduct(productId){
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptop`, // specify the URL of the API endpoint
+        url: `laptop`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             productId: productId
@@ -152,18 +152,21 @@ function addToPage(jsonLaptop){
         if (update) {
             update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
         }
-        for (let i = 0; i < laptop.rate; i++) {
-            newProduct += `
-            <i class="fa fa-star"></i>
-        `;
-        }
+        // for (let i = 0; i < laptop.rate; i++) {
+        //     newProduct += `
+        //     <i class="fa fa-star"></i>
+        // `;
+        // }
 
+        let expression = `
+            <span class="product-available"> ${laptop.quantities> 0 ? 'In Stock' : 'Out of Stock'}  </span>
+        `
         newProduct += `
                 
-                <div>
-                    <h3 class="product-price">$${laptop.price} <del class="product-old-price">$${laptop.price}/del></h3>
-                    <span class="product-available">In Stock</span>
-                </div>
+                
+                    <h3 class="product-price">EG ${laptop.price}</h3>
+                   ${expression}
+                
         
                 <div class="add-to-cart">
                     <div class="qty-label">

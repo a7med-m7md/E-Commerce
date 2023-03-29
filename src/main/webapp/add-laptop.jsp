@@ -46,7 +46,7 @@
 						<h6 class="m-0">Add Product</h6>
 					</div>
 					<div class='card-body p-3'>
-						<form method="post" action="addLaptop" enctype="multipart/form-data" onsubmit="showSpinner()">
+						<form method="post" action="addLaptop" enctype="multipart/form-data" onsubmit="return validateForm();showSpinner()">
 							<div class="form-group">
 								<label for="laptop-name">Laptop Name</label>
 								<input type="text" class="form-control" id="laptop-name" name="laptop-name" placeholder="Enter Laptop Name" required>
@@ -108,7 +108,24 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="errorModalLabel">Error</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>The Category name already exist</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"  id="close" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		<%--				<div class="card card-small mb-3">--%>
 <%--					<div class="card-header border-bottom">--%>
@@ -159,6 +176,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
 
 	<script src="add-laptop-category.js"></script>
+	<script src="js/addlaptop-validation.js"></script>
 	<script>
 		$('#add-photo-button').click(function() {
 			// create a new "input" element of type "file"

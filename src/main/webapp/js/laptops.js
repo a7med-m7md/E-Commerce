@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 function getCategories(){
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
+        url: `category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             addToCategory(data);
@@ -82,42 +82,42 @@ function addToScrollbar(container, laptops) {
 
 
     // use
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
+    loadScript(`js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/bootstrap.min.js`)
+    loadScript(`js/bootstrap.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/slick.min.js`)
+    loadScript(`js/slick.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/nouislider.min.js`)
+    loadScript(`js/nouislider.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.zoom.min.js`)
+    loadScript(`js/jquery.zoom.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/main.js`)
+    loadScript(`js/main.js`)
         .then(() => {
             console.log('Script loaded!');
         })
@@ -128,7 +128,7 @@ function addToScrollbar(container, laptops) {
 
 function getLaptops(container, pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
+        url: `laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,
