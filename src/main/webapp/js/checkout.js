@@ -3,6 +3,7 @@ var productList = [];
 var totalPrice = 0;
 $(document).ready(function () {
     $("#Out").hide();
+    $("#afterOrder").hide();
     for (var i = 0; i < localStorage.length; i++) {
         console.log(localStorage.getItem(localStorage.key(i)));
     }
@@ -16,14 +17,20 @@ $(document).ready(function () {
             data: JSON.stringify(productList), //input data
             success: function (data) {
                 console.log(data);
-                  if (data.localeCompare("Out")) {
-                                    $("#Out").show();
-                                    $("#Out").html("More Than Your Credit Limit");
-                                }
-                                else if (data.localeCompare("more")) {
-                                    $("#Out").show();
-                                    $("#Out").html(" Our Store Cant Fit Your Order");
-                                }
+                console.log(data==="Out");
+                console.log(data==="more");
+                console.log(data==="Success");
+                if (data === "Out") {
+                    $("#Out").show();
+                    $("#Out").html(" Our Store Cant Fit Your Order");
+                }
+                else if (data==="more") {
+                    $("#Out").show();
+                    $("#Out").html("More Than Your Credit Limit");
+                } else if(data==="Success") {
+                $("#afterOrder").show();
+//                 window.location.href = "signin"
+                }
             }
         });
     });

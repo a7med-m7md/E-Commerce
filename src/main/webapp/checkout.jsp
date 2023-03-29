@@ -72,6 +72,9 @@
                         Invalid email or password. Please try again.
                     </div>
 					<div class="col-md-7">
+					<div class="alert alert-success" role="alert" id="afterOrder">
+                      Thank's You For Visit Our Store
+                    </div>
 						<!-- Billing Details -->
 						<div class="billing-details">
 						<c:set var="userInfo" value="${sessionScope.userInfo}" />
