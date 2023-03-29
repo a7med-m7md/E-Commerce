@@ -100,8 +100,8 @@
             </div>
 
             <div class="col-lg-6 mb-5 mb-lg-0">
-               <img  src="img/logo2.png"
-                                   class="w-80 rounded-4 shadow-4" alt=""/>
+               <a href="home"><img  src="img/logo2.png"
+                                   class="w-80 rounded-4 shadow-4" alt=""/></a>
             </div>
         </div>
     </div>
