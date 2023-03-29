@@ -78,6 +78,8 @@
     }
 
     // Product imgs Slick
+    try {
+
     $('#product-imgs').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -97,6 +99,9 @@
         },
         ]
     });
+    }catch (err){
+
+    }
 
     // Product img zoom
     var zoomMainProduct = document.getElementById('product-main-img');

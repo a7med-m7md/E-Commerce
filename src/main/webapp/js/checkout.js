@@ -36,7 +36,7 @@ function listProduct() {
     var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
     $.each(jsonLaptops, function (index, labtop) {
         console.log(labtop);
-        $.get("cheeckout?uuid=" + labtop.productId, function (data, status) {
+        $.get("checkout?uuid=" + labtop.productId, function (data, status) {
             console.log(data)
             var obj = JSON.parse(data);
             productList.push(data);
