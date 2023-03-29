@@ -105,7 +105,8 @@ public class AddLaptopServlet extends HttpServlet {
             System.out.println(image.getImgaeType());
         });
 //        request.getRequestDispatcher("index.jsp").forward(request, response);
-        JSPages.HOME_PAGE.forward(request, response);
+//        JSPages.HOME_PAGE.forward(request, response);
+        response.sendRedirect("product?uuidProduct="+laptop.getUuidLaptop());
     }
 
 

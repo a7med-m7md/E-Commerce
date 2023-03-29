@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+
+
     // Validate Username
     $("#isinvalid").hide();
     $("#usercheck").hide();
@@ -258,7 +261,32 @@ $(document).ready(function () {
             });
             return true;
         } else {
+            let button = document.getElementById('saveBtn');
+            button.innerHTML = ''
             return false;
         }
     });
 });
+
+
+function validateEmail() {
+    const emailInput = document.getElementById("emailL");
+    const email = emailInput.value;
+    const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; // regular expression for email validation
+    if (emailRegex.test(email)) {
+        // valid email
+        return true;
+    } else {
+        // invalid email
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    const passwordInput = document.getElementById("passwordL");
+    const password = passwordInput.value;
+    if(password.length < 6){
+        alert("Please enter a valid email password.");
+        return false;
+    }
+
+}
