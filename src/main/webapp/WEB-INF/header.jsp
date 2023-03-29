@@ -103,6 +103,8 @@
 						</div>
 						<!-- /SEARCH BAR -->
 
+								<c:set var="userRole" value="${sessionScope.userInfo.role}" />
+								<c:if test="${userRole != 'ADMIN'}">
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
@@ -160,6 +162,17 @@
 							</div>
 						</div>
 						<!-- /ACCOUNT -->
+                        </c:if>
+
+
+
+
+                        <c:if test="${userRole == 'ADMIN'}">
+                        <div style="color: white; text-align: center; font-weight: bold; font-size: xx-large">
+                            Admin Dashboard
+                        </div>
+                        </div>
+                        </c:if>
 					</div>
 					<!-- row -->
 				</div>

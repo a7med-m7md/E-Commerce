@@ -105,11 +105,13 @@ export function updateCart() {
 
 export function removeCartUIElement() {
     var cartContainer = document.getElementById("cart-container");
-    // var clearCartButton = document.getElementById("clear-cart");
-    console.log("updated")
-    // Remove all child nodes of the cart container element
-    while (cartContainer.firstChild) {
-        console.log("remove")
-        cartContainer.removeChild(cartContainer.lastChild);
+    if(cartContainer) {
+        // var clearCartButton = document.getElementById("clear-cart");
+        console.log("updated")
+        // Remove all child nodes of the cart container element
+        while (cartContainer.firstChild) {
+            console.log("remove")
+            cartContainer.removeChild(cartContainer.lastChild);
+        }
     }
 }
