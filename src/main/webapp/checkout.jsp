@@ -34,34 +34,13 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     </head>
 	<body>
 		<%@ include file="WEB-INF/header.jsp" %>
 
-		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
+
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -89,7 +68,9 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
+                <div class="alert alert-danger" role="alert" id="Out">
+                        Invalid email or password. Please try again.
+                    </div>
 					<div class="col-md-7">
 						<!-- Billing Details -->
 						<div class="billing-details">
@@ -253,7 +234,7 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit" id="placeOrder">Place order</a>
+						<a class="primary-btn order-submit" id="placeOrder">Place order</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -402,6 +383,7 @@
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
+
 		<script type="module"  src="js/checkout.js"></script>
 	</body>
 

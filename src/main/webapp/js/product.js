@@ -1,4 +1,5 @@
 import {DOMINO, PORT} from "./configuration.js";
+import {ShoppingCart} from "./local-storage-handler.js";
 
 $(document).ready(function () {
     // Get the URL search parameters
@@ -26,42 +27,42 @@ $(document).ready(function () {
     }
 
 // use
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
+    loadScript(`js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/bootstrap.min.js`)
+    loadScript(`js/bootstrap.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/slick.min.js`)
+    loadScript(`js/slick.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/nouislider.min.js`)
+    loadScript(`js/nouislider.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.zoom.min.js`)
+    loadScript(`js/jquery.zoom.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/main.js`)
+    loadScript(`js/main.js`)
         .then(() => {
             console.log('Script loaded!');
         })
@@ -72,7 +73,7 @@ $(document).ready(function () {
 
 export function getMyProduct(productId){
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptop`, // specify the URL of the API endpoint
+        url: `laptop`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             productId: productId
@@ -85,59 +86,61 @@ export function getMyProduct(productId){
     });
 }
 
-function addToPage(jsonLaptop){
-    var laptop = $.parseJSON(jsonLaptop);
-    let container = $("#myProduct")[0];
 
-    let newProduct = `
+// todo it returns undefined
+function addToPage(jsonLaptop){
+    console.log(jsonLaptop)
+    if(jsonLaptop) {
+        var laptop = $.parseJSON(jsonLaptop);
+        let container = $("#myProduct")[0];
+
+        let newProduct = `
         <!-- Product main img -->
         <div class="col-md-5 col-md-push-2">
             <div id="product-main-img">
     `;
 
-    $.each(laptop.imagByteList, function (index, bytes) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(bytes)));
-        newProduct += `
+        $.each(laptop.imagList, function (index, bytes) {
+            newProduct += `
                 <div class="product-preview">
-                    <img src="data:image/png;base64,${image}"
+                    <img src="${bytes}"
                      width="600" 
                      height="600"
                      alt="">
                 </div>
         `;
-    });
+        });
 
-    newProduct += `
+        newProduct += `
             </div>
         </div>
         <!-- /Product main img -->
     `;
 
-    newProduct += `
+        newProduct += `
         <!-- Product thumb imgs -->
         <div class="col-md-2  col-md-pull-5">
             <div id="product-imgs">
     `;
 
-    $.each(laptop.imagByteList, function (index, bytes) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(bytes)));
-        newProduct += `
+        $.each(laptop.imagList, function (index, bytes) {
+            newProduct += `
                 <div class="product-preview">
-                    <img src="data:image/png;base64,${image}"
+                    <img src="${bytes}"
                      width="153" 
                      height="153"
                      alt="">
                 </div>
         `;
-    });
+        });
 
-    newProduct += `
+        newProduct += `
             </div>
         </div>
         <!-- /Product main img -->
     `;
 
-    newProduct += `
+        newProduct += `
         <!-- Product details -->
         <div class="col-md-5">
             <div class="product-details">
@@ -145,33 +148,36 @@ function addToPage(jsonLaptop){
                 <div>
                     <div class="product-rating">
     `;
-    let update = document.getElementById("updateBTN");
-    if(update){
-        update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
-    }
-    for(let i = 0 ; i<laptop.rate ; i++){
-        newProduct += `
-            <i class="fa fa-star"></i>
-        `;
-    }
+        let update = document.getElementById("updateBTN");
+        if (update) {
+            update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
+        }
+        // for (let i = 0; i < laptop.rate; i++) {
+        //     newProduct += `
+        //     <i class="fa fa-star"></i>
+        // `;
+        // }
 
-    newProduct += `
+        let expression = `
+            <span class="product-available"> ${laptop.quantities> 0 ? 'In Stock' : 'Out of Stock'}  </span>
+        `
+        newProduct += `
                 
-                <div>
-                    <h3 class="product-price">$${laptop.price} <del class="product-old-price">$${laptop.price}/del></h3>
-                    <span class="product-available">In Stock</span>
-                </div>
+                
+                    <h3 class="product-price">EG ${laptop.price}</h3>
+                   ${expression}
+                
         
                 <div class="add-to-cart">
                     <div class="qty-label">
-                        Qty
+                        Quantity
                         <div class="input-number">
-                            <input type="number">
+                            <input type="number" id="qty-val" value="1" min="1"  required>
                                 <span class="qty-up">+</span>
                                 <span class="qty-down">-</span>
                         </div>
                     </div>
-                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</button>
+                    <button class="add-to-cart-btn" id="add-tocart-btn"><i class="fa fa-shopping-cart" ></i>add to cart</button>
                 </div>
         
                 <ul class="product-links">
@@ -183,11 +189,51 @@ function addToPage(jsonLaptop){
         <!-- /Product details -->
     `;
 
-    container.innerHTML += newProduct;
+        container.innerHTML += newProduct;
 
-    //Add description to details tap
-    let desc = $('#desc')[0];
-    desc.innerHTML += `
+        //Add description to details tap
+        let desc = $('#desc')[0];
+        desc.innerHTML += `
         <p>${laptop.description}</p>
     `;
+
+        document.getElementById("add-tocart-btn").addEventListener('click', function () {
+            let quantityVal = document.getElementById("qty-val").value;
+            if (quantityVal) {
+                let productId = laptop.uuid
+                let quantity = parseInt(document.getElementById("qty-val").value);
+                let item = {
+                    productId,
+                    quantity
+                }
+                console.log(item)
+                console.log("UUID : " + document.getElementById("userUUID").innerHTML)
+                let cart = new ShoppingCart(document.getElementById("userUUID").innerHTML);
+                cart.addItem(item)
+            } else {
+                alert("Quantity must be specified")
+            }
+        })
+
+        document.querySelector(".qty-up").addEventListener('click', function () {
+            let quantity = document.getElementById("qty-val");
+            quantity.value = parseInt(quantity.value) + 1;
+        })
+        document.querySelector(".qty-down").addEventListener('click', function () {
+            let quantity = document.getElementById("qty-val").value;
+            quantity.value = parseInt(quantity.value) - 1;
+        })
+    }
+}
+
+
+addToPage()
+
+
+
+
+
+
+function addToCard(uuid){
+    console.log("Hello "+ uuid)
 }

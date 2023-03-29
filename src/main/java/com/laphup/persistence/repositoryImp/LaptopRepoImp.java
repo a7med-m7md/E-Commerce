@@ -8,6 +8,7 @@ import com.laphup.persistence.entities.Laptop;
 import com.laphup.persistence.entities.LaptopCategory;
 import com.laphup.util.enums.SortBy;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -97,14 +98,23 @@ public class LaptopRepoImp extends BaseRepo<Laptop, UUID> {
         return laptopDTOS;
     }
 
-    public boolean updateLaptop(Laptop laptop) {
-        String queryString = "UPDATE Laptop SET quantities = quantities - " + laptop.getQuantities() + " WHERE uuidLaptop =  " + laptop.getUuidLaptop();
-        Query q = entityManager.createQuery(queryString);
-        int updateCount = q.executeUpdate();
-        if (updateCount != 0)
-            return true;
-        return false;
-    }
+//    public boolean updateLaptop(Laptop laptop) {
+//        EntityTransaction transaction = entityManager.getTransaction();
+//        String queryString = "UPDATE Laptop SET quantities = quantities - :qu WHERE uuidLaptop =:id  ";
+//        Query q = entityManager.createQuery(queryString).setParameter("qu", laptop.getQuantities())
+//                .setParameter("id", laptop.getUuidLaptop());
+//        int updateCount = q.executeUpdate();
+//        transaction.commit();
+//        if (updateCount != 0)
+//            return true;
+//        return false;
+//    }
+public Laptop updateLaptop(Laptop laptop) {
+    ModelMapper modelMapper = new ModelMapper();
+    Laptop currentLaptop = modelMapper.map(laptop, Laptop.class);
+    save(currentLaptop);
+    return currentLaptop;
+}
     public Long getLaptopCount(){
         //Create CriteriaQuery and root table (laptop)
         CriteriaQuery<Long> query_Laptop = criteriaBuilder.createQuery(Long.class);

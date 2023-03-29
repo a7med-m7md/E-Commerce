@@ -53,7 +53,8 @@
 									<hr style="visibility: hidden; height: 10px; margin: 0px">
 									<a class="dropdown-item drop-menu-hov" href="home" style="">Order History</a><br>
 									<hr style="margin: 7.5px">
-									<button id="logout-btn" style="background-color: transparent;border: none;outline: none;" style="font-weight: bold">Logout</button>
+									<button id="logout-btn" style="background-color: transparent;border: none;outline: none;" style="font-weight: bold">
+										Logout</button>
 								</div>
 								</div>
 							</li>
@@ -105,15 +106,6 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
-								<div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
-									</a>
-								</div>
-								<!-- /Wishlist -->
 
 								<!-- Cart -->
 								<div class="dropdown">
@@ -151,7 +143,6 @@
 											<h5 id="item-total-price"></h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
 											<a href="checkout.jsp">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
@@ -177,5 +168,5 @@
 			<!-- /MAIN HEADER -->
 		</header>
 		<!-- /HEADER -->
-
+<jsp:include page="WEB-INF/loading-spinner.jsp" />
 	<script type="module" src="js/cart-widget.js"></script>

@@ -29,6 +29,7 @@ public class UserDto implements Serializable {
     private String interests;
 
 
+
     private Role role;
 
     public UserDto(Date birthDay, String fName, String lName, Gender gender, String password, String job, String eMail, long creditLimit, String address, String interests) {
@@ -145,5 +146,7 @@ public class UserDto implements Serializable {
 
         this.role = role;
     }
+
+
 
 }

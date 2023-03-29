@@ -114,7 +114,9 @@
 							</div>
 						</div>
 						<!-- /aside Widget -->
-
+						<div class="aside">
+							<button class="filter-btn"><i class="fa fa-shopping-cart"></i> Filter</button>
+						</div>
 <%--						<!-- aside Widget -->--%>
 <%--						<div class="aside">--%>
 <%--							<h3 class="aside-title">Top selling</h3>--%>

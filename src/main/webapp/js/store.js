@@ -1,5 +1,7 @@
-import { DOMINO, PORT } from "./configuration.js";
+import {DOMINO, PORT} from "./configuration.js";
 import {updateCart} from "./cart-widget.js";
+import {ShoppingCart} from "./local-storage-handler.js";
+
 
 var carts = [];
 
@@ -8,8 +10,7 @@ var currentUserUUID;
 $(document).ready(function () {
     //Detect count of pages
     getPagesCount();
-
-    shoppingCart = new ShoppingCart();
+////////
     //Handel pages buttons
     const liElements = document.querySelectorAll('.store-pagination li');
     liElements.forEach(li => {
@@ -28,6 +29,11 @@ $(document).ready(function () {
             updateCart();
         });
     });
+    const filter = document.querySelectorAll('.filter-btn')[0];
+    filter.addEventListener("click", function() {
+        getPage();
+    });
+
 
     //Get all categories in db
     getCategories();
@@ -35,6 +41,7 @@ $(document).ready(function () {
     //Get page of products from db
     getPage();
 
+    // shoppingCart = new ShoppingCart();
 
     //Handel pages buttons
     const products = document.querySelectorAll('#productImage');
@@ -42,7 +49,7 @@ $(document).ready(function () {
         li.addEventListener('click', event => {
             let uuid = document.querySelector(`#uuid + *`);
             $.ajax({
-                url: `http://localhost:${PORT}/${DOMINO}/product?uuid=${uuid}`, // specify the URL of the API endpoint
+                url: `product?uuid=${uuid}`, // specify the URL of the API endpoint
                 type: "GET", // specify the type of request (GET in this case)
                 success: function (data) { // define a callback function to handle the response
                     addToCategory(data);
@@ -54,15 +61,16 @@ $(document).ready(function () {
         });
     });
 });
-function getPagesCount(){
+
+function getPagesCount() {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/pagesCount`, // specify the URL of the API endpoint
+        url: `pagesCount`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             let count = $("#count")[0].value;
-            let numberOfPages = Math.ceil(Math.round(data/count));
+            let numberOfPages = Math.ceil(Math.round(data / count));
             let container = $(".store-pagination")[0];
-            for (let i =2 ; i<=numberOfPages ; i++){
+            for (let i = 2; i <= numberOfPages; i++) {
                 container.innerHTML += `
                     <li><a>${i}</a></li>
                 `;
@@ -74,9 +82,10 @@ function getPagesCount(){
         async: false
     });
 }
-function getCategories(){
+
+function getCategories() {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
+        url: `category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             addToCategory(data);
@@ -87,7 +96,7 @@ function getCategories(){
     });
 }
 
-function addToCategory(categories){
+function addToCategory(categories) {
     // Get the URL search parameters
     var searchParams = new URLSearchParams(window.location.search);
     // Get the value of the "myParam" parameter
@@ -114,14 +123,13 @@ function addTopage(laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     let container = $("#products")[0];
     $.each(jsonLaptops, function (index, labtop) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
 
         let newProduct = `
                 <div class="col-md-4 col-xs-6">
                     <div class="product">
                         <input type="hidden" id="uuid" value="${labtop.uuid}">
                         <div class="product-img">
-                            <img id="productImage" src="data:image/png;base64,${image}" 
+                            <img id="productImage" src="${labtop.imagList[0]}" 
                                     width="263" 
                                     height="263"
                                     alt="">
@@ -132,11 +140,11 @@ function addTopage(laptops) {
                         </div>
                         <div class="product-body">
                             <p class="product-category">${labtop.laptopCategory}</p>
-                            <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}">${labtop.name}</a></h3>
+                            <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}" class="two-lines">${labtop.name}</a></h3>
                             <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
                             <div class="product-rating">
                     `;
-        for(var i=0 ; i< labtop.rate ; i++){
+        for (var i = 0; i < labtop.rate; i++) {
             newProduct += '<i class="fa fa-star"></i>';
         }
 
@@ -156,7 +164,7 @@ function addTopage(laptops) {
             product[i].addEventListener("click", async function () {
                 product[i].classList.toggle(jsonLaptops[i].uuid);
                 await $.get("addToCard?uuid=" + jsonLaptops[i].uuid, ajaxCallBack);
-                updateCart()
+                // updateCart()
             });
 
         }
@@ -189,13 +197,13 @@ function getPage() {
     let minPrice = $("#price-min")[0].value;
     let maxPrice = $("#price-max")[0].value;
 
-    if(minPrice == "")
+    if (minPrice == "")
         minPrice = 0;
-    if(maxPrice == "")
+    if (maxPrice == "")
         maxPrice = 100000;
 
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
+        url: `laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,
@@ -212,6 +220,7 @@ function getPage() {
         async: false
     });
 }
+
 function ajaxCallBack(responseTxt, statusTxt, xhr) {
     console.log("TXT")
     // console.log(JSON.parse(responseTxt))
@@ -232,8 +241,8 @@ function ajaxCallBack(responseTxt, statusTxt, xhr) {
         productId: responseTxt.laptopId,
         quantity: 1
     }
-
-    shoppingCart = new ShoppingCart();
+///
+    shoppingCart = new ShoppingCart(currentUserUUID);
     shoppingCart.addItem(item)
 
     return true;
@@ -245,93 +254,12 @@ function addToCardInLocalStorge(labtop) {
 }
 
 
-
 /// User Cart Class
 
-
-export class ShoppingCart {
-    constructor() {
-        this.items = [];
-        this.loadFromLocalStorage();
-    }
-
-    addItem(item) {
-        let existingItem = this.items.find(
-            (cartItem) => cartItem.productId === item.productId
-        );
-        if (existingItem) {
-            existingItem.quantity += item.quantity;
-        } else {
-            this.items.push(item);
-        }
-        this.saveToLocalStorage();
-    }
-
-
-    removeItem(item) {
-        const index = this.items.indexOf(item);
-        if (index !== -1) {
-            this.items.splice(index, 1);
-            this.saveToLocalStorage();
-        }
-    }
-
-    updateItemQuantity(item, quantity) {
-        item.quantity = quantity;
-        this.saveToLocalStorage();
-    }
-
-    clear() {
-        this.items = [];
-        this.saveToLocalStorage();
-    }
-
-    saveToLocalStorage() {
-        const userId = getUserId(); // get user ID from session or cookie
-        if (userId) {
-            const key = `cart-${userId}`;
-            const value = JSON.stringify(this.items);
-            localStorage.setItem(key, value);
-        }
-    }
-
-    loadFromLocalStorage() {
-        const userId = getUserId(); // get user ID from session or cookie
-        if (userId) {
-            const key = `cart-${userId}`;
-            const value = localStorage.getItem(key);
-            if (value) {
-                console.log("exist")
-                this.items = JSON.parse(value);
-            }
-        }
-    }
-
-    mergeItemsByKey(keyToMerge, targetKey) {
-        this.items.forEach((item) => {
-            if (item.hasOwnProperty(keyToMerge)) {
-                const targetItem = this.items.find(
-                    (i) => i.hasOwnProperty(targetKey) && i[targetKey] === item[keyToMerge]
-                );
-                if (targetItem) {
-                    targetItem.quantity += item.quantity;
-                    this.removeItem(item);
-                } else {
-                    const newItem = { ...item };
-                    newItem[targetKey] = item[keyToMerge];
-                    delete newItem[keyToMerge];
-                    this.addItem(newItem);
-                    this.removeItem(item);
-                }
-            }
-        });
-    }
-}
 
 function getUserId() {
     return currentUserUUID;
 }
-
 
 
 

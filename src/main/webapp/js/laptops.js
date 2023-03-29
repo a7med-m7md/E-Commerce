@@ -4,16 +4,16 @@ $(document).ready(function () {
     getCategories();
 
     let container1 = $(".products-slick")[0];
-    getLaptops(container1, 1, 10, '', 'PRICE', 0, 10000);
+    getLaptops(container1, 1, 10, '', 'PRICE', 0, 1000000);
 
     let container2 = $(".products-slick")[1];
-    getLaptops(container2, 1, 10, '', 'RATE', 0, 10000);
+    getLaptops(container2, 1, 10, '', 'RATE', 0, 1000000);
 });
 
 
 function getCategories(){
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
+        url: `category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             addToCategory(data);
@@ -50,19 +50,18 @@ function addToCategory(categories){
 function addToScrollbar(container, laptops) {
     var jsonLaptops = $.parseJSON(laptops);
     $.each(jsonLaptops, function (index, labtop) {
-        let image = btoa(String.fromCharCode.apply(null, new Uint8Array(labtop.imagByteList[0])));
         let newProduct = `
             <div class="product">
                 <input type="hidden" value="${labtop.uuid}">
                 <div class="product-img">
-                    <img src="data:image/png;base64,${image}"
+                    <img src="${labtop.imagList[0]}"
                             width="263" 
                             height="263"
                             alt="">
                 </div>
                 <div class="product-body">
                     <p class="product-category">${labtop.laptopCategory}</p>
-                    <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}">${labtop.name}</a></h3>
+                    <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}" class="two-lines">${labtop.name}</a></h3>
                     <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
                     <div class="product-rating">
                     `;
@@ -83,42 +82,42 @@ function addToScrollbar(container, laptops) {
 
 
     // use
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
+    loadScript(`js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/bootstrap.min.js`)
+    loadScript(`js/bootstrap.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/slick.min.js`)
+    loadScript(`js/slick.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/nouislider.min.js`)
+    loadScript(`js/nouislider.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.zoom.min.js`)
+    loadScript(`js/jquery.zoom.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/main.js`)
+    loadScript(`js/main.js`)
         .then(() => {
             console.log('Script loaded!');
         })
@@ -129,7 +128,7 @@ function addToScrollbar(container, laptops) {
 
 function getLaptops(container, pageNumber, count, laptopCategory, sortedBy, minPrice, maxPrice) {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
+        url: `laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,

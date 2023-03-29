@@ -210,8 +210,9 @@
           <configuration>
             <username>admin</username>
             <password>admin</password>
-
-            <url>http://localhost:9090/manager/text</url>
+            
+            // Enter your port
+            <url>http://localhost:8082/manager/text</url>
 
             <path>/store</path>
           </configuration>

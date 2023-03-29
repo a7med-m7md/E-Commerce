@@ -2,6 +2,7 @@ import { DOMINO, PORT } from "./configuration.js";
 var productList = [];
 var totalPrice = 0;
 $(document).ready(function () {
+    $("#Out").hide();
     for (var i = 0; i < localStorage.length; i++) {
         console.log(localStorage.getItem(localStorage.key(i)));
     }
@@ -13,9 +14,16 @@ $(document).ready(function () {
             type: 'POST', //servlet request type
             contentType: 'application/json', //For input type
             data: JSON.stringify(productList), //input data
-            dataType: 'json',
             success: function (data) {
-                console.log("sucess");
+                console.log(data);
+                  if (data.localeCompare("Out")) {
+                                    $("#Out").show();
+                                    $("#Out").html("More Than Your Credit Limit");
+                                }
+                                else if (data.localeCompare("more")) {
+                                    $("#Out").show();
+                                    $("#Out").html(" Our Store Cant Fit Your Order");
+                                }
             }
         });
     });
@@ -24,7 +32,8 @@ $(document).ready(function () {
 function listProduct() {
     let container = $(".order-products")[0];
     container.innerHTML = "";
-    var jsonLaptops = $.parseJSON(localStorage.getItem("cart-0acd314f-2958-4a43-afac-03ee669533ec"))
+    let userUUID = document.getElementById("userUUID").innerHTML;
+    var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
     $.each(jsonLaptops, function (index, labtop) {
         console.log(labtop);
         $.get("checkout?uuid=" + labtop.productId, function (data, status) {
