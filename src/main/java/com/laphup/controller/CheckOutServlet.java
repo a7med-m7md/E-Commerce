@@ -120,5 +120,8 @@ public class CheckOutServlet extends HttpServlet {
         User user = userService.getUserById(uuid);
         user.setCreditLimit(user.getCreditLimit() - totalPrice);
         userService.updateUserEntity(user);
+        HttpSession session = request.getSession();
+        UserDto userDto = modelMapper.map(user,UserDto.class);
+        session.setAttribute("userInfo", userDto);
     }
 }
