@@ -36,6 +36,8 @@
 		<![endif]-->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
     </head>
 	<body>
 		<%@ include file="WEB-INF/header.jsp" %>
@@ -106,17 +108,17 @@
 								<input class="input" type="tel" name="tel" placeholder="Birth Date" value=<c:out value="${userInfo.birthDay}" />>
 							</div>
 							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="create-account">
-									<label for="create-account">
-										<span></span>
-										Create Account?
-									</label>
-									<div class="caption">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-										<input class="input" type="password" name="password" placeholder="Enter Your Password">
-									</div>
-								</div>
+<%--								<div class="input-checkbox">--%>
+<%--									<input type="checkbox" id="create-account">--%>
+<%--									<label for="create-account">--%>
+<%--										<span></span>--%>
+<%--										Create Account?--%>
+<%--									</label>--%>
+<%--									<div class="caption">--%>
+<%--										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>--%>
+<%--										<input class="input" type="password" name="password" placeholder="Enter Your Password">--%>
+<%--									</div>--%>
+<%--								</div>--%>
 							</div>
 						</div>
 						<!-- /Billing Details -->
@@ -181,13 +183,13 @@
 							</div>
 							<div class="order-products">
 								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
+									<div>No items in your cart</div>
 									<div>$980.00</div>
 								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>$980.00</div>
-								</div>
+<%--								<div class="order-col">--%>
+<%--									<div>2x Product Name Goes Here</div>--%>
+<%--									<div>$980.00</div>--%>
+<%--								</div>--%>
 							</div>
 							<div class="order-col">
 								<div>Shiping</div>
@@ -195,49 +197,49 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div id="totalPrice"><strong class="order-total">$2940.00</strong></div>
+								<div id="totalPrice"><strong class="order-total">00.00</strong></div>
 							</div>
 						</div>
-						<div class="payment-method">
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-1">
-								<label for="payment-1">
-									<span></span>
-									Direct Bank Transfer
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-2">
-								<label for="payment-2">
-									<span></span>
-									Cheque Payment
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-							<div class="input-radio">
-								<input type="radio" name="payment" id="payment-3">
-								<label for="payment-3">
-									<span></span>
-									Paypal System
-								</label>
-								<div class="caption">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-						</div>
-						<div class="input-checkbox" >
-							<input type="checkbox" id="terms">
-							<label for="terms">
-								<span></span>
-								I've read and accept the <a href="#">terms & conditions</a>
-							</label>
-						</div>
-						<a class="primary-btn order-submit" id="placeOrder">Place order</a>
+<%--						<div class="payment-method">--%>
+<%--							<div class="input-radio">--%>
+<%--								<input type="radio" name="payment" id="payment-1">--%>
+<%--								<label for="payment-1">--%>
+<%--									<span></span>--%>
+<%--									Direct Bank Transfer--%>
+<%--								</label>--%>
+<%--								<div class="caption">--%>
+<%--									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--							<div class="input-radio">--%>
+<%--								<input type="radio" name="payment" id="payment-2">--%>
+<%--								<label for="payment-2">--%>
+<%--									<span></span>--%>
+<%--									Cheque Payment--%>
+<%--								</label>--%>
+<%--								<div class="caption">--%>
+<%--									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--							<div class="input-radio">--%>
+<%--								<input type="radio" name="payment" id="payment-3">--%>
+<%--								<label for="payment-3">--%>
+<%--									<span></span>--%>
+<%--									Paypal System--%>
+<%--								</label>--%>
+<%--								<div class="caption">--%>
+<%--									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
+<%--						<div class="input-checkbox" >--%>
+<%--							<input type="checkbox" id="terms">--%>
+<%--							<label for="terms">--%>
+<%--								<span></span>--%>
+<%--								I've read and accept the <a href="#">terms & conditions</a>--%>
+<%--							</label>--%>
+<%--						</div>--%>
+						<a class="primary-btn order-submit" id="placeOrder" style="cursor: pointer">Purchase</a>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -377,6 +379,26 @@
 			</div>
 			<!-- /bottom footer -->
 		</footer>
+
+		<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="successModalLabel">Success!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Your operation was successful.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->

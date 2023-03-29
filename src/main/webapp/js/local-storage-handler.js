@@ -30,6 +30,11 @@ export class ShoppingCart {
         }
     }
 
+    removeAll() {
+        this.items = [];
+        this.saveToLocalStorage(true);
+    }
+
     updateItemQuantity(item, quantity) {
         item.quantity = quantity;
         this.saveToLocalStorage(true);

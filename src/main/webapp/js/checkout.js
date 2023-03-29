@@ -1,4 +1,6 @@
-import { DOMINO, PORT } from "./configuration.js";
+import {DOMINO, PORT} from "./configuration.js";
+import {ShoppingCart} from "./local-storage-handler.js";
+
 var productList = [];
 var totalPrice = 0;
 $(document).ready(function () {
@@ -8,31 +10,44 @@ $(document).ready(function () {
         console.log(localStorage.getItem(localStorage.key(i)));
     }
     listProduct();
- let userUUID = document.getElementById("userUUID").innerHTML;
+    let userUUID = document.getElementById("userUUID").innerHTML;
     var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
     $("#placeOrder").click(function () {
-     console.log(productList);
+        console.log(productList);
         $.ajax({
             url: 'checkout',//servlet url
             type: 'POST', //servlet request type
             data: JSON.stringify(jsonLaptops), //input data
             success: function (data) {
                 console.log(data);
-                console.log(data==="Out");
-                console.log(data==="more");
-                console.log(data==="Success");
+                console.log(data === "Out");
+                console.log(data === "more");
+                console.log(data === "Success");
                 if (data === "Out") {
                     $("#Out").show();
                     $("#afterOrder").hide();
                     $("#Out").html(" Our Store Cant Fit Your Order");
-                }
-                else if (data==="more") {
+                } else if (data === "more") {
                     $("#Out").show();
                     $("#afterOrder").hide();
                     $("#Out").html("More Than Your Credit Limit");
-                } else if(data==="Success") {
-                $("#afterOrder").show();
-                $("#Out").hide();
+
+                } else if (data === "Success") {
+                    const successModal = document.getElementById('successModal');
+
+                    // Show the modal
+                    $(successModal).modal('show');
+                    successModal.addEventListener("hidden.bs.modal", function () {
+                        // Refresh page
+                        window.location.reload();
+                    });
+                    $(successModal).on("hidden.bs.modal", function () {
+                        let cart = new ShoppingCart(userUUID);
+                        cart.removeAll()
+                        location.reload()
+                    })
+                    $("#afterOrder").show();
+                    $("#Out").hide();
 //                 window.location.href = "signin"
                 }
             }

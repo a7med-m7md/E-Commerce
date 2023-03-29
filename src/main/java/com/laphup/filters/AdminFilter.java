@@ -1,5 +1,6 @@
 package com.laphup.filters;
 
+import com.laphup.controller.utility.JSPages;
 import com.laphup.dtos.UserDto;
 import com.laphup.util.enums.Role;
 import jakarta.servlet.*;
@@ -22,6 +23,9 @@ public class AdminFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         UserDto user = (UserDto) req.getSession().getAttribute("userInfo");
+        if(user == null){
+            JSPages.NOT_FOUNT.forward(req, res);
+        }
         if(user.getRole() != Role.ADMIN){
             res.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied.");
             return;

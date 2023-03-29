@@ -17,7 +17,8 @@ public enum JSPages {
     PRODUCT("product.jsp"),
     CHECKOUT("checkout.jsp"),
     PROFILE("WEB-INF/profile.jsp"),
-    UPDATE_PRODUCT("/update-laptop.jsp");
+    UPDATE_PRODUCT("/update-laptop.jsp"),
+    NOT_FOUNT("error-404.html");
     private final String path;
     JSPages(String path){
         this.path = path;
