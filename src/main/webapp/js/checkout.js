@@ -8,13 +8,14 @@ $(document).ready(function () {
         console.log(localStorage.getItem(localStorage.key(i)));
     }
     listProduct();
-    console.log(productList);
+ let userUUID = document.getElementById("userUUID").innerHTML;
+    var jsonLaptops = $.parseJSON(localStorage.getItem(`cart-${userUUID}`))
     $("#placeOrder").click(function () {
+     console.log(productList);
         $.ajax({
             url: 'checkout',//servlet url
             type: 'POST', //servlet request type
-            contentType: 'application/json', //For input type
-            data: JSON.stringify(productList), //input data
+            data: JSON.stringify(jsonLaptops), //input data
             success: function (data) {
                 console.log(data);
                 console.log(data==="Out");
