@@ -76,7 +76,7 @@
             ">
                             <div class="card-body p-5 shadow-5 text-center">
                                 <h2 class="fw-bold mb-5">Sign In now </h2>
-                                <form method="post" action="signin">
+                                <form >
                                     <!-- Email input -->
                                     <div class="form-outline mb-4 input_style">
                                         <input type="text" id="emailL" name="emailL" class="form-control 3" />

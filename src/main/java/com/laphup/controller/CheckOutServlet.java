@@ -18,18 +18,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.*;
 
 @WebServlet(value = "/checkout")
 public class CheckOutServlet extends HttpServlet {
 
     List<LaptopDTO> laptops = new ArrayList<>();
-    Set<OrderDetails> orderDetailsDTOSet = new HashSet<>();
     ModelMapper modelMapper = new ModelMapper();
     Order order;
-    Map<UUID, Integer> map;
+    Map<UUID, Integer> map = new HashMap<>();
+
     long totalPrice = 0;
 
     @Override
@@ -44,93 +46,52 @@ public class CheckOutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        map = new HashMap<>();
-//        totalPrice = 0;
-        laptops = AddToCardServlet.laptops;
-//        calculateCheckOut(laptops, req);
+        Gson gson = new Gson();
+//        Type founderListType = new TypeToken<ArrayList<LaptopDTO>>(){}.getType();
+//        laptops = gson.fromJson(req.getReader(), founderListType);
+        loadMap();
+        totalPrice = 0;
+        totalPrice = calculateCheckOut(req);
+
         System.out.println("Laptop Size" + laptops.size());
-        if (presistOrder(laptops, req) == 2) {
-            resp.getWriter().print("Out");
-        } else if (presistOrder(laptops, req) == 3) {
-            resp.getWriter().print("more");
-        } else
-            resp.getWriter().print(totalPrice);
+        resp.getWriter().print(presistOrder(req));
     }
 
-//    public long calculateCheckOut(List<LaptopDTO> laptops, HttpServletRequest request) {
-//        for (LaptopDTO laptopDTO : laptops) {
-//            totalPrice += (laptopDTO.getPrice() * laptopDTO.getQuantities());
-//        }
-//        return totalPrice;
-//    }
-
-    public int presistOrder(List<LaptopDTO> laptops, HttpServletRequest request) {
-        totalPrice = 0;
-        OrderServices services = new OrderServices(request);
+    public String presistOrder(HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserDto user = (UserDto) session.getAttribute("userInfo");
-        User userEntity = modelMapper.map(user, User.class);
-        Laptop laptopEntity;
-        for (LaptopDTO laptopDTO : laptops) {
-            Integer j = map.get(laptopDTO.getUuid());
-            totalPrice += laptopDTO.getPrice();
-            map.put(laptopDTO.getUuid(), (j == null) ? 1 : j + 1);
+        if (!checkQuantities(request)) {
+            return "Out";
+        } else if (!checkLimitationCredit(user.getUuid(), request)) {
+            return "more";
+        } else {
+            addOrder(request, totalPrice);
+            return "Success";
         }
-        if (!checkLimitationCredit(user.getUuid(), request))
-            return 3;
-        else if (!checkQuantities(map, request))
-            return 2;
-        else {
-            java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
-            order = new Order(userEntity, date, totalPrice);
-            for (Map.Entry<UUID, Integer> val : map.entrySet()) {
-                UUID uuidLaptop = val.getKey();
-                AddToCardService addToCardService = new AddToCardService(request);
-                Laptop laptopDTO = addToCardService.getLaptopByUuid2(uuidLaptop);
-                // if (!services.updateLaptops(laptopEntity)) {
-                OrderDetailsId orderDetailsId = new OrderDetailsId(order.getOrderUuid(), laptopDTO.getUuidLaptop());
-                OrderDetails orderDetails = new OrderDetails(orderDetailsId, order, laptopDTO, val.getValue());
-//            orderDetailsDTOSet.add(orderDetails);
-                services.saveOrderDetails(orderDetails);
-            }
-            services.checkOut(order);
-            updateCreditLimit(user.getUuid(), request);
-        }
-        return 1;
     }
 
-    public boolean checkQuantities(Map<UUID, Integer> map, HttpServletRequest request) {
-        for (Map.Entry<UUID, Integer> val : map.entrySet()) {
-            AddToCardService addToCardService = new AddToCardService(request);
-            Laptop laptop = addToCardService.getLaptopByUuid2(val.getKey());
-            OrderServices services = new OrderServices(request);
-            System.out.println("Quantity before :" + laptop.getQuantities());
-            System.out.println("in check qou");
-            if (val.getValue() > laptop.getQuantities()) {
-                return false;
-            } else {
-                laptop.setQuantities(laptop.getQuantities() - val.getValue());
-                Laptop laptop1 = services.updateLaptops(laptop);
-                Laptop laptoptes = addToCardService.getLaptopByUuid2(val.getKey());
-                System.out.println("Quantity After :" + laptoptes.getQuantities());
-                System.out.println("Quantity After :" + laptop1.getQuantities());
-                if (laptop1 != null) {
-                    System.out.println("Update Success");
-                    return true;
-                }
-            }
-            return false;
-
+    public void loadMap() {
+        laptops = AddToCardServlet.laptops;
+        for (LaptopDTO laptopDTO : laptops) {
+            Integer j = map.get(laptopDTO.getUuid());
+            map.put(laptopDTO.getUuid(), (j == null) ? 1 : j + 1);
         }
-        return true;
+    }
+
+    public long calculateCheckOut(HttpServletRequest request) {
+        AddToCardService addToCardService = new AddToCardService(request);
+        for (Map.Entry<UUID, Integer> val : map.entrySet()) {
+            Laptop laptopDTO = addToCardService.getLaptopByUuid2(val.getKey());
+            totalPrice += (laptopDTO.getPrice() * val.getValue());
+        }
+        return totalPrice;
     }
 
     public boolean checkLimitationCredit(UUID userUuid, HttpServletRequest request) {
-
         UserService userService = new UserService(request);
         User user = userService.getUserById(userUuid);
-        if (totalPrice > user.getCreditLimit())
-            return false;
+        System.out.println("getCreditLimit :" + user.getCreditLimit() + "Total Price : " + totalPrice);
+        if (totalPrice > user.getCreditLimit()) return false;
         return true;
 
     }
@@ -142,4 +103,40 @@ public class CheckOutServlet extends HttpServlet {
         userService.updateUserEntity(user);
     }
 
+    public boolean checkQuantities(HttpServletRequest request) {
+        for (Map.Entry<UUID, Integer> val : map.entrySet()) {
+            AddToCardService addToCardService = new AddToCardService(request);
+            Laptop laptop = addToCardService.getLaptopByUuid2(val.getKey());
+            System.out.println("Quantity before :" + laptop.getQuantities());
+            if (val.getValue() > laptop.getQuantities()) return false;
+        }
+        return true;
+    }
+
+    public void addOrder(HttpServletRequest request, long totalPrice) {
+        OrderServices services = new OrderServices(request);
+        HttpSession session = request.getSession();
+        UserDto user = (UserDto) session.getAttribute("userInfo");
+        User userEntity = modelMapper.map(user, User.class);
+        Laptop laptopEntity;
+        for (LaptopDTO laptopDTO : laptops) {
+            Integer j = map.get(laptopDTO.getUuid());
+            map.put(laptopDTO.getUuid(), (j == null) ? 1 : j + 1);
+        }
+        java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+        order = new Order(userEntity, date, totalPrice);
+        for (Map.Entry<UUID, Integer> val : map.entrySet()) {
+            System.out.println(val.getValue());
+            UUID uuidLaptop = val.getKey();
+            AddToCardService addToCardService = new AddToCardService(request);
+            Laptop laptopDTO = addToCardService.getLaptopByUuid2(uuidLaptop);
+            OrderDetailsId orderDetailsId = new OrderDetailsId(order.getOrderUuid(), laptopDTO.getUuidLaptop());
+            OrderDetails orderDetails = new OrderDetails(orderDetailsId, order, laptopDTO, val.getValue());
+            services.saveOrderDetails(orderDetails);
+            laptopDTO.setQuantities(laptopDTO.getQuantities() - val.getValue());
+            Laptop laptop1 = services.updateLaptops(laptopDTO);
+        }
+        services.checkOut(order);
+        updateCreditLimit(user.getUuid(), request);
+    }
 }
