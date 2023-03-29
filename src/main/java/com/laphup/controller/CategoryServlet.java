@@ -40,4 +40,5 @@ public class CategoryServlet extends HttpServlet {
             response.getWriter().write("{\"error\": \"true\"}");
         }
     }
+
 }

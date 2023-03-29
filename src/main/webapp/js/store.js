@@ -68,7 +68,7 @@ function getPagesCount() {
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             let count = $("#count")[0].value;
-            let numberOfPages = Math.ceil(Math.round(data / count));
+            let numberOfPages = Math.ceil(Math.ceil(data / count));
             let container = $(".store-pagination")[0];
             for (let i = 2; i <= numberOfPages; i++) {
                 container.innerHTML += `
@@ -77,6 +77,7 @@ function getPagesCount() {
             }
             container.innerHTML += '<li><a><i class="fa fa-angle-right"></i></a></li>';
         }, error: function (jqXHR, textStatus, errorThrown) { // handle error cases
+            console.log("Failed")
             console.log("Request failed. Status code: " + jqXHR.status);
         },
         async: false
