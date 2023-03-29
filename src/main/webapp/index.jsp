@@ -683,9 +683,10 @@
 <%--<script type="module" src="js/product.js"></script>--%>
 <%--<script src="js/jquery.min.js"></script>--%>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/slick.min.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/jquery.zoom.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 </html>

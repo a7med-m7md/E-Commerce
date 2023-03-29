@@ -62,12 +62,12 @@ function addToScrollbar(container, laptops) {
                 <div class="product-body">
                     <p class="product-category">${labtop.laptopCategory}</p>
                     <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}" class="two-lines">${labtop.name}</a></h3>
-                    <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
+                    <h4 class="product-price">EG ${labtop.price}</del></h4>
                     <div class="product-rating">
                     `;
-        for(var i=0 ; i< labtop.rate ; i++){
-            newProduct += '<i class="fa fa-star"></i>';
-        }
+        // for(var i=0 ; i< labtop.rate ; i++){
+        //     newProduct += '<i class="fa fa-star"></i>';
+        // }
 
         newProduct += `
                     </div>

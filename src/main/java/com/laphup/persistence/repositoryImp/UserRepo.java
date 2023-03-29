@@ -71,6 +71,7 @@ public class UserRepo extends BaseRepo<User, Integer> {
 
     public User updateUserMEntity(User user) {
         merge(user);
+//        entityManager.refresh(user);
         return user;
     }
 }

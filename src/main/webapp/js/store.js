@@ -133,21 +133,13 @@ function addTopage(laptops) {
                                     width="263" 
                                     height="263"
                                     alt="">
-                                    <div class="product-label">
-                                        <span class="sale">-30%</span>
-                                        <span class="new">NEW</span>
-                                    </div>
                         </div>
                         <div class="product-body">
                             <p class="product-category">${labtop.laptopCategory}</p>
                             <h3 class="product-name"><a href="product?uuidProduct=${labtop.uuid}" class="two-lines">${labtop.name}</a></h3>
-                            <h4 class="product-price">$${labtop.price} <del class="product-old-price">$${labtop.price}</del></h4>
+                            <h4 class="product-price">EG ${labtop.price}</h4>
                             <div class="product-rating">
                     `;
-        for (var i = 0; i < labtop.rate; i++) {
-            newProduct += '<i class="fa fa-star"></i>';
-        }
-
         newProduct += `
                             </div>
                         </div>
@@ -159,7 +151,7 @@ function addTopage(laptops) {
             </div>
             `;
         container.innerHTML += newProduct;
-        const product = document.querySelectorAll(".product");
+        const product = document.querySelectorAll(".add-to-cart-btn");
         for (let i = 0; i < product.length; i++) {
             product[i].addEventListener("click", async function () {
                 product[i].classList.toggle(jsonLaptops[i].uuid);

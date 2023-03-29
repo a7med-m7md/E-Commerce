@@ -46,7 +46,7 @@
 						<h6 class="m-0">Add Product</h6>
 					</div>
 					<div class='card-body p-3'>
-						<form method="post" action="addLaptop" enctype="multipart/form-data" onsubmit="return validateForm();showSpinner()">
+						<form method="post" action="addLaptop" enctype="multipart/form-data" onsubmit="showSpinner();return validateForm()">
 							<div class="form-group">
 								<label for="laptop-name">Laptop Name</label>
 								<input type="text" class="form-control" id="laptop-name" name="laptop-name" placeholder="Enter Laptop Name" required>

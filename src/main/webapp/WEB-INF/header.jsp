@@ -88,7 +88,7 @@
 						<!-- /LOGO -->
 
 						<!-- SEARCH BAR -->
-						<div class="col-md-6">
+						<div class="col-md-6" style="visibility: hidden">
 							<div class="header-search">
 								<form>
 									<select class="input-select">
