@@ -23,13 +23,16 @@ $(document).ready(function () {
                 console.log(data==="Success");
                 if (data === "Out") {
                     $("#Out").show();
+                    $("#afterOrder").hide();
                     $("#Out").html(" Our Store Cant Fit Your Order");
                 }
                 else if (data==="more") {
                     $("#Out").show();
+                    $("#afterOrder").hide();
                     $("#Out").html("More Than Your Credit Limit");
                 } else if(data==="Success") {
                 $("#afterOrder").show();
+                $("#Out").hide();
 //                 window.location.href = "signin"
                 }
             }
