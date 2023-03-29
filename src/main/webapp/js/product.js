@@ -152,18 +152,21 @@ function addToPage(jsonLaptop){
         if (update) {
             update.setAttribute("href", `updateProduct?uuid=${laptop.uuid}`);
         }
-        for (let i = 0; i < laptop.rate; i++) {
-            newProduct += `
-            <i class="fa fa-star"></i>
-        `;
-        }
+        // for (let i = 0; i < laptop.rate; i++) {
+        //     newProduct += `
+        //     <i class="fa fa-star"></i>
+        // `;
+        // }
 
+        let expression = `
+            <span class="product-available"> ${laptop.quantities> 0 ? 'In Stock' : 'Out of Stock'}  </span>
+        `
         newProduct += `
                 
-                <div>
-                    <h3 class="product-price">$${laptop.price} <del class="product-old-price">$${laptop.price}/del></h3>
-                    <span class="product-available">In Stock</span>
-                </div>
+                
+                    <h3 class="product-price">EG ${laptop.price}</h3>
+                   ${expression}
+                
         
                 <div class="add-to-cart">
                     <div class="qty-label">
