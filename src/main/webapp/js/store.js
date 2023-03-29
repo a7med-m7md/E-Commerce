@@ -49,7 +49,7 @@ $(document).ready(function () {
         li.addEventListener('click', event => {
             let uuid = document.querySelector(`#uuid + *`);
             $.ajax({
-                url: `http://localhost:${PORT}/${DOMINO}/product?uuid=${uuid}`, // specify the URL of the API endpoint
+                url: `product?uuid=${uuid}`, // specify the URL of the API endpoint
                 type: "GET", // specify the type of request (GET in this case)
                 success: function (data) { // define a callback function to handle the response
                     addToCategory(data);
@@ -64,7 +64,7 @@ $(document).ready(function () {
 
 function getPagesCount() {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/pagesCount`, // specify the URL of the API endpoint
+        url: `pagesCount`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             let count = $("#count")[0].value;
@@ -85,7 +85,7 @@ function getPagesCount() {
 
 function getCategories() {
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/category`, // specify the URL of the API endpoint
+        url: `category`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         success: function (data) { // define a callback function to handle the response
             addToCategory(data);
@@ -203,7 +203,7 @@ function getPage() {
         maxPrice = 100000;
 
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptoppagination`, // specify the URL of the API endpoint
+        url: `laptoppagination`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             pageNumber: pageNumber,

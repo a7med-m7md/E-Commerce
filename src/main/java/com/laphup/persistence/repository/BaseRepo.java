@@ -2,11 +2,13 @@ package com.laphup.persistence.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceException;
 import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,7 +39,7 @@ public class BaseRepo<Table,ID> {
         return table;
     }
 
-    public Table save(Table obj) {
+    public Table save(Table obj)  {
         System.out.println("in loin333333333");
         EntityTransaction transaction = entityManager.getTransaction();
         System.out.println("in loin333333333");
@@ -45,7 +47,14 @@ public class BaseRepo<Table,ID> {
             transaction.begin();
             entityManager.persist(obj);
             transaction.commit();
-        }catch (Exception e){
+        }
+        catch (PersistenceException e){
+            System.out.println("Persistence Error in Base");
+//            response.getWriter().write("{error: true}");
+            e.printStackTrace();
+            throw new PersistenceException();
+        }
+        catch (Exception e){
             transaction.rollback();
             e.printStackTrace();
         }

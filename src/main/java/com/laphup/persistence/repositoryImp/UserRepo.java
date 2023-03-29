@@ -60,12 +60,17 @@ public class UserRepo extends BaseRepo<User, Integer> {
 
         ModelMapper modelMapper = new ModelMapper();
         User currentUser = modelMapper.map(user, User.class);
-        save(currentUser);
+        merge(currentUser);
         return currentUser;
     }
 
     public User updateUserEntity(User user) {
         save(user);
+        return user;
+    }
+
+    public User updateUserMEntity(User user) {
+        merge(user);
         return user;
     }
 }
