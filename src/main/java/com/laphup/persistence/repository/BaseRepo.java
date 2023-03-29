@@ -51,6 +51,7 @@ public class BaseRepo<Table,ID> {
         catch (PersistenceException e){
             System.out.println("Persistence Error in Base");
 //            response.getWriter().write("{error: true}");
+            e.printStackTrace();
             throw new PersistenceException();
         }
         catch (Exception e){

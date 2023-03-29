@@ -27,42 +27,42 @@ $(document).ready(function () {
     }
 
 // use
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.min.js`)
+    loadScript(`js/jquery.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/bootstrap.min.js`)
+    loadScript(`js/bootstrap.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/slick.min.js`)
+    loadScript(`js/slick.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/nouislider.min.js`)
+    loadScript(`js/nouislider.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/jquery.zoom.min.js`)
+    loadScript(`js/jquery.zoom.min.js`)
         .then(() => {
             console.log('Script loaded!');
         })
         .catch(() => {
             console.error('Script loading failed! Handle this error');
         });
-    loadScript(`http://localhost:${PORT}/${DOMINO}/js/main.js`)
+    loadScript(`js/main.js`)
         .then(() => {
             console.log('Script loaded!');
         })
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
 export function getMyProduct(productId){
     $.ajax({
-        url: `http://localhost:${PORT}/${DOMINO}/laptop`, // specify the URL of the API endpoint
+        url: `laptop`, // specify the URL of the API endpoint
         type: "GET", // specify the type of request (GET in this case)
         data: {
             productId: productId

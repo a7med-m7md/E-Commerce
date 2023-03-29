@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     if (userUUID && items && items.length != 0 && userUUID != "00000000-0000-0000-0000-000000000000") {
         const cartPromise = new Promise(function (resolve, reject) {
-            $.get(`http://localhost:${PORT}/${DOMINO}/cart`, function (response) {
+            $.get(`cart`, function (response) {
                 localStorage.setItem(`cart-${userUUID}`, response)
                 console.log("VVVAA")
                 console.log(response)
@@ -65,7 +65,7 @@ export function updateCart() {
         var totalPrice = 0;
         document.getElementById('items-num').innerText = userId.length
         userId.forEach(async (product, index) => {
-            await $.get(`http://localhost:${PORT}/${DOMINO}/laptop?productId=${product.productId}`, response => {
+            await $.get(`laptop?productId=${product.productId}`, response => {
                 // handle the response from the server here
                 let currentProduct = JSON.parse(response);
 
@@ -77,7 +77,7 @@ export function updateCart() {
                     src: image,
                     alt: ""
                 })));
-                $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `http://localhost:${PORT}/store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
+                $newProduct.append($("<div>", {class: "product-body"}).append($("<h3 class='product-name'>", {class: currentProduct.name}).append($("<a>", {href: `store/product?uuidProduct=${currentProduct.uuid}`}).text(currentProduct.name))).append($("<h4>", {class: "product-price"}).append($("<span>", {class: "qty"}).text(userId[index].quantity + "x")).append("EG " + currentProduct.price)));
                 // todo add delete functionality
                 $newProduct.append($("<button>", {
                     class: "delete",

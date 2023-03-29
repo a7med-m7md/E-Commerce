@@ -30,7 +30,7 @@ $(document).ready(function () {
 //     $('#hidden-category').val(category)
 // });
 
-$("#list-category-val").on("change", "input[type=radio]", function() {
+$("#list-category-val").on("change", "input[type=radio]", function () {
     var selectedCategory = $(this).siblings("label").text();
     console.log("Should change to " + selectedCategory)
     $('#hidden-category').val(selectedCategory)
@@ -43,10 +43,10 @@ function addNewCategory(event) {
     $.post("category", {"category-name": categoryName}, function (response) {
         console.log(response)
         let categoryInfo = JSON.parse(response);
-        if(categoryInfo.error){
+        if (categoryInfo.error) {
             console.log("errrrrr");
             $('#errorModal').modal('show');
-            $('#close').click(()=>$('#errorModal').modal('hide'));
+            $('#close').click(() => $('#errorModal').modal('hide'));
             $('#category-name').val("")
             return;
         }
@@ -59,11 +59,12 @@ function addNewCategory(event) {
         li.append(div);
         li.append($("<button>").addClass("btn btn-sm btn-outline-danger ml-2").html("<i class='fa fa-trash'></i>"));
         $("#list-category-val").append(li);
+        $('#category-name').val("")
     })
 }
 
 
-function showSpinner(){
+function showSpinner() {
     console.log("HELLO")
     let button = document.getElementById('saveBtn');
     button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';

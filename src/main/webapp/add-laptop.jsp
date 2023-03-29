@@ -46,7 +46,7 @@
 						<h6 class="m-0">Add Product</h6>
 					</div>
 					<div class='card-body p-3'>
-						<form method="post" action="addLaptop" enctype="multipart/form-data" onsubmit="showSpinner()">
+						<form method="post" action="addLaptop" enctype="multipart/form-data" onsubmit="return validateForm();showSpinner()">
 							<div class="form-group">
 								<label for="laptop-name">Laptop Name</label>
 								<input type="text" class="form-control" id="laptop-name" name="laptop-name" placeholder="Enter Laptop Name" required>
@@ -176,6 +176,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
 
 	<script src="add-laptop-category.js"></script>
+	<script src="js/addlaptop-validation.js"></script>
 	<script>
 		$('#add-photo-button').click(function() {
 			// create a new "input" element of type "file"

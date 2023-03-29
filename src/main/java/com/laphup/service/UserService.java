@@ -27,7 +27,7 @@ public class UserService {
         return userRepo.updateUser(userDto);
     }
     public User updateUserEntity(User user){
-        return userRepo.updateUserEntity(user);
+        return userRepo.updateUserMEntity(user);
     }
 
 }

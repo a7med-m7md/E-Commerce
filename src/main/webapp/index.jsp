@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Laphup ECOMMERCE</title>
+	<title>Laphub</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -27,17 +27,8 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-<%--	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
-
-<%--	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>--%>
-<%--	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>--%>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 </head>
 <body>
@@ -689,13 +680,12 @@
 
 <!-- jQuery Plugins -->
 <script type="module" src="js/laptops.js"></script>
-<script type="module" src="js/product.js"></script>
-		<script src="js/jquery.min.js"></script>
-<%--		<script src="js/bootstrap.min.js"></script>--%>
-		<script src="js/slick.min.js"></script>
-<%--		<script src="js/nouislider.min.js"></script>--%>
-<%--		<script src="js/jquery.zoom.min.js"></script>--%>
-<%--		<script src="js/main.js"></script>--%>
-
+<%--<script type="module" src="js/product.js"></script>--%>
+<%--<script src="js/jquery.min.js"></script>--%>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
