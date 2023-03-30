@@ -37,8 +37,13 @@
   </c:if>
 <c:set var="userInfoo" value="${sessionScope.userInfo}" />
 <div class="col-lg">
+  <div style="background-color: #f2f2f2; padding: 10px;">
+    <a href="home" style="color: #5e0505; text-decoration: none; font-weight: bold;">Home</a>
+    <span style="font-weight: bold;">Profile Page</span>
+  </div>
+  <br>
+  <br>
 
-<%--    <%@ include file="header.jsp"%>--%>
 
     <div class="card card-small mb-4">
       <div class="card-header border-bottom">
@@ -96,6 +101,8 @@
                     <label for="datePicker">Birthdate</label>
                     <input type="date" name="birthday" value= <c:out value="${userInfoo.birthDay}" /> class="form-control" id="datePicker">
                   </div>
+                    <c:set var="userRole" value="${sessionScope.userInfo.role}" />
+                    <c:if test="${userRole == 'USER'}">
                   <div class="input-group mb-3">
                     <label style="padding: 5px;">Credit Limit</label>
                     <div class="input-group-prepend">
@@ -107,6 +114,7 @@
                       <span class="input-group-text">.00</span>
                     </div>
                   </div>
+                    </c:if>
 
                   <!-- <div class="form-group col-md-2">
                     <label for="inputZip">Credit Limit</label>

@@ -16,7 +16,7 @@ $(document).ready(function () {
                 div.append(input);
                 div.append(label);
                 li.append(div);
-                li.append($("<button>").addClass("btn btn-sm btn-outline-danger ml-2").html("<i class='fa fa-trash'></i>"));
+                // li.append($("<button>").addClass("btn btn-sm btn-outline-danger ml-2").html("<i class='fa fa-trash'></i>"));
                 $("#list-category-val").append(li);
             }
         }
@@ -57,7 +57,7 @@ function addNewCategory(event) {
         div.append(input);
         div.append(label);
         li.append(div);
-        li.append($("<button>").addClass("btn btn-sm btn-outline-danger ml-2").html("<i class='fa fa-trash'></i>"));
+        // li.append($("<button>").addClass("btn btn-sm btn-outline-danger ml-2").html("<i class='fa fa-trash'></i>"));
         $("#list-category-val").append(li);
         $('#category-name').val("")
     })

@@ -22,7 +22,7 @@ public class Laptop {
     @ManyToOne
     @JoinColumn(name = "laptopCategoryUuid")
     private LaptopCategory laptopCategory;
-    @OneToMany(mappedBy = "laptop")
+    @OneToMany(mappedBy = "laptop", cascade = CascadeType.DETACH)
     private Set<OrderDetails> orderDetails;
     private String name;
     private double price;

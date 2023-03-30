@@ -12,6 +12,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -21,17 +22,17 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserDto user = (UserDto)session.getAttribute("userInfo");
+        UserDto user = (UserDto) session.getAttribute("userInfo");
         boolean isAlreadyLoggedIn = user != null;
         // 1. When he try to access /signin end point and he is already logged in
-        if(isAlreadyLoggedIn){
+        if (isAlreadyLoggedIn) {
             response.sendRedirect("home");
             return;
         }
 
         boolean isLoggedInUsingCookies = loggedInWithCookie(request);
 
-        if(isLoggedInUsingCookies){
+        if (isLoggedInUsingCookies) {
             response.sendRedirect("home");
             return;
         }
@@ -45,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 
     private boolean loggedInWithCookie(HttpServletRequest request) {
         Optional<Cookie> userCookie = CookieUtility.getCookie(request.getCookies(), "user_remember_cookie");
-        if(userCookie.isPresent() && !userCookie.isEmpty()){
+        if (userCookie.isPresent() && !userCookie.isEmpty()) {
             String userCookieVal = userCookie.get().getValue();
             String userEmailVal = userCookieVal.split("=")[0];
             String userPasswordVal = userCookieVal.split("=")[1];
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             LoginDTO loginDTO = new LoginDTO(userEmailVal, userPasswordVal);
             Optional<UserDto> user = signInService.logInto(loginDTO);
             //==
-            if(user.isPresent()){
+            if (user.isPresent()) {
                 return true;
             }
         }
@@ -97,10 +98,12 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void SaveSession(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cookie cookie = new Cookie("user_remember_cookie", loginDTO.geteMail() + "=" + loginDTO.getPassword());
+        if (request.getParameter("remember-me-m") != null) {
+            Cookie cookie = new Cookie("user_remember_cookie", loginDTO.geteMail() + "=" + loginDTO.getPassword());
 //        Cookie pas = new Cookie("password", loginDTO.getPassword());
-        cookie.setMaxAge(7 * 24 * 60 * 60);
-        response.addCookie(cookie);
+            cookie.setMaxAge(7 * 24 * 60 * 60);
+            response.addCookie(cookie);
+        }
 //        response.addCookie(pas);
         checkExistence(loginDTO, request, response);
     }

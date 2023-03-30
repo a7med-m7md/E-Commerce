@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,11 +118,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">EGP</span>
                                     </div>
-                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                           value="1000">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">.00</span>
-                                    </div>
+
+                                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                               value="1000">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
                                 </div>
                                 <!-- <div class="form-group col-md-2">
                                   <label for="inputZip">Credit Limit</label>

@@ -34,8 +34,10 @@ public class SignUpServlet extends HttpServlet {
                 return;
             }
         }
-        JSPages.HOME_PAGE.forward(request, response);
+//        JSPages.SIGN_IN.forward(request, response);
+        response.sendRedirect("signin");
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
