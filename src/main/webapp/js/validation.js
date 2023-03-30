@@ -213,7 +213,7 @@ $(document).ready(function () {
         }
     }
     //  // Submit button
-    $("#signupbtn").click(function () {
+    $("#signupbtn").click(function (event) {
         validateFirstname();
         validateLastname();
         validatePassword();

@@ -4,11 +4,15 @@ import {DOMINO, PORT} from "./configuration.js";
 import {ShoppingCart} from "./local-storage-handler.js";
 
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    // code to execute after the DOM is loaded
+});
+
 $(document).ready(function () {
     let userUUID = document.getElementById("userUUID").innerText
     let items = JSON.parse(localStorage.getItem("cart-00000000-0000-0000-0000-000000000000"))
     console.log(userUUID.length)
-
     // Create a Promise that resolves when the $.get request is complete
 
     if (userUUID && items && items.length != 0 && userUUID != "00000000-0000-0000-0000-000000000000") {
@@ -54,6 +58,13 @@ $(document).ready(function () {
 
 
 export function updateCart() {
+    autoLogin().then(function(response) {
+        // Do something with the response
+
+    }).catch(function(error) {
+        // Handle the error
+    });
+
     removeCartUIElement()
     let userUUID = document.getElementById("userUUID").innerText
     if (!userUUID) {
@@ -114,4 +125,44 @@ export function removeCartUIElement() {
             cartContainer.removeChild(cartContainer.lastChild);
         }
     }
+}
+
+
+
+function autoLogin() {
+    return new Promise((resolve, reject) => {
+        let email;
+        let pass;
+
+        console.log("CCCCC")
+        console.log(document.cookie)
+
+        if (!document.cookie.indexOf("loggedIn") != -1) {
+            let cookies = document.cookie.split(';');
+
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                console.log("=== " + cookie + " ====")
+                if (cookie.startsWith('user_remember_cookie=')) {
+                    let credentials = cookie.substring('user_remember_cookie='.length, cookie.length);
+                    let values = credentials.split("=");
+                    email = values[0];
+                    pass = values[1];
+
+                    $.post("signin", {
+                        emailL: email,
+                        passwordL: pass
+                    }, function (response) {
+                        document.cookie += ";loggedIn=true;";
+                        console.log(username);
+                        resolve(response);
+                    }).fail(function (error) {
+                        reject(error);
+                    });
+
+                    break;
+                }
+            }
+        }
+    });
 }

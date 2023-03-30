@@ -25,12 +25,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="text-white">Dashboard Admin Page - Add Product</h4>
-                <p class="text-muted mb-0">Dashboard</p>
+                <h4 class="text-white">Dashboard Admin Page - Users</h4>
+                <p class="text-muted mb-0"><a href="home" style="border: none; ">Home</a></p>
             </div>
         </div>
     </div>
 </header>
+
+
 <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
         <thead class="thead-dark">
@@ -69,7 +71,7 @@
                             <p><strong>Job:</strong><c:out value="${user.job}" /></p>
                             <p><strong>Credit Limit:</strong><c:out value="${user.creditLimit}" /></p>
                             <p><strong>Birthdate:</strong><c:out value="${user.birthDay}" /></p>
-<%--                            <p><strong>Number of orders:</strong> <c:out value="${fn:length(user.order)}" /></p>--%>
+<%--                            <p><strong>Number of orders:</strong> <c:out value="${(user.order)}" /></p>--%>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary closeBTN" data-dismiss="modal">Close</button>

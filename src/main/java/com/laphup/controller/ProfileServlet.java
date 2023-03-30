@@ -46,7 +46,10 @@ public class ProfileServlet extends HttpServlet {
             String job = request.getParameter("job");
             Gender gender = request.getParameter("gender").equals("Male") ? Gender.MALE : Gender.FEMALE;
             String birthday = request.getParameter("birthday");
-            int creditLimit = Integer.parseInt(request.getParameter("creditlimit"));
+            int creditLimit = 0;
+            if(request.getParameter("creditlimit") != null){
+                creditLimit = Integer.parseInt(request.getParameter("creditlimit"));
+            }
             UserDto currentUser = (UserDto)request.getSession().getAttribute("userInfo");
             System.out.println("ROLE:: " + currentUser.getRole());
             System.out.println("DATE :: T" + currentUser.getBirthDay());

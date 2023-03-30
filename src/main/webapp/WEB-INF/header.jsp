@@ -49,10 +49,13 @@
 									   aria-haspopup="true" aria-expanded="false"
 									   style="padding: 0px; color: white"><c:out value="${userInfo.fName}" /></a>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 115px;  padding: 5px; ">
+									<c:set var="userRole" value="${sessionScope.userInfo.role}" />
 									<div><a class="dropdown-item drop-menu-hov" href="profile" style="">Profile</a></div>
 									<hr style="visibility: hidden; height: 10px; margin: 0px">
+							<c:if test="${userRole == 'USER'}">
 									<a class="dropdown-item drop-menu-hov" href="home" style="">Order History</a><br>
 									<hr style="margin: 7.5px">
+							</c:if>
 									<button id="logout-btn" style="background-color: transparent;border: none;outline: none;" style="font-weight: bold">
 										Logout</button>
 								</div>

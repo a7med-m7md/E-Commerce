@@ -16,7 +16,7 @@ public class OrderDetails {
     @JoinColumn(name = "orderUuid")
     private Order order;
     @MapsId("uuidLaptop")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "uuidLaptop")
     private Laptop laptop;
     private int quantity;

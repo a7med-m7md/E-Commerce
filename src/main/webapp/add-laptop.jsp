@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4 class="text-white">Dashboard Admin Page - Add Product</h4>
-				<p class="text-muted mb-0">Dashboard</p>
+				<p class="text-muted mb-0"><a href="home" style="border: none; ">Home</a></p>
 			</div>
 		</div>
 	</div>
