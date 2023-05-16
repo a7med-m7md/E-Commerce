@@ -1,6 +1,6 @@
 # LapHuB
 
-E-Commerce is a web application developed using Servlet and JSP technologies for online shopping. The application is built with a user-friendly interface using JavaScript and AJAX to provide an enhanced user experience. JPA is integrated as an ORM tool for managing data in the MySQL database, ensuring efficient data retrieval and storage. The web app also includes an admin dashboard to enable efficient website management.
+LapHuB is an e-Commerce web application developed using Servlet and JSP technologies for online shopping. The application is built with a user-friendly interface using JavaScript and AJAX to provide an enhanced user experience. JPA is integrated as an ORM tool for managing data in the MySQL database, ensuring efficient data retrieval and storage. The web app also includes an admin dashboard to enable efficient website management.
 
 ## Installation
 1. Clone the repository to your local machine.
